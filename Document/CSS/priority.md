@@ -15,5 +15,5 @@
 |pesudo-element|4|
 
 >!important와 inline style attribute는 실무에서 사용을 제한하는 경우가 많다.
-><br> !important는 css 값뒤에 붙여진 키워드를 의미
+><br> !important는 css 값뒤에 붙여진 키워드를 의미(치트키) 강제우선순위
 ><br> inline style은 태그에 주어진 style 속성
