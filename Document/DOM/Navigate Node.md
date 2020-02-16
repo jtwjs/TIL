@@ -1,15 +1,15 @@
 # DOM내의 노드 탐색
 >DOM을 탐색함으로써 다른 노드에 대한 참조를 얻을 수 있다. 
-## 1.DOM내의 노드탐색(text노드&comment노드 포함) 
+## 1.DOM내의 노드탐색(text노드 & comment노드 포함) 
 >element노드 뿐만아니라 text노드 comment 노드도 포함 
 
 - parentNode : 부모노드 참조
 - firstChild : 첫번째 자식노드 참조
 - lastCHild : 마지막 자식노드 참조
-- nextSibling : 형제노드 (부모의 childNodes)목록에서 지정된 노드 바로 다음에 있는 노드 반환 ※지정된 노드가 마지막이면 null값 반환 
-- previousSibling : 형제노드목록에서 지정된 노드 이전의 노드 반환 ※지정된 노드가 첫번째면 null값 반환
+- nextSibling : 다음 형제노드 참조 ※지정된 노드가 마지막이면 null값 반환 
+- previousSibling : 이전 형제노드 참조 ※지정된 노드가 첫번째면 null값 반환
 
-## 2.DOM내의 노드탐색(text와 comment노드 무시)
+## 2.DOM내의 노드탐색(texts노드 & comment노드 무시)
 - firstElementChild : 첫번째 자식노드 참조
 - lastElementChild :  마지막 자식노드 참조
 - nextElementSibling : 다음의 형제노드 참조
@@ -20,7 +20,7 @@
 
 ## 3. DOM 트리 내의 Node 위치 확인
 - contains() : 특정 노드가 다른 노드 내에 포함되어있는지를 확인
-- compareDocumentPosition() :  각노드의 관계 비교 node.compareDocumentPosition(otherNode)
+- compareDocumentPosition() :  각노드의 관계 비교 <br> ex: node.compareDocumentPosition(otherNode)
 
 |반환되는 숫자코드|숫자 코드 정보|
 |----------|----------|
