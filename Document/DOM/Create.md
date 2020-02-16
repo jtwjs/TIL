@@ -25,7 +25,7 @@ var textNode = document.createTextNode('Hi');
 - appendChild() : 하나의 노드를 메서드가 호출된 노드의 **자식 노드 끝에 삽입**
 - insertBefore() : 2개의 매개변수 필요(삽입될노드,참조노드) **참조노드로 위치조정**
 
-### 노드를 제거하거나 바꾸기
+## 2.노드를 제거하거나 바꾸기
 >DOM에서 노드를 제거하는것은 여러 단계의 과정으로 이루어진다.
 <br>1.삭제하고자 하는 노드를 선택. 
 <br>2.부모 노드에 대한 접근을 얻어야함(parentNode 속성 사용)
@@ -33,6 +33,6 @@ var textNode = document.createTextNode('Hi');
 - removeChild() : 노드 삭제, 매개변수(삭제할 노드)
 - replaceChild() : 노드 변경, 매개변수(A,B); B를 A로 바꿈 
 
-### 노드 복제하기
+## 3.노드 복제하기
 - cloneNode() : 단일 노드 복제  <i>※문서 내에서 요소ID가 중복될수도 있다.</i>
 - cloneNode(true) : 노드와 그 자식 노드를 모두 복제 
