@@ -17,9 +17,12 @@ console.log(textHi);
     - document나 doctype 노드에서 사용될 경우 null값 반환, script 및 style element의 경우 내용이 반환
 - splitText() : 텍스트 노드 분할
 - appendData() : 추가
-- deleteData() : 삭제, 매개변수에 삭제할Text지점과 길이 값 넣음 ex) deleteData(7,5)->7지점에서 5길이만큼 삭제
-- insertData() : 삽입, 매개변수에 삽입할Text지점과 '삽입할 text를 넣음' ex)insertData(7,'blue') ->7지점에서 blue 삽입
-- replaceData() : 수정, 매개변수에 바꿀text시작지점과 길이 text를 넣음 ex)replaceData(7,5,'Bunny ') ->7지점5길이의'bunny'로수정
+- deleteData() : 삭제, 매개변수에 삭제할Text지점과 길이 값 넣음 
+    - ex) deleteData(7,5)->7지점에서 5길이만큼 삭제
+- insertData() : 삽입, 매개변수에 삽입할Text지점과 '삽입할 text를 넣음 
+    - ex)insertData(7,'blue') ->7지점에서 blue 삽입
+- replaceData() : 수정, 매개변수에 바꿀text시작지점과 길이 text를 넣음 
+    - ex)replaceData(7,5,'Bunny ') ->7지점5길이의'bunny'로수정
 - subStringData() : 추출, ex)substringData(7,10) -> 7지점에서 10의길이 문자열 반환
 - normalize() : 형제 텍스트 노드들을 결합 
     - 형제 Text 노드들은 통상적으로 텍스트를 DOM에 프로그래밍적으로 추가한 경우에만 나타남
