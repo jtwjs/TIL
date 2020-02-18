@@ -14,7 +14,7 @@ console.log(textHi);
 
 ## 1.Text 개체 및 속성
 - textContent : 모든 자식 텍스트 노드를 취합해서 반환/ [설정]모든 자식 텍스트 노드 제거후 단일 텍스트 노드로 바꿈   
-    document나 doctype 노드에서 사용될 경우 null값 반환, script 및 style element의 경우 내용이 반환
+    - document나 doctype 노드에서 사용될 경우 null값 반환, script 및 style element의 경우 내용이 반환
 - splitText() : 텍스트 노드 분할
 - appendData() : 추가
 - deleteData() : 삭제, 매개변수에 삭제할Text지점과 길이 값 넣음 ex) deleteData(7,5)->7지점에서 5길이만큼 삭제
@@ -22,8 +22,8 @@ console.log(textHi);
 - replaceData() : 수정, 매개변수에 바꿀text시작지점과 길이 text를 넣음 ex)replaceData(7,5,'Bunny ') ->7지점5길이의'bunny'로수정
 - subStringData() : 추출, ex)substringData(7,10) -> 7지점에서 10의길이 문자열 반환
 - normalize() : 형제 텍스트 노드들을 결합 
-    형제 Text 노드들은 통상적으로 텍스트를 DOM에 프로그래밍적으로 추가한 경우에만 나타남
-    Element 노드를 포함하고 있지 않은 형제 Text 노드들을 제거하기 위해 사용
+    - 형제 Text 노드들은 통상적으로 텍스트를 DOM에 프로그래밍적으로 추가한 경우에만 나타남
+    - Element 노드를 포함하고 있지 않은 형제 Text 노드들을 제거하기 위해 사용
 - data : text 노드값 가져옴 
 - document.createTextNode() : Text노드 생성
 
@@ -38,6 +38,6 @@ console.log(textHi);
 1. innerText에는 CSS가 반영됨
 2. innerText는 reflow가 발생
 3. innerText는 script와 style element내에 포함된 text 노드를 무시한다.
-4. textContent와 달리 innerText는 텍스트를 정규화해서 반환한다. 
-    textContent는 문서 내에 있는것을 마크업만 제거후 그대로 반환 ex) 공백,줄 바꿈, 개행문자 모두 포함
+4. textContent와 달리 innerText는 텍스트를 정규화해서 반환한다.  
+    - textContent는 문서 내에 있는것을 마크업만 제거후 그대로 반환 ex) 공백,줄 바꿈, 개행문자 모두 포함
 5. innerText는 비표준이고 브라우저에 국한된 것으로 간주, textContent는 DOM 사양으로 간주
