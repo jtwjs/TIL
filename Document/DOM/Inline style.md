@@ -3,8 +3,8 @@
 ## 1.style attribute
 - node.style : CSSStyleDeclaration 개체를 반환 
 - CSSStyleDeclaration : element의 인라인 스타일만이 포함됨
->1.style개체에 포함된 속성명에는 하이픈(-)을 사용하지않고 카멜케이스를 사용한다. ex: (font-size -> fontSize)
-<br>2.CSS 속성명이 JavaScript 키워드인 경우, JavaScript CSS속성명에는 css라는접두어가 붙는다. ex: (float = cssFloat)
+>1.style개체에 포함된 속성명에는 하이픈(-)을 사용하지않고 카멜케이스를 사용한다. ex: (font-size -> font**S**ize)
+<br>2.CSS 속성명이 JavaScript 키워드인 경우, JavaScript CSS속성명에는 css라는접두어가 붙는다. ex: (float = **css**Float)
 <br>3.측정단위가 필요한 CSS 속성의 경우, 적절한 단위를 포함시켜야 함 ex: (style.width = '300**px**')
 
 ### 1-1.Style개체는 CSSStyleDeclaration 개체로 개별 CSS속성에 대한 접근 및 조작 가능
@@ -22,7 +22,7 @@
     - node.style.getPropertyValue(propertyName);
 3.  제거
     - node.style.removeProperty();
-> setProperty()와 getPropertyValue() 메서드에 전달되는 속성명은 **하이픈이 포함**된 **CSS 속성명**을 사용
+> setProperty()와 getPropertyValue() 메서드에 전달되는 속성명은 **하이픈이 포함된 CSS 속성명**을 사용
 
 ### 1-3 모든 인라인 CSS 속성 가져오기 설정 제거
 >CSSStyleDeclaration 개체의 cssText 속성과 getAttribute() 및 setAttribute() 메서드를 사용하면 
@@ -46,7 +46,7 @@ console.log(window.getComputedStyle(div).backgroundColor);
 
 ## 3.class 및 id attribute를 사용하여 element의 CSS 속성 적용 및제거
 ```javascript
-var div= document.querySelector('idv');
+var div= document.querySelector('div');
 
 //설정 
 div.setAttribute('id','bar');

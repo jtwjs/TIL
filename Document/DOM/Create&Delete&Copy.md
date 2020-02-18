@@ -5,10 +5,10 @@
 - createElement()
 - createTextNode()
 ```javascript
-<script>
+
 var elementNode = document.createElement('div');
 var textNode = document.createTextNode('Hi');
-</script>
+
 ```
 >createElement() 메서드는 생설될 element를 지정하는 문자열을 매개변수로 받는다.
 <br>이 문자열은 Element 개체의 tagName 속성에서 반환되는 문자열과 동일하다.
