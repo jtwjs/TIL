@@ -9,7 +9,7 @@
 
 ## 2.DOM내의 모든 스타일시트(CSSStylesheet 개체)에 접근하기
 - document.styleSheets : HTML 문서 내에 명시적으로 연결(link)되거나 내장(style)된 <br>모든 스타일시트 개쳬(CSSStylesheet 개체)리스트에 접근할수있게 해줌
->styleSheet은 다른 노드리스트와 마찬가지로 라이브상태
+>styleSheets은 다른 노드리스트와 마찬가지로 라이브상태
 - sheet : sheet속성을 사용하여 CSSStylesheet개체에 접근할 수 있다.
 ```javascript
 document.querySelector('#linkElement').sheet;//document.styleSheets[0]와 동일
@@ -29,8 +29,7 @@ document.querySelector('#styleElement').sheet;//document.styleSheets[1]와 동�
 - insertRule
 
 ## 3.CSSStyleRule 개요
->CSSStyleRule 개체는 스타일시트에 포함된 각CSS 규칙을 표현 (CSS속성과 값에 대한 인터페이스)
->cssRules 리스트는 특정 스타일시트 내에 있는 모든 CSS규칙(CSSStyleRue 개체)들의 리스트(CSSRuleList)를 제공
+>CSSStyleRule 개체는 스타일시트에 포함된 각CSS 규칙을 표현 (CSS속성과 값에 대한 인터페이스)<br>cssRules 리스트는 특정 스타일시트 내에 있는 모든 CSS규칙(CSSStyleRue 개체)들의 리스트(CSSRuleList)를 제공
 - cssText 
 - parentRule
 - parentStylesheet
@@ -42,6 +41,10 @@ document.querySelector('#styleElement').sheet;//document.styleSheets[1]와 동�
 >스타일시트 내의 CSS규칙은 0부터 시작하는 인덱스를 가짐
 - insertRule() : 2개 매개변수 ('CSS규칙',인덱스 Index번호에 CSS규칙 추가
 - deleteRule() : 매게변수에 Index번호 전달
+```javascript
+document.querySelector('#styleElement').sheet.insertRule('p{color:red},1'); //추가
+document.querySelector('#styleElement').sheet.deleteRule(1); //index1번 규칙 삭제 
+```
 ### 4-1.style 속성 사용하여 CSSStyleRule의 값 편집
 ```javascript
 var styleSheet = document.querySelector('#styleElement').sheet;
