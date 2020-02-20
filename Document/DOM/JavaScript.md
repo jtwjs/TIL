@@ -56,4 +56,4 @@ onload="console.log('jQuery is loaded and executed');">
 >scirpt element는 원래 동기방식이므로 HTML문서의 head element에 두게 되면<br> 실행되는 javascript가 script보다 뒤에있는 DOM의 요소에 의존적일 경우 타이밍 문제를 발생시킨다.<br>이 때문에 많은 개발자들은 모든 script element를 /body element 이전에 두려고 시도함.
 
 ## 7.DOM 내의 script 목록 가져오기
-- document.scripts : 현재 DOM 내의 모든 script의 리시트를 제공
+- document.scripts : 현재 DOM 내의 모든 script의 리스트를 제공
