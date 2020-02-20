@@ -15,7 +15,7 @@ console.log('hi')
 >JavaScript 코드가 /script라는 문자열을 가지는 경우, 파서가 이를 실제 /script element로 생각하지 않도록 <br> \/script로 이스케이프 처리를 해야한다.
 
 ## 1.기본적으로 javaScript는 동기 방식으로 해석됨
-> DOM이 해석될 때 script element를 만나게되면 문서 해석을 중지하고. 렌더링 및 다운로드를 차단한 후,<br> Javscript를 실행한다. 이 동작은 블로킹을 발생시키며, DOM 해석이나 JavaScript 실행을 병렬적으로 수행할 수 없게 하므로,<br> 동기 방식이라고 생각하면 된다. JavaScript가 HTML문서 외부에 있는 경우 블로킹이 더 심해지는데,<br> JavaScript를 해석하기 전에 먼저 다운로드를 해야 하기 때문이다.
+> DOM이 해석될 때 script element를 만나게되면 문서 해석을 중지하고. 렌더링 및 다운로드를 차단한 후,<br> Javscript를 실행한다. 이 동작은 블로킹을 발생시키며, DOM 해석이나 JavaScript 실행을 병렬적으로<br> 수행할 수 없게 하므로,동기 방식이라고 생각하면 된다. JavaScript가 HTML문서 외부에 있는 경우<br> 블로킹이 더 심해지는데, JavaScript를 해석하기 전에 먼저 다운로드를 해야 하기 때문이다.
 
 >script element의 기본 블로킥 특성은 성능 및 HTML 웹 페이지의 시각적인 렌더링 속도에 상당한 영향을 미칠 수 있다.<br> HTML 페이지의 시작 부분에 여러 script element가 있는 경우, 각 스크립트가 순차적으로 다운로드 되어 실행 될때 까지는 아무런 다른 동작이 발생하지 않는다.
 
