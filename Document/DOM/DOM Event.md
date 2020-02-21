@@ -24,18 +24,18 @@ elementDiv.addEventListener('click',function()
 ## 1. 이벤트 흐름
 >이벤트가 발생되면 DOM을 따라 흘러가거나 전파되면서 다른 노드와 JavaSCript 개체들에서 동일한 이벤트를 발생시킨다. 캡처 단계(DOM 트리줄기 -> 가지)이나 버블링 단계(DOM트리 가지-> 줄기), 혹은 양쪽 모두로 발생하도록 프로그래밍 할수있다.
 
->~~캡처 단계는 이를 지원하지않는 브라우저가 있기 떄문에 널리 사용되지 않는다.~~ 최신 브라우저들에서는 캡처 단계 사용을 지원하고 있으므로, 예전에 신뢰 할수없다고 간주된 것도 요즘에는 가치가 있을수 있다.<br>통상적으로 이벤트는 버블링 단계 도중에 호출되는 것으로 가정된다.
+>~~캡처 단계는 이를 지원하지않는 브라우저가 있기 떄문에 널리 사용되지 않는다.~~<br> 최신 브라우저들에서는 캡처 단계 사용을 지원하고 있으므로, 예전에 신뢰 할수없다고 간주된 것도 요즘에는 가치가 있을수 있다.<br>통상적으로 이벤트는 버블링 단계 도중에 호출되는 것으로 가정된다.
 
 1. Event Bublling : 특정 화면 오소에서 이벤트가 발생 했을때 해당 이벤트가 더 상위의 화면 요소들로 전달되어가는 특성
 <img width="457" alt="event-bubble" src="https://user-images.githubusercontent.com/60641307/75015118-360ae780-54cb-11ea-82fa-d6c6c6872b97.png">
 
 2. Event Capture : 버블링과 반대 방향으로 진행되는 이벤트 전파 방식
-    addEventListener()의 boolean계수를 false로 설정
+    addEventListener()의 boolean계수를 true 설정
 <img width="459" alt="event-capture" src="https://user-images.githubusercontent.com/60641307/75015213-6bafd080-54cb-11ea-83e0-0a40a5694b5a.png">
 
 
 ## 2.이벤트 수신기
->이벤트 수신기 함수에 전달되는 이벤트 개체는 이벤트가 어느 단계에서 호출되었는지를 가리키는 숫자를 가지고 있는 envetPhase속성을 가진다.<br>1 : 캡처단계 <br>2 : 대상 단계 <br>3 : 버블링 단계
+>이벤트 수신기 함수에 전달되는 이벤트 개체는 이벤트가 어느 단계에서 호출되었는지를 가리키는 숫자를 가지고 있는 eventPhase속성을 가진다.<br>1 : 캡처단계 <br>2 : 대상 단계 <br>3 : 버블링 단계
 
 addEventListener() 메서드는 세 개의 인수를 받는다. 
 1. 첫번째 인수 : 수신할 이벤트 형식
@@ -71,7 +71,7 @@ document.body.addEventListener('click',function(event){
 
 ## 4.이벤트 흐름을 중지시키기
 
-- stopPropagation() : 이벤트 흐름단계는 중지되지만 노드나 개체에 직접 연결된 이벤트는 호출, +기본 이벤트는 막지 않음
+- stopPropagation() : 이벤트 흐름단계는 중지되지만 노드나 개체에 직접 연결된 이벤트는 호출,<br> +기본 이벤트는 막지 않음
 - case : event bubbling (클릭한 요소의 이벤트만 발생)
 - case : event capture (클릭한 요소의 최상위 요소의 이벤트만 동작)
 
@@ -83,11 +83,11 @@ document.body.addEventListener('click',function(event){
 
 - createEvent('CustomEvent) :이벤트 생성
 - initCustomEvent() : 사용자 정의 이벤트 상세히 설정
-    -매개변수 (event,bubbles,cancelable,event.detail)
-        1.event : 이벤트
-        2.bubbles : 이벤트 버블링인지>
-        3.cancelabe : 이벤트 취소가 가능한지?
-        4.event.detail : IE9는 4번쨰 매개변수를 필요로함
+    - 매개변수 (event,bubbles,cancelable,event.detail)
+    - event : 이벤트
+    - bubbles : 이벤트 버블링인지?
+    - cancelabe : 이벤트 취소가 가능한지?
+    - event.detail : IE9는 4번쨰 매개변수를 필요로함
 - dispatchEvent() : 이벤트 발생(호출)
 ```javascript
 var divElement = document.querySelector('div');
