@@ -1,4 +1,4 @@
-# 즉시 실행 함수(Immediately-Invoked Function Expression, IIFE)
+# 즉시 실행 함수<br>(Immediately-Invoked Function Expression, IIFE)
 >함수를 정의하자마자 바로 호출하는 것
 ## 1.기본 형태
 ```javascript
@@ -6,7 +6,7 @@
         //statements
 })()
 ```
->함수 표현(Function expression)은 함수를 정의하고, 변수에 함수를 저장하고 실행하는 과정을 거친다. 하지만 즉시 실행 함수는 함수를 정의하고 바로실행하여 이러한 과정을 거치지 않는 특징이 있다.
+>함수 표현(Function expression)은 함수를 정의하고, 변수에 함수를 저장하고 실행하는 과정을 거친다.<br>하지만 즉시 실행 함수는 함수를 정의하고 바로실행하여 이러한 과정을 거치지 않는 특징이 있다.
 
 ## 2.즉시 실행 함수 사용법
 
