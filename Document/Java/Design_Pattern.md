@@ -20,7 +20,7 @@
 ## 디자인 패턴의 종류
 - GoF 디자인 패턴
     - Gof(Gang of Fout)라 불리는 사람들
-        - 예리한 감마(Erich Gamma),리차드 헬름(Richard Helm),랄프 존슨(Ralph Johnson),존 블라시디스(John Vlissides)
+        - 예리한 감마(Erich Gamma),리차드 헬름(Richard Helm),랄프 존슨(Ralph Johnson)<br>존 블라시디스(John Vlissides)
         - 소프트웨어 개발 영역에서 디자인 패턴을 구체화하고 체계화한 사람들
         - 23가지의 디자인 패턴을 정리하고 각각의 디자인 패턴을 생성(Creational),구조(Structual),행위(Behavioral)3가지로 분류했다.
 - Gof 디자인 패턴의 분류
@@ -33,6 +33,6 @@
 2. 구조(Structural)패턴
     - 클래스나 객체를 조합해 더 큰 구조를 만드는 패턴
     - 예를 들어 서로 다른 인터페이스를 지닌 2개의 객체를 묶어 단일 인터페이스를 제공하거나 객체들을 서로 묶어 새로운 기능을 제공하는 패턴
-3. 행위(Behavioral)
+3. 행위(Behavioral)패턴
     - 객체나 클래스 사이의 알고리즘이나 책임 분배에 관련된 패턴
     - 한 객체가 혼자 수행할수 없는 작업을 여러개의 객체로 어떻게 분배하는지, 또 그렇게 하면서도 객체 사이의 결합도를 최소화 하는 것에 중점을 둔다.
