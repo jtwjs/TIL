@@ -1,13 +1,4 @@
-# Abstraction (추상화)
->객체에서 공통된 속성과 행위를 추출하는것
-
-## Abstract class (추상클래스)
-1. abstract method(미완성 메소드)를 포함하고 있는 클래스
-     - 선언부만 있고 구현부가 없는 메소드
-2. 추상클래스는 인스턴스를 생성할 수 없다.
-3. 추상클래스를 상속받는 자식클래스에서 abstrac method를 완성해야한다.
-4. 코드의 공통적인 부분을 제시하고 표준화하기 위한 용도로 활용된다.
-## Interface (인터페이스)
+# Interface (인터페이스)
 1. 추상메소드와 상수만을 멤버로 가질 수 있다.
     - 추상클래스보다 추상화 정도가 높다.
     - 추상클래스는 추상메소드 외에 멤버 변수나 일반 메소드를 가질수 있지만 인터페이스는 반드시 사전에 정의된 추상 메소드나 상수만을 가질수 있다.
@@ -22,10 +13,11 @@
     - 문법: 
 ```java
 public interface X{
-    int total(); //추상메서드 (구현부 X) 
+    int total(); //추상메서드 (구현부 X)
+    //교체 할수있는 필수 조건  
 }
 
-public class B implements X{
+public class B implements X{//교체 가능한 부품
     public int total(){
         return 26;
     }
@@ -44,10 +36,10 @@ public class A{
 
 public class main{}
 public static void main(String[] args){
-
     A a = new A();
-
-    a.print();
+    B b = new B();
+    a.setX(b); //A와B 결합 
+    a.print();//출력 값 Total is 26
 }
 }
 ```
@@ -58,12 +50,27 @@ public static void main(String[] args){
     - C의 핵심적인 기능을 자유롭게 변경할 수 있다.
 >A(class)->B(interface)->C(interface를 구현한 클래스)
 
-## 추상 클래스와 인터페이스의 차이
+## [번외] 문자열을 읽어서 새로운 객체 만들기 
+```java
+public class main{
+    public static void main(String[] args){
+        FileinputStream fis = new FileInputStream("파일 경로");
+        //ex:) 파일: setting.txt 파일경로: 루트에서부터 상태적인경로 
+        //ex:) src/패키이름/파일이름
+        //ex:) 파일 내용: 패키지명 포함해서 클래스 이름
+        //ex:) 파일 내용: 패키지명.클래스이름
+        Scanner sc = new Scanner(fis);
+        String className = sc.nextLine();
+        sc.close();
+        fis.close();
 
- ||Abstract Class|Interface|
- |:-----:|:-------:|:-------:|
- |**비유**|유전자<br>DNA 물려받는것|사교적인 관계|
- |**목적**|상속을강제|설계도/약속|
- |**키워드**|abstract class/extends|interface/implement|
- |**인스턴스화**|X|X|
- |**상속**|단일상속|다중상속|
+        Class clazz = Class.forName(className);
+        A a =new A();
+        X x = (X)clazz.newInstance();
+        a.setX(x);
+        
+        a.print();
+    }
+}
+
+```
