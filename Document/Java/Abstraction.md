@@ -7,56 +7,6 @@
 2. 추상클래스는 인스턴스를 생성할 수 없다.
 3. 추상클래스를 상속받는 자식클래스에서 abstrac method를 완성해야한다.
 4. 코드의 공통적인 부분을 제시하고 표준화하기 위한 용도로 활용된다.
-## Interface (인터페이스)
-1. 추상메소드와 상수만을 멤버로 가질 수 있다.
-    - 추상클래스보다 추상화 정도가 높다.
-    - 추상클래스는 추상메소드 외에 멤버 변수나 일반 메소드를 가질수 있지만 인터페이스는 반드시 사전에 정의된 추상 메소드나 상수만을 가질수 있다.
-2. 인스턴스를 생성할 수 없고, 클래스 작성에 도움을 줄 목적으로 사용된다.
-3. 미리 정해진 규칙에 맞게 구현하도록 표준을 제시하는데 사용
-4. 유연한 설계가 가능하고 유지보수가 쉽다.
-5. 다중상속을 구현하게 해주는 고급기술
-6. default또는static으로 선언되지 않은 모든 메소드는 암묵적으로 abstract 이기 때문에 abstract제어자가 필요없다(붙여도 상관없음)
-7. 인터페이스 구현(implements)
-    - 인터페이스에 정의된 추상메서드를 완성해야한다.
-    - 클래스는 다중상속이 안되지만 인터페이스는 다중구현 가능
-    - 문법: 
-```java
-public interface X{
-    int total(); //추상메서드 (구현부 X) 
-}
-
-public class B implements X{
-    public int total(){
-        return 26;
-    }
-}
-
-public class A{
-    private X x ;
-    public void setX(X x){
-        this.x = x;
-    }
-    public void print(){
-        int total = x.total();
-        System.out.prinf("Total is %d \n",total);
-    }
-}
-
-public class main{}
-public static void main(String[] args){
-
-    A a = new A();
-
-    a.print();
-}
-}
-```
-6. 인터페이스의 장점 :유연한 개발이 가능
-    - A는 B의 method만 호출하면 된다.
-    - A는 C의 존재와 내용을 몰라도 B를 통해 기능을 사용할수 있다.
-    - C의 변경이 A에 영향을 미치지 않는다.
-    - C의 핵심적인 기능을 자유롭게 변경할 수 있다.
->A(class)->B(interface)->C(interface를 구현한 클래스)
 
 ## 추상 클래스와 인터페이스의 차이
 

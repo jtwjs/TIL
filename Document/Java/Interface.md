@@ -72,5 +72,4 @@ public class main{
         a.print();
     }
 }
-
 ```
