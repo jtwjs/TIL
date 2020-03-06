@@ -12,9 +12,9 @@
 |void|clear()|저장된 객체 모두 삭제|
 |boolean|remove(Object o)|해당 객체 삭제|
 
->Set은 인덱스로 객체를 관리하지 않기 때문에 **데이터를 검색하기 위해서는 iterator()메소드로 Iterator(반복자)를 생성하고 데이터를 가져와야 한다.**
+>Set은 인덱스로 객체를 관리하지 않기 때문에<br> **데이터를 검색하기 위해서는 iterator()메소드로 Iterator(반복자)를 생성하고 데이터를 가져와야 한다.**
 
-## HastSet
+## HashSet
 >Set 컬렉션을 구현하는 대표적인 클래스. <br> **데이터를 중복 저장할 수 없고 순서를 보장하지 않는다.**
 
 ### Set< E > 객체명 = new HashSet< E >();
