@@ -121,6 +121,30 @@ List<E> extends Collection<E>{...}
 //순서로 부모<-자식 상속관계가 생긴다.
 ```
 
+```java
+abstract class info{
+    public abstract int getLevel();
+}
+class EmployeeInfo extends Info{
+    public int rank;
+    EmployeeInfo(int rank){ this.rank = rank;}
+    public int getLevel(){
+        return this.rank;
+    }
+}
+class Person<T extends Info>{//Info의 자식들만 T로 올수있다.
+                            //class뿐아니라 interface도 가능
+                            //info부분은 부모가 누구냐를 의미하는것
+    public T info;
+    Person<T info>{ this.info = info; }
+}
+public class Main{
+    public static void main(String[] args){
+            Person p1 = new Person(new EmployeeInfO(1));//O
+            Person<String> p2 = new Person<String>("부정");//X
+    }
+}
+```
 ## 와일드 카드
 - Wild card(와일드 카드) : 제네릭을 사용하는 코드에서 타입 매개변수를 기재하는 꺽쇠괄호 속 **물음표(?)로 표현**되며, 카드 게임에서 조커와 유사한 역할, **즉, 어떤 타입이던지 나타낼 수 있다.**
 - 와일드 카드는 매개변수,필드,지역 변수의 타입을 나타내는 등 다양하게 사용
