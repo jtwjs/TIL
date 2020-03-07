@@ -35,7 +35,7 @@ for(String value : list){
 ## ArrayList 클래스
 >**ArrayList는 List컬렉션 인터페이스를 구현한 클래스이다. <br> 일반 배열과 ArrayList는 인덱스로 객체를 관리한다는 점에서 동일하지만<br> 크기를 동적으로 늘릴수 있다는 점에서 차이점**이 있다.
 
->ArrayList는 내부에서 처음 설정한 저장 용량이 있다. 설정한 저장 용량 크기를 넘어서 더많은 객체가 들어오게 되면, 자동적으로 저장 용량이 늘어난다.
+>ArrayList는 내부에서 처음 설정한 저장 용량이 있다.<br> 설정한 저장 용량 크기를 넘어서 더많은 객체가 들어오게 되면, 자동적으로 저장 용량이 늘어난다.
 
 ```java
 //기본 저장 용량은 10
@@ -80,7 +80,7 @@ list.remove(0);
 //String 객체를 관리하는 정적ArrayList 생성
 List<String> list = Array.asList("hello","gglee","java");
 
-list. add("why");// UnsupportedOperationException 에러발생
+list.add("why");// UnsupportedOperationException 에러발생
 list.remove(1);//// UnsupportedOperationException 에러발생
 ```
 
