@@ -136,7 +136,7 @@ class Person<T extends Info>{//Info의 자식들만 T로 올수있다.
                             //class뿐아니라 interface도 가능
                             //info부분은 부모가 누구냐를 의미하는것
     public T info;
-    Person<T info>{ this.info = info; }
+    Person(T info){ this.info = info; }
 }
 public class Main{
     public static void main(String[] args){

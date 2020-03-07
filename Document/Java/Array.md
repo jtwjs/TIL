@@ -41,5 +41,3 @@ for(타입변수:배열){
 ```
 ## 정렬 (Array.sort())
 >Array.sort는 배열을 정렬해주는 java 패키지로써 java.util.Arrays에 포함되어 있다.<br>배열 값들을 오름차순으로 숫자>알파벳>한글 순으로 정렬
-
-``
