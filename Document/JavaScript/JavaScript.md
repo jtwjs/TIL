@@ -38,10 +38,96 @@ var foo = true; //foo 는이제 Boolean
 |String|텍스트 데이터|
 |Symbol|유일하고 변경불가능한 기본값<br>객체 속성의 key값으로도 사용가능|
 
-### Wrapper클래스
-- var 
-- let
-- c
+### Array 객체
+>선형으로써 순서를 기반으로 데이터를 뽑아내고싶다 = Array
+- push/pop 메소드를 이용한 데이터 관리 : Stack
+
+```javascript
+var nums = new Array();
+
+nums.push(5); // 스택형식으로 쌓음(LIFO)
+nums.push(10);
+nums.push(21);
+var n1 = nums.pop(); //최근에 들어온 데이터순으로 방출
+var n2 = nums/pop(); //방출된 데이터를 변수에 저장
+var n3 = nums/pop(); //값을 꺼내면 사라짐
+```
+- push/pop 메소드를 이용한 데이터 관리 : List
+
+```javascript
+var nums = new Array();
+nums[0] = 5;  //인덱스를 부여해 저장하는 방식
+nums[1] = 10; 
+nums[2] = 21;
+
+var nums2 = new Array();
+nums2[3] = 5; // 배열 길이가 4인 배열을 만듦
+//앞쪽은 비어있는 형태의 공간을 만듦
+```
+- 배열 객체 초기화
+
+```javascript
+var nums = new Array(); 
+//숫자가 하나일 경우 배열의 길이를 정함
+var nums = new Array(5); 
+//숫자가 두개 이상일 경우 초깃값으로 인식;
+var nums = new Array(5,10,21);
+//다른 형식의 데이터를 목록에 넣을수 있다.
+var nums = new Array(5,10,21,"hello");
+alert(typeof nums[3]);//typeof : 어떤형식의 데이터인지 알려줌
+//배열 목록에 배열을 넣을수 있다.
+var nums =new Array(5,10,21,"hello",new Array(2,3,4));
+//nums[4][0] = 2 ,nums[4][1] = 3, nums[4][2] = 4 
+```
+
+- splice()메소드를 이용한 데이터 관리 : List
+
+```javascript
+var nums = new Arrays(5,10,21,"hello");//생성과동시에 초기화
+
+nums.splice(1); //1번째 위치부터 다 삭제
+nums.splice(1,1);//1번쨰 위치부터 1개를 삭제
+nums.splice(1,2);//1번째 위치부터 2개를 삭제
+nums.splice(2,1,"hoho"); //2번째 위치에서 1개를 지우고 "hoho"를 삽입
+nums.splice(2,0,"hoho");// 2번째 위치에 "hoho"를 삽입
+```
+
+- new 연산자 없이 배열 생성
+> []구문 안에 해당 배열 객체에 초기화할 값들을 넣음
+```javascript
+//var 참조변수이름 = [값1,값2,값3...값n];
+var numbers = [1,2,3,4,5];
+var Strings = ['나무','산','바다'];
+```
+
+### Object
+>JavaScript는 객체를 만든후에 정의를한다. (동적인 객체정의)<br> 그러므로 오타에 주의..(버그의 주요인)
+
+>key값 hash(식별자)값을 이용해서 값을 저장하는 공간이 필요하다 = Object
+
+```javascript
+var exam = new Object();
+exam.kor = 30;
+exam.eng = 70;
+exam.math = 80;
+```
+
+- 키를 이용한 데이터 관리 : Map
+
+
+```javascript
+var exam = new Object();
+//변수에 담겨진 문자열을 객체의 속성을 꺼내야될때&대입하여야될때
+exam["kor"] = 30;
+exam["eng"] = 70;
+exam["math"] = 80;
+//기본값
+exam.kor = 30;
+exam.eng = 70;
+exam.math = 80;
+```
+#### prototype
+#### class
 ## 연산자
 ## 제어구조
 ## 함수
