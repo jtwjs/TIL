@@ -23,3 +23,18 @@ Math.random() //0.2327996...
 (int)Math.random()*n //n은 범위값
 (int)Math.random()*n+a //a는 시작값(초기값은0)
 ```
+
+## 4.Math.sqrt() [제곱근]
+>>매개변수의 제곱근(루트)을 구해준다.
+```java
+int a=3;
+double a=Math.sqrt(3)
+System.out.print(a);// 3의 제곱근 출력
+```
+
+## 5.Math.abs() [절대값]
+>>매개변수의 절대값을 구한다.
+```java
+int a = -3;
+System.out.print(Math.abs(a));// 절대값 3출력
+```
