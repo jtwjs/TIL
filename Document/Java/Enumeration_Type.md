@@ -29,15 +29,15 @@ public enum Week { LOGIN_SUCCESS,LOGIN_FAILED}
 Week today;
 Week reservationDay;
 ```
->열거 타입 변수를 선언했다면 열거 상수를 저장할 수 있다.<br>열거 상수는 단독으로 사용할 수 없고 반드시 열거타입 변수 = 열거타입.열거상수;로 사용된다.<br>Week today=Week.SUNDAY;
+>열거 타입 변수를 선언했다면 열거 상수를 저장할 수 있다.<br>열거 상수는 단독으로 사용할 수 없고 반드시 열거타입 변수 = 열거타입.열거상수;로 사용된다.<br>**Week today=Week.SUNDAY;**
 
->위에서 생성되는 열거 상수도 열거 객체로 생성된다. 즉 참조 타입인 것이다.(null값 저장 가능)<br>위에서 만든 Week의 경우 MONDAY부터 SUNDAY까지 총 7개의 Week 객체로 생성된다. <br>메소드 영역에 생성된 열거 상수가 해당 Week 객체를 각각 참조하게 된다.
+>위에서 생성되는 열거 상수도 열거 객체로 생성된다. 즉 참조 타입인 것이다.(null값 저장 가능)
 
 - 참조 타입 변수는 객체를 참조하는 변수 == 열거 상수는 객체
  >열거 타입 Week의 경우 MONDAY부터 SUNDAY까지 열거 상수는 총 7개의 Week 객체로 생성된다. <br>그리고 메소드 영역에 생성된 열거 상수가 해당 Week 객체를 각각 참조하게 된다.
  ![enum](https://user-images.githubusercontent.com/60641307/76695096-4bd08e80-66be-11ea-8cbb-5a9a4da2a98a.png)
 
- >열거 타입 변수 today는 스택 영역에 생성된다. today에 저장되는 값은 Week.SUNDAY 열거 상수가 참조하는 객체의 번지이다. <br>따라서 열거 상수ㅏ Week.SUNDAY와 today변수는 서로 같은 WEek 객체를 참조하게 된다.
+ >열거 타입 변수 today는 스택 영역에 생성된다. today에 저장되는 값은 Week.SUNDAY 열거 상수가 참조하는 객체의 번지이다. <br>따라서 열거 상수 Week.SUNDAY와 today변수는 서로 같은 Week 객체를 참조하게 된다.
  ![emum2](https://user-images.githubusercontent.com/60641307/76695103-73bff200-66be-11ea-80f1-cc6d043f2aa5.png)
 >그렇기 때문에 today 변수와 Week.SUNDAY 상수의 == 연산 결과는 true가 된다. 
 
