@@ -87,4 +87,37 @@ class SecondExam extends Exam{
 
 ## final 키워드 (상속금지)
 - final class{} : 상속 금지
+>final 클래스는 부모 클래스가 될 수 없어 자식 클래스를 만들수 없다.
 - final method(){} : 오버라이딩 금지 
+>부모 클래스에 선언된 final 메소드는 자식 클래스에서 재정의할 수 없다는 것이다.
+
+## protected 접근 제한자
+>public과 default 접근 제한의 중간쯤에 해당한다. 같은 패키지에서는 default와 같이 접근 제한이 없지만 다른 패키지에서는 자식클래스만 접근을 허용한다.
+
+![img_java_access_protected](https://user-images.githubusercontent.com/60641307/76756899-f71a3a00-67c9-11ea-8e0c-c6736e10ed1a.png)
+>protected는 **필드와 생성자, 메소드** 선언에 사용될 수 있다. 
+
+```java
+package package1;
+
+public class A{
+    protected String field; //protected로 선언된 필드
+
+    protected A(){          //protected로 선언된 생성자
+    }
+
+    protected void method(){//protected로 선언된 메소드
+    }
+}
+
+package package2;       //부모클래스인 A와 다른패키지
+import package1.A;      //부모클래스가있는 패키지 import
+                        
+public class D extends A{//자식클래스이기때문에 protected 필드,생성자,메소드 접근가능    
+    public D(){          //단 new연산자를 사용해서 생성자를 직접호출할 수 없다.
+        super();        //자식 생성자에서 super()로 A생성자를 호출 가능
+        this.field="value";
+        this.method();
+    }
+}
+```
