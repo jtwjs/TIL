@@ -84,3 +84,7 @@ class SecondExam extends Exam{
 
 ## Overloading (오버로딩)
 >새로운 메소드를 추가로 정의하는 것
+
+## final 키워드 (상속금지)
+- final class{} : 상속 금지
+- final method(){} : 오버라이딩 금지 
