@@ -35,10 +35,13 @@ Week reservationDay;
 
 - 참조 타입 변수는 객체를 참조하는 변수 == 열거 상수는 객체
  >열거 타입 Week의 경우 MONDAY부터 SUNDAY까지 열거 상수는 총 7개의 Week 객체로 생성된다. <br>그리고 메소드 영역에 생성된 열거 상수가 해당 Week 객체를 각각 참조하게 된다.
+ 
  ![enum](https://user-images.githubusercontent.com/60641307/76695096-4bd08e80-66be-11ea-8cbb-5a9a4da2a98a.png)
 
  >열거 타입 변수 today는 스택 영역에 생성된다. today에 저장되는 값은 Week.SUNDAY 열거 상수가 참조하는 객체의 번지이다. <br>따라서 열거 상수 Week.SUNDAY와 today변수는 서로 같은 Week 객체를 참조하게 된다.
+
  ![emum2](https://user-images.githubusercontent.com/60641307/76695103-73bff200-66be-11ea-80f1-cc6d043f2aa5.png)
+
 >그렇기 때문에 today 변수와 Week.SUNDAY 상수의 == 연산 결과는 true가 된다. 
 
 ```java
@@ -180,6 +183,29 @@ public class EnumMethodExample{
         for(Week day : days){
             System.out.println(day);
         }
+    }
+}
+```
+## 열거형 상수를 다른 값과 연결하기
+>열거형 상수와 관련된 값을 생성자를 통해 연결시킨 경우 세미콜론(;)을 붙여야함
+
+1. 각각의 열거 상수 뒤에 연관 값을 기술
+    - 열거 상수와 다른 구성요소를 구분하는 세미콜론 붙임
+2. 연관 값을 저장할 필드 선언
+    - **final private** :반드시 써야하는 키워드
+3. 생성자의 선언
+4. 메소드의 선언
+
+```java
+enum Season{
+    //1단계 열거 상수 뒤에 연관 값을 기술
+    SPRING("봄"),SUMMER("여름"),FALL("가을"),WINTER("겨울"); //;반드시 붙임
+    final private String name; //2단계 연관 값을 저장할 필드 선언
+    Season(String name){//3단계 생성자 선언
+        this.name=name;
+    }
+    String value(){ //4단계 메소드선언
+        return name;
     }
 }
 ```

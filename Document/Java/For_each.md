@@ -8,7 +8,7 @@ public class ForTest{
     public static void main(String[] args){
         int array[] = {10,20,30,40,50};
         for(int number : array){
-            System.out.println(number);
+            System.out.println(array[number]);
         }
     }
 }
