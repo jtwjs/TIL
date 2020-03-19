@@ -6,10 +6,8 @@
 3. 목록의 나머지 값들(첫 번째 값을 제외한 모든 값)을 조사하여
 가장 작은 값을 찾고,이 값과 목록의 두 번째 위치에 있는 값을 교환한다.
 4. 목록의 각 위치에 대해서 이러한 과정을 계속한다.
+- [예제 그림 보기](#Ex:)
 
-![1](https://user-images.githubusercontent.com/60641307/76816673-2a99aa80-6844-11ea-814a-3fd5cff7563b.jpg)
-
-![246C904C534962792D](https://user-images.githubusercontent.com/60641307/76816681-308f8b80-6844-11ea-98aa-03d8dd5b9199.jpg)
 
 ```java
 public class Select_Sort{
@@ -34,3 +32,14 @@ public class Select_Sort{
     }
 }
 ```
+
+## 장점
+- 비교 횟수는 많지만 교환 횟수가 적기 때문에 교환이 많이 이루어저야 하는 자료 상태에서 가장 효율적으로 적용 가능
+- 데이터의 양이 적을 때 성능이 좋음
+## 단점
+- 100개 이상의 자료에 대해서는 속도가 급격히 떨어짐
+
+## Ex:
+![1](https://user-images.githubusercontent.com/60641307/76816673-2a99aa80-6844-11ea-814a-3fd5cff7563b.jpg)
+
+![246C904C534962792D](https://user-images.githubusercontent.com/60641307/76816681-308f8b80-6844-11ea-98aa-03d8dd5b9199.jpg)

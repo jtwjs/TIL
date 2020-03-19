@@ -4,8 +4,7 @@
 - 왼쪽의 값이 비교하려는 요소값보다 작을때 까지 위치를 왼쪽으로 이동시킨다.
 - ex:) 신병이 들어오면 서열정리를한다.
     - 자료 배열의 모든 요소를 앞에서부터 차례대로 이미 정렬된 배열 부분과 비교 하여<br>자신의 위치를 찾아 삽입함으로써 정렬을 완성하는 알고리즘
-    
-![insertion_sort-recursion](https://user-images.githubusercontent.com/60641307/76817980-b7923300-6847-11ea-9dcc-9a566fae77e0.png)
+- [예제 그림 보기](#Ex:)
 
 ```java
 int [] a= {.....};
@@ -28,3 +27,6 @@ for(int i=1;i<a.length;i++){
 ## 단점
 - 최악의 경우 O(n^2)라는 시간복잡도를 갖게된다.
 - 데이터의 상태 및 데이터의 크기에 따라서 성능의 편차가 굉장히 심하다
+
+## Ex:
+![insertion_sort-recursion](https://user-images.githubusercontent.com/60641307/76817980-b7923300-6847-11ea-9dcc-9a566fae77e0.png)
