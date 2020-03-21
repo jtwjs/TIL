@@ -1,8 +1,8 @@
 # Byte Stream (바이트 스트림)
+![바이트스트림](https://user-images.githubusercontent.com/60641307/77131709-f4586700-6a9f-11ea-9bd3-3506292b14ed.jpg)
+
 - [FileInputStream / FileOutputStream](#FileInputStream-/-FileOutputStream)
 - [DataInputStream / DataOutputStream](#DataInPutStream-/-DataOutputStream)
-
-![바이트스트림](https://user-images.githubusercontent.com/60641307/77131709-f4586700-6a9f-11ea-9bd3-3506292b14ed.jpg)
 
 >binary 데이터를 출력하는 스트림이다.<br>이미지,동영상 등을 송수신할 때 주로 사용한다.
 - InputStream / OutputStream
