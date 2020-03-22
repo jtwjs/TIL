@@ -10,6 +10,29 @@
 - FileReader / FileWriter
     - 문자 기반의 파일을 입출력 하는 클래스
 
+## Char 단위 입출력(Console)
+>char단위 입출력 클래스를 ㅇ리용해서 키보드로부터 한줄 입력 받아 콘솔 출력
+- System.in : 키보드를 의미(InputStream)
+- BufferedReader : 한줄씩 입력받기 위한 클래스
+- BufferedReader 클래스의 생성자는 InputStream을 입력받는 생성자가 없다.
+- System.in은 InputStream 타입이므로 BufferedReader의 생성자에 바로 들어갈수 없으므로 InputStreamReader 클래스를 이용한다.
+
+```java
+public class CharIOExample1{
+    public static void main(String[] args){
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String line = null;
+        //키보드로 입력받을 문자열을 저장하기 위해 line 변수 선언
+        try{
+            line = br.readLine();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        System.out.println(line); //콘솔출력
+    }
+}
+```
 ## FileReader / FileWriter 
 
 - **FileReader** : 파일로부터 입력을 위한 스트림을 생성하는 클래스로 데이터가 입력될 파일의 정보를 인자로 받는다.

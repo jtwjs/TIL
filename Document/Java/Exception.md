@@ -133,3 +133,12 @@ public void doSomething() throws Exception{
 - trhows는 예외를 전가시키는 것
     - 예외를 자신이 처리하지 않고,자신을 호출하는 메소드에게 책임을 전가
 >메소드를 정의할 때 throws 예약어를 시그내처에 추가하면 그 메소드를 호출하는 곳에서 예외 처리를 해야한다.
+
+
+## e.Method() 예외 메소드
+
+|Method|Explain|
+|:----|:----|
+|e.getMessage()|에러 이벤트와 **함꼐 들어오는 메세지를 출력**|
+|e.toString()|에러 이벤트의 **toString()을 호출해서 간단한 에러 메세지**를 확인<br>ex:) java.lang.Exception:출력문구|
+|e.printStackTrace()|에러 메세지의 발생 **근원지를 찾아서 단계별로 에러를 출력**한다.<br>ex:) java.lang.Exception:출력문구<br>at ExTrhowException.main(···)|
