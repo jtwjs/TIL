@@ -1,6 +1,6 @@
-# Design Pattern (디자인패턴)
+# Design Pattern (디자인 패턴)
 - 소프트웨어를 설계할 때 특정 맥락에서 자주 발생하는 고질적인 문제들이 또 발생했을 때 재 사용할수 있는 훌륭한 해결책
-- "바퀴를 다시 발명하지 마라(DOn't reinvent the wheel")
+- "바퀴를 다시 발명하지 마라(Don't reinvent the wheel")
 - 이미 만들어져서 잘되는 것을 처음부터 다시 만들 필요가 없다는 의미 
 - 패턴이란
     - 패턴은 공통의 언어를 만들어 주며 팀원 사이의 의사소통을 원할하게 해주는 아주 중요한 역할을 한다.
@@ -20,7 +20,7 @@
 ## 디자인 패턴의 종류
 - GoF 디자인 패턴
     - Gof(Gang of Fout)라 불리는 사람들
-        - 예리한 감마(Erich Gamma),리차드 헬름(Richard Helm),랄프 존슨(Ralph Johnson)<br>존 블라시디스(John Vlissides)
+        - 에릭 감마(Erich Gamma),리차드 헬름(Richard Helm),랄프 존슨(Ralph Johnson)<br>존 블라시디스(John Vlissides)
         - 소프트웨어 개발 영역에서 디자인 패턴을 구체화하고 체계화한 사람들
         - 23가지의 디자인 패턴을 정리하고 각각의 디자인 패턴을 생성(Creational),구조(Structual),행위(Behavioral)3가지로 분류했다.
 - Gof 디자인 패턴의 분류

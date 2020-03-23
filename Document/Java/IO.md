@@ -33,6 +33,119 @@
 ||void write(byte[] b, int off,int len)|배열 b[ off ]부터 len 바이트를 해당 출력 스트림에 저장 |
 >read() 메소드는 해당 입력 스트림에서 더 이상 읽어들일 바이트가 없으면 -1을 반환해야 한다.<br>그런데 반환 타입을 byte 타입으로 하면, 0부터 255까지의 바이트 정보는 표현할 수 있지만 -1은 표현할수 없게 된다.<br>따라서 InputStream의 read() 메소드는 반환 타입을 int형으로 선언하고 있다.
 
+### PrintStream과 PrintWriter 클래스 
+- 다른 싱크 스트림을 감싸서 사용해야하는 처리 스트림이다.
+- 다양한 출력형식을 제공하는 'format(String format, Object...args)' 메소드를 제공한다.
+- 객체를 생성할때 autoFlush속성을 true로 하면 버퍼가 차거나 필요한 경우 버퍼를 flush한다.
+
+### File 클래스
+>(파일의 내용이 아니라)파일 자체를 관리하는 클래스
+- 다음과 같은 메소드 제공
+    - 파일 정보를 가져오는 메소드
+    - 파일 정보를 수정하는 메소드
+    - 파일을 생성/삭제하는 메소드
+- 디렉토리 관리에도 사용됨
+#### 사용방법
+1. File 객체 생성
+```java
+File file = new File("poem.txt"); 
+                    //▲현재 디렉토리에 있는 poem.txt
+                    //에 대한 File 객체를 생성한다.
+File file = new File("C:\\work\\chap10");
+                    //▲C드라이브의 work디렉토리 아래에있는
+                    //chap10에 대한 File 객체를 생성한다.
+```
+2. 파일/디렉토리 정보를 가져오는 메소드를 호출한다.
+
+```java
+Boolean isThere = file.exists();
+                    //▲ 파일 또는 디렉토라기 있으면 true
+                    //없으면 false를 리턴
+Boolean isFile = file.isFile();
+                    //▲ 파일이면 true
+                    //아니면 false를 리턴
+Booelan isDir = file.isDirectory();
+                    //▲ 디렉토리이면 true
+                    //아니면 false를 리턴
+```
+
+3. 파일/디렉토리 정보를 가져오는 메소드를 호출한다.(계속)
+
+```java
+String name = file.getName();//이름 리턴
+long size = file.length();   //크기 리턴
+long time = file.lastModified();//최종 수정일시를 리턴
+boolean readMode = file.canWrite(); //쓰기 가능여부를 리턴
+boolean hiddenmode = file.isHidden();//숨김 여부를 리턴
+String parent = file.getParent(); //부모 디렉토리 경로명을 리턴
+
+Files childs[] = file.listFiles();
+                    //▲ 서브디렉토리와 파일들의 목록을
+                    // 리턴하는 메소드
+public class FileExample {
+
+    public static void main(String args[]) {
+        File file = new File(".");
+        File arr[] = file.listFiles();
+        for (int cnt = 0; cnt < arr.length; cnt++) {
+            String name = arr[cnt].getName();    
+            if (arr[cnt].isFile())
+                System.out.printf("%-25s %7d ", name, arr[cnt].length());
+            else
+                System.out.printf("%-25s   <DIR> ", name);
+            long time = arr[cnt].lastModified();     
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.setTimeInMillis(time);
+            System.out.printf("%1$tF %1$tT %n", calendar);
+        }
+}
+	}
+```
+
+#### 파일/디렉토리 생성/삭제하기
+- 파일을 생성하고 삭제하는 메소드
+- 디렉토리를 생성하고 삭제하는 메소드
+
+```java
+//파일|디렉토리 생성/삭제
+File file1 = new File("poem.txt");
+file1.createNewFile();  //파일생성
+file1.mkdir();//디렉토리 생성
+
+File file2 = new File("C:\\doc\\회의록.hwp");
+file.delete(); //삭제는 메소드 동일
+```
+
+- 임시 파일 생성하기
+
+```java                                 
+                                         //▼ .txt로 끝나는 
+File tmpFile = file.createTempFile("tmp",".txt",tmpDir);//임시파일을 tmpDir에 생성
+                                  //▲ tmp로 시작하고
+                                  
+public class FileExample2 {
+    public static void main(String args[]) {
+        FileWriter writer = null;
+        try {
+            File file = File.createTempFile("tmp", ".txt", new File("C:\\temp"));
+            writer = new FileWriter(file);
+            writer.write('자');
+            writer.write('바');
+        }
+        catch (IOException ioe) {
+            System.out.println("임시 파일에 쓸 수 없습니다.");
+        }
+        finally {
+            try {
+                writer.close();
+            }          
+            catch (Exception e) {
+            }
+        }
+    }
+	}
+
+```
 ## Byte Stream(바이트 스트림)
 >자바에서 스트림은 기본적으로 바이트 단위로 데이터를 전송한다.
 
@@ -61,6 +174,27 @@
 
 ## 보조 스트림
 >자바에서 제공하는 보조 스트림은 실제로 데이터를 주고받을 수는 없다.<br>다른 스트림의 기능을 향상시키거나 새로운 기능을 추가해주는 스트림이다.
+
+### Bufferd
+>버퍼는 데이터를 한 곳에서 다른 한 곳으로 전송하는 동안 일시적으로 그 데이터를 보관하는 메모리의 영역이다
+
+>운영체제는 유저의 어플리케이션 버퍼와 같은 사이즈인 Non페이지한 시스템 버퍼를 할당한다. <br> 쓰기 작업이 발생할 때는 드라이버 스택을 호출하기 전에 I/O관리자는 유저의 데이터를 시스템 버퍼에 복사한다.<br>읽기 작업이 발생할 때는 드라이버 스택의 요청 작업이 완료된 후 시스템 버퍼를 유저 영역에 복사한다.
+
+- 즉, 유저 영역의 데이터를 드라이버의 버퍼로 가져올 떄, **드라이버 스택 전에 복사를 마친후 호출**한다.
+    - [유저 -> 시스템 버퍼(IRP)]
+
+- 반면에 시스템 드라이버의 버퍼에서 유저 영역의 버퍼로 데이터를 복사할 때는 **드라이버에서의 활동이 모두 마친후, 유저 영역의 데이터로 복사**
+    - [시스템 버퍼 -> 유저]
+
+>서비스와 **상호 동작**하거나 **느린 디바이스** 또는 한번에 상대적으로 **적은 양의 데이터**를 주고받는 드라이버의 경우에 **buffered I/O 전송 방식**을 사용한다.
+
+>적은양의 buffered I/O방식을 사용하면 상호 동작하는 전송에 있어서 적은 양의 물리 메모리를 소비해도 가능하다. 그 이유는 메모리 관리자는 이 buffred I/O방식을 위해서 **매번 통신 할 때 마다 할당된 메모리를 lock**할 필요가 없다.
+
+>일반적으로 비디오,키보드,마우스,가상드라이버들이 buffred I/O 방식을 사용
+
+> **데이터를 전달 할 때마다 페이지를 할당하고 lock(해당 데이터 전달을 위해서 메모리를 묵어 놓는 방식)하지 않고 적은양의 데이터 송/수신에 사용한다.**
+
+
 
 ##### Byte Stream
 

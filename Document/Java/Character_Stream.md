@@ -11,7 +11,7 @@
     - 문자 기반의 파일을 입출력 하는 클래스
 
 ## Char 단위 입출력(Console)
->char단위 입출력 클래스를 ㅇ리용해서 키보드로부터 한줄 입력 받아 콘솔 출력
+>char단위 입출력 클래스를 이용해서 키보드로부터 한줄 입력 받아 콘솔 출력
 - System.in : 키보드를 의미(InputStream)
 - BufferedReader : 한줄씩 입력받기 위한 클래스
 - BufferedReader 클래스의 생성자는 InputStream을 입력받는 생성자가 없다.
@@ -33,6 +33,48 @@ public class CharIOExample1{
     }
 }
 ```
+## Char 단위 입출력(File)
+>파일에서 한 줄씩 입력 받아서 파일에 출력
+- 파일에서 읽기위해서 FileReader 클래스 이용
+- 한 줄 읽어 들이기 위해서 BufferedReader 클래스 이용
+    - BufferedReader 클래스가 가지고 있는 readLine() 메소드가 한줄씩 읽게 한다.
+    - readline() 메소드는 읽어낼 때 더이상 읽어 들일 내용이 없을 때 null값 반환
+- 파일에 쓰게하기 위해서 FileWriter 클래스 이용
+- 편리하게 출력하기 위해서 PrintWriter 클래스 이용
+
+```java
+public static void main(String[] args){
+    BufferedReader br =null;
+    PrintWrtier pw = null;
+    try{
+        br = new BufferedReader(new FileReader("읽을 파일 경로"));
+        pw = new PrintWriter(new FileWriter("test.txt"));
+        String line = null;
+        While((line = br.readLine())!= null){
+            pw.println(line);
+        }
+    }catch(Exception e){
+        e.printStackTrace();
+    }finally{
+        pw.close();
+        // PrintWrite 클래스가 정의하고 있는 close() 메소드는 
+        // excpetion을 trhows하고 있지 않기 떄문에
+        // 사용하는 쪽에서 처리할 필요가 없는것!
+        try{
+            br.close();//BufferedReader 클래스의 close() 메소드는
+            //throws IOException 정의 되있어서 사용하는 쪽에서 예외처리해주어야함
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+}
+```
+>[!]Exception
+- checked Exception은 반드시 예외처리를 해야한다.
+1. try-catch 블럭을 이용해서 직접 처리하는 방법
+2. throws 해서 해당 메소드를 사용하는 쪽에서 처리하는 방법
+    - throws 했다는것은 직접 excpetion 처리를 안했다는말임 
+
 ## FileReader / FileWriter 
 
 - **FileReader** : 파일로부터 입력을 위한 스트림을 생성하는 클래스로 데이터가 입력될 파일의 정보를 인자로 받는다.
@@ -81,3 +123,12 @@ reader.close();
     - :FileReader/FileWriter 는 바이트를 문자(Char)로 변환하여 입출력처리
         - :버퍼를 사용하지않고도 한글처리 가능
 >FileInputStream / FileOutputStream은 InputStream / OutputStream을 상속 받고 있으며, FileReader / FileWriter는 Reader와 Writer을 상속받고 있다.
+
+## PrintWriter
+>File(String), OutputStream, Writer 등의 객체를 인수로 받아 더 간편하게 스트림을 연결할 수 있다.
+
+|Method|Explain|
+|:-----|:------|
+|print()|boolean,int,char,float,double 등등의 데이터형을<br>String으로 변환해서 쓰지 않고 직접 입력해줍니다.|
+|println()|print할 데이터 뒤에 /n을 추가하여<br>데이터와 함께 개행을 출력한다.|
+

@@ -1,7 +1,7 @@
 # Object Overriding Method
 > Object 클래스는 모든 클래스의 **최상위** 클래스이다.<br>**자동으로 Object클래스를 상속**하고 있다.<br>Object가 가지고 있는 메소드들은 모든 클래스에서 사용할 수 있다는 것을 뜻한다.<br>Object가 가지고 있는 메소드 중에서 가장 많이 사용되는 메소드는 **equals** , **toString** ,**hashCode**가 있으며 이는 반드시 오버라이딩해서 사용해야 한다.
 
-- [equals Overriding](#equals-overriding-(이퀄즈-오버라이딩))
+- [equals()](#equals-overriding-(이퀄즈-오버라이딩))
 - [hashCode()](#hashCode-overriding-(해쉬코드-오버라이딩))
 - [toString()](#toString-overriding-(투스트링-오버라이딩))
 
