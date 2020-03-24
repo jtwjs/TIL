@@ -89,13 +89,15 @@ list.remove(1);//// UnsupportedOperationException 에러발생
 
 ## LinkedList 클래스
 
+![DLL1](https://user-images.githubusercontent.com/60641307/77399244-5e4c7580-6dec-11ea-8e5d-4a67f6ab6110.png)
 
-![연결리스트](https://user-images.githubusercontent.com/60641307/76953683-73d82000-6952-11ea-90f0-b9a4452a00e2.png)
+- **자바는 "더블리 링크드리스트(Doubly LinkedList)"를 기반**으로 하고있다.
+    - 자바 LinkedList는 처음 들어가는 값이 "Header"부분에 들어가도록 되어있다.
 >》연결리스트는 각 노드가 데이터와 포인터를 가지고 한 줄로 연결되어 있는 방식의 자료구조이다.
 
 >연결될 다음 원소에 대한 주소를 저장해야하므로 <원소,주소>의 단위로 저장한다.<br>이러한 단위 구조를 노드(node)라 함 < data+link >
 
-> **LinkedList는 List 구현 클래스**이다. 내부 구조는 ArrayList와 다르다. **ArrayList에는 내부 배열에 객체를 저장해서 인덱스로 관리하지만, LinkedList는 인접 참조를 링크해서 체인처럼 관리**한다. 그렇기 때문에 **LinkedList에서 특정 인덱스의 객체를 제거하게되면, 제거되는 인덱스의 앞 뒤 링크만 변경되고 나머지 링크는 변겨되지 않는다.**
+> **LinkedList는 List 구현 클래스**이다. 내부 구조는 ArrayList와 다르다. **ArrayList에는 내부 배열에 객체를 저장해서 인덱스로 관리하지만, LinkedList는 인접 참조를 링크해서 체인처럼 관리**한다. 그렇기 때문에 **LinkedList에서 특정 인덱스의 객체를 제거하게되면, 제거되는 인덱스의 앞 뒤 링크만 변경되고 나머지 링크는 변경되지 않는다.**
 
 >**ArrayList는 제거되는 인덱스를 기준으로 뒤에 있는 객체가 한칸씩 이동 했었던 점과 차이**가 있다. 이러한 차이로 인해 객체를 삽입,삭제하는 로직에 있어서 ArrayList보다 LinkedList를 사용할 때 좋은 성능이 나온다.
 
@@ -116,7 +118,7 @@ list.remove(1);//// UnsupportedOperationException 에러발생
     4. 연속적인 기억 장소의 할당이 필요하지 않다.
 - **단점** 
     1. 탐색이 느리다.
-        - 순차접근방식 단방향성을 갖고 있어 자료 검색에는 부적합하다.
+        - 순차접근방식 단방향성을 갖고 있어 자료 검색에는 부적합하다.(단일 연결리스트)
     2. 포인터의 사용으로 인해 저장 공간의 낭비가 있다.
     3. 알고리즘이 복잡하다.
 ### LinkedList의 삽입 과정
@@ -351,5 +353,3 @@ public class LinkedList{
 }
 
 ```
-
-

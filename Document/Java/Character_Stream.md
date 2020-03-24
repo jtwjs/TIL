@@ -1,7 +1,9 @@
 # Character Stream (문자 스트림)
-![문자스트림](https://user-images.githubusercontent.com/60641307/77131106-cc680400-6a9d-11ea-8fc1-a1c9b36c5779.jpg)
 
+![문자 전체](https://user-images.githubusercontent.com/60641307/77149533-22a46980-6ad5-11ea-8a6a-b042e592d560.jpg)
 - [FileReader / FileWriter](#FileReader-/-FileWriter)
+
+
 
 >말 그대로 text 데이터를 입출력하는데 사용하는 스트림이다.<br>HTML 문서,텍스트 파일을 송수신할 때 주로 사용한다.
 

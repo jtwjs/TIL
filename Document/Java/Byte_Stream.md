@@ -1,5 +1,5 @@
 # Byte Stream (바이트 스트림)
-![바이트스트림](https://user-images.githubusercontent.com/60641307/77131709-f4586700-6a9f-11ea-9bd3-3506292b14ed.jpg)
+![스트림 전체](https://user-images.githubusercontent.com/60641307/77149510-18826b00-6ad5-11ea-942c-a02acfea9ef7.jpg)
 
 - [FileInputStream / FileOutputStream](#FileInputStream-/-FileOutputStream)
 - [DataInputStream / DataOutputStream](#DataInPutStream-/-DataOutputStream)

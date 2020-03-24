@@ -3,6 +3,8 @@
 
 >이러한 컬렉션 프레임워크는 자바의 인터페이스를 사용하여 구현된다.
 
+
+
 ## 주요 인터페이스
 1. List
     - 순서 있는 데이터 집합
@@ -64,7 +66,7 @@ public class Collection{
 |**메소드**|**설명**|
 |:------|:------|
 |boolean **add(E e)**|해당 collection에 전달된 요소를 **추가**함.(선택적 기능)|
-|void **clar()**|해당 collection의 **모든 요소를 제거**함.(선택적 기능)|
+|void **clear()**|해당 collection의 **모든 요소를 제거**함.(선택적 기능)|
 |boolean **contains(Object o)**|해당 collection이 전달된 객체를 **포함하고 있는지를 확인함**.|
 |boolean **equals(Object o)**|해당 collection과 전달된 객체가 **같은지를 확인**함.|
 |boolean **isEmpty()**|해당 collection이 **비어있는지를 확인**함.|
@@ -96,7 +98,7 @@ public class Ex{
 }
 
 ```
-## 자료구조 정렬
+
 
 ### Collections 클래스 
 >여러가지 데이터와 관련된 작업들을 처리할수있게 도와주는 class<br>속해있는 메소드들은 모두 static (인스턴스로 만들필요없음)
