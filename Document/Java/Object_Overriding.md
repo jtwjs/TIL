@@ -9,8 +9,10 @@
 #### 가장 많이 사용되는 메소드
 >사용자의 요구에 맞도록 오버라이딩을 해서 사용해야 한다.
 - equals() : 객체가 가진 값을 비교할 때 사용
+    - 두 객체의 **내용이 같은지** 확인
 - hashCode() : 객체의 해시코드 값 반환
     - hashcode : 객체를 식별할 수 있는 정수값
+    - 두 객체가 **같은 객체인지** 확인
 - toString() : 객체가 가진 값을 문자열로 반환
 
 #### IDE가 쉽게 만들어 준다.
@@ -127,64 +129,6 @@ public boolean equals(Object obj){
 ## hashCode overriding (해쉬코드 오버라이딩)
 >객체 해시코드란 객체를 식별할 하나의 정수값을 말한다.<br>Object의 hashCode() 메소드는 객체의 메모리 번지를 이용해서 해시코드를 만들어 리턴하기 때문에 객체 마다 다른 값을 가지고 있다.<br> 객체의 값을 동등성 비교시 hashCode()를 오버라이딩할 필요성이 있다.
 
-#### 컬렉션 프레임워크에서 HashSet,HashMap,HashTable의 객체비교
->우선 hashCode()메소드를 실행해서 리턴된 해시코드 값이 같은지를 본다.<br>해시 코드값이 다르면 다른 객체로 판단하고, 해시 코드값이 같으면 equals()메소드로 다시 비교한다.<br> 이 두개가 모두 맞아야 동등 객체로 판단한다.
-
-![해시코드](https://user-images.githubusercontent.com/60641307/77223145-4f23b880-6b9d-11ea-96c0-2ec35045a2ab.png)
-
-```java
-//Key클래스 equals() 메소드를 재정의해서 number 필드값이 같으면 true를 리턴
-//그러나 hashCode() 메소드는 재정의하지 않았기 때문에 Object hashCode()메소드가 사용됨
-public class Key{
-    public int number;
-
-    public Key(int number);
-    this.number = number;
-
-@Override
-public boolean equals(Object obj){
-    if(obj instanceof key){
-        key compareKey = (key) obj;
-        if(this.number == compareKey.number){
-            return true;
-        }
-    }
-    return false;
-}
-}
-//이런 경우 두개의 동등한 객체를 HashMap의 식별키로 Key 객체를 사용하면 
-//저장된 값을 찾아 오지 못한다. number필드 값이 같더라도 hashCode()메소드에서 
-//리턴하는 해시코드가 다르기 때문에 다른 식별키로 인식하기 떄문..
-public class KeyExample{
-    public static void main(String[] args){
-        //Key 객체를 식별키로 사용해서 String 값을 저장하는 HashMap 객체생성
-        HashMap<Key,String> hashMap = new HashMapM<Key,String>();
-
-        //식별키 "new key(1)"로 "홍길동"을 저장함
-        hashMap.put(new key(1),"홍길동");
-
-        //식별키 "new key"로 "홍길동"을 읽어옴
-        String value = hashMap.get(new Key(1));
-        System.out.println(value);
-    }
-}
-//위내용에서 HashCode를 정의하지 않았기 떄문에 null이 조회된다.
-//만약 의도한대로 홍길동을 읽으려면 hashCode를 재정의 해야한다.
-public class key{
-    ...
-    @Override
-    public int hashCode(Object obj){
-        return number;
-    }
-}
-//저장할 때의 new Key(1)과 읽을때의 new Key(1)은 다른 참조값의 다른 객체자이지만
-//HashMap은 hashCode()의 리턴값이 같고, equals() 리턴값이 true가 나오기 떄문에
-//두 객체는 동등객체로 평가하여 하나의 키처럼 사용하게 된다. 즉,같은 식별키로 인식
-```
-
->**이러한 이유로 객체의 동등비교를 위해서는 Object의 equals() 메소드만 재정의하지 말고** <br>**hashCode() 메소드도 재정의해서 논리적 동등 객체일경우 동일한 해시코드가 리턴되도록해야한다.**
-
->키를 기반으로 찾는 것이지 객체의 참조 값으로 찾는것은 아니다.<br> hash코드값이 같다고 해서 객체의 참조 값이 같은것은 아니다.
 
 #### 해시코드 생성(hash(), hashCode())
 >Object 중에 해시코드를 생성해주는 역할이 있다.<br>이 Object.hash(Object...values) 메소드는 매개값으로 주어진 값들을 이용해서<br> 해시 코드를 생성하는 역할을 하는데, 주어진 매개값들로 배열을 생성하고<br> Arrays.hashCode(Object[])를 호출해서 해시코드를 얻고 이값을 리턴한다.

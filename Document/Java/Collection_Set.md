@@ -137,3 +137,44 @@ public class HashSetEx{
     }
 }
 ```
+
+## TreeSet
+- TreeSet은 이진 트리(binary tree)를 기반으로 한 Set 컬렉션이다.
+- 하나의 노드는 노드값인 value와 왼쪽과 오른쪽 자식 노드를 참조하기 위한 두개의 변수로 구성된다.
+- TreeSet에 객체를 저장하면 자동으로 정렬되는데 부모값과 비교해서 낮은것이 왼쪽 높은것이 오른쪽 자식노드에 저장된다.
+
+```java
+TreeSet<E> treeSet = new TreeSet<E>();
+```
+>Set 인터페이스 타입 변수에 대입해도 되지만 TreeSet 클래스 타입으로 대입한 이유는 객체를 찾거나 범위 검색과 관련된 메소드를 사용하기 위해서이다.
+
+|Return Type|Method|Explain|
+|:----:|:----|:-----|
+|E|first()|제일 낮은 객체를 리턴|
+|E|last()|제일 높은 객체를 리턴|
+|E|lower(E e)|주어진 객체보다 바로 아래 객체를 리턴|
+|E|higher(E e)|주어진 객체보다 바로 위 객체를 리턴|
+|E|floor(E e)|주어진 객체와 동등한 객체가 있으면 리턴,만약<br>없다면 주어진 객체의 바로 아래의 객체를 리턴|
+|E|ceiling(E e)|주어진 객체와 동등한 객체가 있으면 리턴,만약<br>없다면 주어진 객체의 바로 위의 객체를 리턴|
+|E|pollFirst()|제일 낮은 객체를 꺼내오고 컬렉션에서 제거함|
+|E|pollLast()|제일 높은 객체를 꺼내오고 컬렉션에서 제거함|
+
+- TreeSet이 가지고 있는 정렬과 관련된 메소드
+
+|Return type|Method|Explain|
+|:-----|:-----|:-----|
+|Iterator< E>|descendingIterator()|내림차순으로 Iterator를 리턴|
+|NavigableSet< E>|descendingSet()|내림차순으로 정렬된 NavigableSet을 반환|
+
+- descendingSet() 메소드는 내림차순으로 정렬된 NavigableSet 객체를 리턴
+    - TreeSet과 마찬가지로 first,last,lower,higher,floor,ceiling 메소드 제공
+    - 정렬 순서를 바꾸는 descendingSet() 메소드도 제공한다.
+    - 오름차순으로 정렬하려면 descendingSet() 메소드를 두번 호출하면된다.
+
+- TreeSet이 가지고 있는 범위 검색과 관련된 메소드
+
+|Return Type|Method|Explain|
+|:-----|:-----|:----------|
+|NavigableSet< E>|headSet(<br>E toElement,<br>boolean inclusive<br>)|주어진 객체보다 낮은 객체들을 NavigableSet으로 리턴,<br>주어진 객체 포함 여부는 두 번째 매개값에 따라 달라짐|
+|NavigableSet< E>|tailSet(<br>E fromElement,<br>boolean inclusive<br>)|주어진 객체보다 높은 객체들을 NavigableSet으로 리턴,<br>주어진 객체 포함 여부는 두 번째 매개값에 따라 달라짐|
+|NavigableSet< E>|subSet(<br>E fromElement,<br>boolean fromInclusive,<br>E toElement,<br>boolean toInclusvie<br>)|시작과 끝으로 주어진 객체 사이의 객체들을 NavigableSet으로 리턴,<br> 시작과 끝 객체의 포함 여부는 두 번째,네 번째 매개값에 따라 달라짐|
