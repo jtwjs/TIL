@@ -167,6 +167,9 @@ public class Button {
 ```
 
 ## anonymous inner class(익명 클래스)
+1. 필드선언과 초기값 대입
+2. 로컬변수선언과 초기값 대입
+3. 매개값으로 익명구현객체 대입
 - 지역 중첩 클래스의 변형된 형태
 - 단독으로 생성할 수 없고 클래스를 상속하거나 인터페이스를 구현해야만 생성할 수 있다.
 - 익명 객체는 필드의 초기값이나  지역변수의 초기값, 매개변수의 매개값으로 주로 대입된다.
@@ -199,3 +202,97 @@ class Outer{
 
 ```
 > 클래스 파일은 각각 Outer.class, Outer$숫자.class로 파일이 생긴다.
+
+### 익명 자식 객체 생성
+- 부모 타입으로 필드나 변수를 선언하고, 자식 객체를 초기값으로 대입할 경우 
+    1. 부모 클래스를 상속해서 자식 클래스를 선언
+    2. new 연산자를 이용해 자식 객체를 생성한 후, 필드나 로컬 변수에 대입하는것이 기본.
+        - ex:) ParentClass field = new Child();
+>그러나 자식 클래스가 재사용되지 않고, 오로지 해당 필드와 변수의 초기값으로만 사용할 경우<br> 익명 자식 객체를 생성해서 초기값으로 대입하는것이 좋은 방법!
+
+```java
+Class A{
+//필드 선언
+Parent field = new Parent(){//A클래스의 필드 선언
+    int childField;
+    void childMethod(){}
+    @Override
+    void ParentMethod(){} //부모클래스의 메소드 오버라이딩
+};
+
+//로컬변수 선언
+void method(){
+    Parent localVar = new Parent(){
+        int childField;
+        void childMethod(){}
+        @Override
+        void parentMethod(){} //부모클래스의 메소드 오버라이딩
+    };
+    localVar.childmethod(); // 로컬변수 사용 메소드안에서만 사용가능
+}
+
+//메소드의 매개변수가 부모타입일 경우 
+//메소드 호출코드에서 익명 자식 객체를 생성해서 
+//매개값으로 대입할수도 있다.
+void method1(Parent parent){}
+
+void method2(
+        method1(    //method1 호출
+            new Parent(){// method1() 매개값으로 익명자식 객체를 대입
+                int childField;
+                void childMethod(){ }
+                @Override
+                void parentMethod() { }
+            }
+        ); //익명클래스는선언한곳 마지막에는 세미콜론(;) 필수 
+)
+}
+```
+
+### 익명구현 객체 생성
+- 인터페이스 타입으로 필드나 변수를 선언하고, 구현 객체를 초기값으로 대입하는 경우
+    1. 구현 클래스를 선언
+    2. new 연산자를 이용해서 구현객체 생성
+    3. 필드나 로컬변수에 대입
+>그러나 구현클래스가 재사용되지 않고, 오로지 해당 필드와 변수의 초기값으로만 사용하는 경우<br> 익명구현객체를 초기값으로 대입하는것이 좋다.<br> 중괄호 {}에는 인터페이스에 선언된 모든 추상메소드들의 실체 메소드를 작성해야 한다.<br>추가적으로 필드와 메소드를 선언할수 있지만, 실체메소드에서만 사용이 가능하고 외부에서는 사용하지 못한다.
+
+```java
+public interface RemoteControl {
+    public void turnOn();
+}
+
+class A{
+    RemoteContorl field = new RemoteControl(){//클래스 A의 필드 선언
+    @OVerride           
+    void turnOn(){ } //RemoteControl 인터페이스의 추상메소드에 대한 실체메소드
+    };
+
+    void method(){
+        RemoteControl localVar = new RemoteControl(){//로컬 변수 선언
+        @Override
+        void turnOn(){ }//RemoteContorl 인터페이스의 추상메소드에 대한 실체 메소드
+        };
+    }
+    void method1(RemoteControl rc){}
+
+    void method2(){
+        method1( //method1() 메소드 호출
+            new RemoteContorl(){ // method1()의 매개값으로 익명구현객체를 대입
+                @Override
+                void turnOn(){ }
+            }
+        ); //매개변수값으로 써잇을경우 매개변수괄호에 세미콜론(;)
+    }
+}
+```
+
+### 익명객체의 로컬변수 사용
+- 익명객체 내부에서는 바깥 클래스의 필드나 메소드는 제한없이 사용할수 있다.
+- 문제는 메소드의 매개변수나 로컬변수를 익명객체에서 사용할 때이다.
+- 메소드 내에서 생성된 익명객체는 실행이 끝나도 힙 메모리에 존재해서 계속 사용할수 있다.
+- 매개변수나 로컬변수는 메소드 실행이 끝나면 스택메모리에서 사라지기 떄문에 익명객체에서 사용할수없게된다.
+- 로컬클래스와 익명클래스와의 차이점은 클래스 이름의 존재여부만 다를뿐 동작방식은 동일하다.
+- 익명 객체 내부에서 메소드의 매개변수나 로컬변수를 사용할경우, 이 변수들은 final 특성을 가져야한다.
+    - 자바 8부터 final키워드 안붙여도 자동선언
+- 컴파일시 final 키워드가 있다면 익명클래스 메소드 내부에 지역 변수로 복사되지만, 없다면 익명클래스의 필드로 복사한다.
+    - 익명클래스의 내부 복사위치에 신경쓸필요없이 그냥 익명객체에서 사용된 매개변수와 로컬변수는 모두 final 특성을 갖는다.
