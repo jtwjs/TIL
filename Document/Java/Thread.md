@@ -149,7 +149,7 @@ Thread thread = Thread.currentThread(); // 코드를 실행하는 현재 스레�
 |setName(String s)|이름을 변경|
 |getName()|스레드 이름을 반환|
 
-### Thread Priority(스레드 우선순위)
+## Thread Priority(스레드 우선순위)
 - 멀티스레드는 동시성(Concurrency) 또는 병렬성(Parallelism)으로 실행됨
     - Concurrency(동시성) : 멀티 작업을 위해 하나의 코어에서 멀티 스레드가 번갈아가며 실행하는 성질
     - Parallelism(병렬성) : 멀티 작업을 위해 멀티 코어에서 개별 스레드를 동시에 실행하는 성질
@@ -169,7 +169,7 @@ Thread thread = Thread.currentThread(); // 코드를 실행하는 현재 스레�
     - 우선순위가 높은 스레드가 실행 기회를 더많이 가지기 떄문에 우선순위가 낮은 스레드보다 계산 작업을 빨리끝낸다.
 - 순환할당방식 : 시간 할당량(Time Slice)을 정해서 하나의 스레드를 정해진 시간만큼 실행하고 다시 다른 스레드를 실행하는 방식
     - 순환할당방식은 JVM에 의해서 정해지기 떄문에 코드로 제어할수 없다.
-### Synchronization method & Synchronization Block (동기화 메소드와 동기화 블록)
+## Synchronization method & Synchronization Block (동기화 메소드와 동기화 블록)
 - **주의할점**
     - 멀티 스레드 프로그램에서는 스레드들이 객체를 공유해서 작업해야 하는 경우
         - 스레드 A를 사용하던 객체가 스레드 B에 의해 상태가 변경될 수 있기 때문에 스레드 A가 의도했던 결과와 다를수 있다.
@@ -209,14 +209,205 @@ public void method(){
     //여러 스래드가 실행 가능 영역
 }
 ```
+## Thread Status (스레드 상태)
+1. (**NEW**) 스레드 객체 생성
+2. start() 메소드 호출
+3. (**RUNNABLE**) 실행 대기 
+    - 스케줄링이 되지 않아서 실행을 기다리고 있는 상태
+    - 스레드 스케줄링으로 선택된 스레드가 비로소 CPU를 점유하고 run()메소드 실행
+4. run() 메소드 실행
+    - 실행 상태의 스레드는 run() 메소드를 모두 실행하기 전에 스레드 스케줄링에의해 다시 실행대기상태로 돌아갈수있다.
+    - 실행 대기 상태에 있는 다른 스레드가 선택되어 실행 상태가 된다.
+    - 스레드는 실행 대기 상태와 실행 상태를 번갈아 가면서 자신의 run() 메소드를 조금씩 실행한다.
+    - 경우에 따라서 실행 대기상태로 가지않고 일시정지 상태로 가기도 한다. 
+        - 다시 실행상태로 가기위해서는 일시 정지상태에서 실행대기 상태로 가야한다.
+5. (**TERMINATED**) 종료
+    - 더이상 실행할 코드가 없기 때문에 스레드의 실행은 멈춘다.
 
+### getState() 메소드 : 스레드의 상태에 따라 Thread.State 열거 상수 리턴
 
-### notify() 메소드
-- 다른 스레드로 신호를 보내는 메소드
-### notifyalll() 메소드 
-- 대기하고 있는 모든 스레드로 신호를 보내는 notifyAll() 메소드
-### wait() 메소드
-- 다른 스레드로부터 신호가 오기를 기다리는 메소드
+|Status|Enum Constatnt|Explain|
+|:-----:|:---------|:------------|
+|객체 생성|NEW|스레드 객체가 생성, 아직 start() 메소드가 호출되지 않은 상태|
+|실행 대기|RUNNABLE|실행 상태로 언제든지 갈 수 있는 상태|
+|일시 정지|WAITING|다른 스레드가 통지할 떄까지 기다리는 상태|
+||TIMED_WAITING|주어진 시간동안 기다리는 상태|
+||BLOCKED|사용하고자 하는 객체의 락이 풀릴 때까지 기다리는 상태|
+|종료|TERMINATED|실행을 마친 상태|
+
+## Thread Status Control (스레드 상태 제어)
+- 실행 중인 스레드의 상태를 변경하는 것
+
+![thread-states](https://user-images.githubusercontent.com/60641307/77843137-0d19f880-71d5-11ea-8cce-7249b5511c38.png)
+
+- stop(), suspend(), resume() 메소드들은 스레드의 안정성을 해친다 하여 더이상 사용하지 않도록 권장된 Deprecated 메소드들이다.
+
+|Method|Explain|
+|:------|:-------|
+|Interrupt()|**일시 정지 상태의 스레드에서 InterruptedException 예외를 발생**시켜, 예외처리<BR>코드(catch)에서 실행 대기 상태로 가거나 종료 상태로 갈수 있도록 한다.|
+|notify()<br>notifyAll()|동기화 블록 내에서 wait() 메소드에 의해 일시 정지 상태에 있는 스레드를<br>실행 대기 상태로 만든다.|
+|~~resume()~~|suspend() 메소드에 의해 일시 정지 상태에 있는 스레드를 실행 대기 상태로 만든다.<br> - Deprected (대신 notify(),notifyAll()사용)|
+|sleep(long millis)<br>sleep(long millis,int nanos)|주어진 시간 동안 스레드를 일시 정지 상태로 만든다. 주어진 시간이 지나면 자동적으로<br>실행 대기 상태가 된다.|
+|join()<br>join(long millis)<br>join(long millis,int nanos)|join() 메소드를 호출한 스레드는 일시 정지 상태가 된다. 실행 대기 상태로 가려면<br>join() 메소드를 멤버로 가지는 스레드가 종료되거나, 매개값으로 주어진 시간이 지나야 한다.|
+|wait()<br>wait(long millis)<br>wait(long millis,int nanos)|동기화(synchronized)블록 내에서 스레드를 일시 정지 상태로 만든다.<br> 매개값으로 주어진 시간이 지나면 자동적으로 실행 대기 상태가 된다. <br>시간이 주어지지 않으면 notify(),notifyAll()메소드에 의해 실행 대기 상태로 갈수 있다.|
+|~~suspend()~~|스레드를 일시 정지 상태로 만든다. resume() 메소드를 호출하면 다시 실행 대기 상태가 된다.<br> - Deprecated(대신 wait() 사용)|
+|yield()|실행 중에 우선순위가 동일한 다른 스레드에게 실행을 양보하고 실행 대기 상태가 된다.|
+|~~stop()~~|스레드를 즉시 종료시킨다. -Deprecated|
+
+- wait(), notify(), notifyAll() 은 Object 클래스의 메소드
+- 그 이외에는 모두 Thread 클래스의 메소드들이다.
+
+### sleep() 메소드 : 주어진 시간동안 일시정지
+- 실행 중인 스레드를 일정 시간 멈추게 하고 싶다면 Thread 클래스의 정적 메소드인 sleep()을 사용하면 된다.
+- Thread.sleep() 메소드를 호출한 스레드는 주어진 시간동안 일시정지가 되고, 다시 실행 대기 상태로 돌아간다.
+
+```java
+try{
+    Thread.sleep(1000);
+}catch(InterruptedException e){
+    //interrupt()메소드가 호출되면 실행
+}
+```
+- 매개값에는 밀리세컨드 (1/1000) 단위로 시간을 주면 된다.  
+    - 1초 -> 1000
+- 일시정지 상태에서 주어진 시간이 되기 전에 interrupt() 메소드가 호출되면 InterruptedException이 발생
+
+### yield() 메소드 : 다른 스레드에게 실행 양보
+- 스레드가 처리하는 작업은 반복적인 실행을 위해 for문, while문을 포함하는 경우가 많다.
+    - 이 반복문들이 무의미한 반복을 하는 경우가 있다. 
+- **다른 스레드에게 실행을 양보**하고 자신은 실행 대기 상태로 가는것이 전체 프로그램 성능에 도움이 된다.
+- 이런 기능을 위해서 **yield() 메소드를 호출한 스레드는 실행 대기상태**로 돌아가고 <br>동일한 우선순위 또는 높은 우선순위를 갖는 다른 스레드가 실행 기회를 가질수 있도록 해준다.
+
+```java
+public void run(){
+    while(true){
+        if(work){
+            System.out.println("ThreadA 작업 내용");
+        }else{
+            Thread.yield(); //조건문에 만족못할시 양보
+        }
+    }
+}
+```
+
+### join() 메소드 : 다른 스레드의 종료를 기다림
+- 스레드는 다른 스레드와 독립적으로 실행하는 것이 기본이다.
+    - 다른 스레드가 종료될 때까지 **기다렸다가 실행**해야 하는 경우도 발생할수 있다.
+    - ex:)계산작업을 하는 스레드가 모든 계산 작업을 마쳤을 때, 계산 결과 값을 받아 이용하는 경우
+    - 이런경우를 위해서 **join()** 메소드를 사용한다.
+
+### wait(), notify(), notifyAll() : 스레드 간 협업
+- 경우에 따라서는 두 개의 스레드를 교대로 번갈아가며 실행해야 할 경우가 있다.
+- 정확한 교대 작업이 필요할 경우 : 
+    - 자신의 작업이 끝나면 상대방 스레드를 일시 정지상태에서 풀어주고, 자신은 일시정지상태로 만드는 것
+- 이 방법의 **핵심은 공유 객체**에 있다.
+    - 공유 객체는 두 스레드가 작업할 내용을 각각 동기화 메소드로 구분해 놓는다.
+    - 한 스레드가 작업을 완료하면 notify() 메소드를 호출
+        - 일시정지 상태에있는 다른 스레드를 실행 대기 상태로 만듦
+    - 자신은 두 번 작업을 하지 않도록 wait() 메소드를 호출하여 일시 정지 상태로 돌아간다.
+##### Thread 클래스가 아닌 Object 클래스에 선언된 메소드이므로 모든 공유 객체에서 호출이 가능하다.
+- 동기화 메소드 또는 동기화 블록내에서만 사용이 가능하다.
+- wait() : 다른 스레드로부터 신호(notify())가 올때까지 일시정지 상태로 만든다.
+- wait(long timeout), wait(long timeout, int nanos)
+    - notify()를 호출하지 않아도 지정된 시간이 지나면 스레드가 자동적으로 실행 대기상태가 된다.
+- notify() : wait() 메소드에 의해 일시정지상태에있는 스레드중 하나를 실행 대기상태로 만듦
+- notifyAll() : wait()에 의해 일시정지 상태에있는 모든 스레드를 실행 대기상태로 만듦
+
+### stop 플래그, interrupt() 메소드 (스레드의 안전한 종료)
+- 스레드는 자신의 run() 메소드가 모두 실행되면 자동적으로 종료된다.
+- 경우에 따라서는 실행 중인 스레드를 즉시 종료할 필요가 있다.
+    - ex:) 동영상을 끝까지 보지않고 사용자의 멈춤요구
+- Thread의 stop()메소드는 deprecated 되었다. 
+    - stop() 메소드로 갑자기 종료하게 되면 스레드가 사용중이던 자원들이 불안전한 상태로 남겨지기 때문
+        - 자원이란: 파일, 네트워크 연결등을 말한다.
+#### stop 플래그를 이용하는 방법
+- 스레드는 run() 메소드가 끝나면 자동적으로 종료되므로, run() 메소드가 정상적으로 종료되도록 유도하는 것이 최선의 방법
+
+```java
+public class XXXThred extends Thread{
+    private boolean stop;
+
+    public void run(){
+        while(!stop){ //stop이 true가 되면 run()이 종료된다.
+            스레드가 반복 실행하는 코드;
+        }
+        //스레드가 사용한 자원 정리
+    }
+}
+```
+
+#### interrupt() 메소드를 이용하는 방법
+- interrupt() 메소드는 스레드가 일시 정지 상태에 있을때 InterruptedException 예외를 발생시키는 역할을 한다.
+
+```java
+public class ThreadA{
+    ThreadB threadB = new ThreadB();
+    threadB.start();
+    ...
+    threadB.interrupt();// ThreadB가 sleep() 메소드로 일시 정지 상태가 될 때 ThreadB에서 
+}                       //InterruptedException이 발생하여 예외처리(catch) 블록으로 이동한다.
+                        //결국 ThreadB는 while문을 빠져나와 run()메소드를 정상종료하게 된다.
+public class ThreadB extends Thread{
+    @Override
+    public void run(){
+        try{
+            while(true){
+                Thread.sleep(1);//일시정지 
+            }
+        }catch(InterruptedException e){
+        }
+    //스레드가 사용한 자원 정리
+    }
+}
+```
+- 스레드가 일시 정지 상태가 되지않으면 interrupt() 메소드 호출은 아무 의미 없다.
+    - 그래서 짧은 시간이나마 일시 정지시키기 위해 Thread.sleep(1)을 사용한 것
+- **일시 정지를 만들지 않고도 interrupt() 호출 여부를 알수 있는 방법**
+    - interrupt() 메소드가 호출되었다면 스레드의 interrupted()와 isInterrupted() 메소드는 true를 리턴한다.
+    - boolean status = Thread.interrupted();
+        - 정적 메소드로 현재 스레드가 interrupted 되었는지 확인
+    - boolean status = objThread.isInterrupted();
+        - 인스턴스 메소드로 현재스레드가 interrupted 되었는지 확인할때 사용
+
+```java
+public class ThreadEx extends Thread{
+    public void run(){
+        while(true){
+            System.out.println("실행 중");
+            if(Thread.interrupted()){ //interrupt() 메소드 호출되었으면 반복문 빠져나감-> run() 정상 종료
+                break;
+            }
+        }
+        System.out.println("자원 정리");
+        System.out.println("실행 종료");
+    }
+}
+```
+
+## 데몬 스레드
+- 데몬(daemon) 스레드는 주 스레드의 작업을 돕는 보조적인 역할을 수행하는 스레드이다.
+- 주 스레드가 종료되면 데몬 스레드는 강제적으로 자동 종료된다.
+    - 주 스레드의 보조 역할을 수행하므로 주 스레드가 종료되면 존재 의미가 없어지기 때문!
+    - 이 점을 제외하면 데몬 스레드는 일반 스레드와 크게 차이가 없다.
+- 데몬 스레드의 적용 ex:) 
+    - 워드프로세서의 자동저장
+    - 미디어 플레이어의 동영상 및 음악 재생
+    - 가비지 컬렉터
+    - 이 기능들은 주 스레드(워드프로세서,미디어플레이어,JVM)가 종료되면 같이 종료한다.
+- 스레드를 데몬으로 만들기 위해서는 주 스레드가 데몬이 될 스레드의 setDaemon(true)를 호출해주면 된다.
+
+```java
+public static void main(String[] args){
+    AutoSaveThread thread = new AutoSaveThread();
+    thread.setDaemon(true); //데몬(보조 스레드)으로 만듬
+    thread.start(); //start() 호출 전에 setDaemon(true) 호출해야함
+}
+```
+- start() 메소드가 호출되고 나서 setDaemon(true)를 호출하면 IllegalThreadStateException이 발생!
+    - start() 메소드 호출 전에 setDaemon(true)를 호출해야 한다.
+- isDaemon() : 현재 실행중인 스레드가 데몬 스레드인지 구별하는 메소드
+    - 리턴값이 true 일경우 데몬 스레드이다.
+
 ## 작성 방법
 - java.lang.Thread : 클래스를 이용하는 방법
 - java.lang.Runnable : 인터페이스를 이용하는 방법 
