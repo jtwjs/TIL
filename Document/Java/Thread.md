@@ -19,6 +19,7 @@
     - 멀티스레드는 하나의 프로세스 내부에 생성되기 때문에 하나의 스레드가 예외를 발생시키면<br> 프로세스 자체가 종료될 수 있어 다른 스레드에게 영향을 미치게 된다.
         - 그렇기 떄문에 **예외처리가 중요함!!**
 ## Main Thread(메인 스레드)
+---
 - 모든 자바 애플리케이션은 메인 스레드가 main() 메소드를 실행하면서 시작된다.
 - 메인 스레드는 main() 메소드의 첫 코드부터 아래로 순차적으로 실행하고,<br> mian() 메소드의 마지막 코드를 실행하거나 return문을 만나면 실행이 종료된다.
 - 메인 스레드는 필요에 따라 작업 스레드들을 만들어서 병렬로 코드를 실행할 수 있다.
@@ -43,6 +44,7 @@
     - 단,CPU코어 수가 적으면 쓰레드를 그 만큼 만들수 없기 때문에 드라마틱하게 빨라지지 않고, 처리하는 데이터 양이 적을 때에도 속도가 많이 빨라지지 않기 때문에 쓰레드를 적절한 경우에 사용하는 것이 좋다.
 
 ## 작업 스레드 생성과 실행
+---
 - 멀티 스레드로 실행하는 애플리케이션을 개발하려면 몇개의 작업을 병렬로 실행할지 결정하고 각 작업별로 스레드를 생성해야 한다.
 - 모든 자바 애플리케이션은 메인스레드가 반드시 존재! 
     - 메인작업 이외에 추가적인 병렬 작업의 수만큼 스레드를 생성하면 된다.
@@ -150,6 +152,7 @@ Thread thread = Thread.currentThread(); // 코드를 실행하는 현재 스레�
 |getName()|스레드 이름을 반환|
 
 ## Thread Priority(스레드 우선순위)
+---
 - 멀티스레드는 동시성(Concurrency) 또는 병렬성(Parallelism)으로 실행됨
     - Concurrency(동시성) : 멀티 작업을 위해 하나의 코어에서 멀티 스레드가 번갈아가며 실행하는 성질
     - Parallelism(병렬성) : 멀티 작업을 위해 멀티 코어에서 개별 스레드를 동시에 실행하는 성질
@@ -170,6 +173,7 @@ Thread thread = Thread.currentThread(); // 코드를 실행하는 현재 스레�
 - 순환할당방식 : 시간 할당량(Time Slice)을 정해서 하나의 스레드를 정해진 시간만큼 실행하고 다시 다른 스레드를 실행하는 방식
     - 순환할당방식은 JVM에 의해서 정해지기 떄문에 코드로 제어할수 없다.
 ## Synchronization method & Synchronization Block (동기화 메소드와 동기화 블록)
+---
 - **주의할점**
     - 멀티 스레드 프로그램에서는 스레드들이 객체를 공유해서 작업해야 하는 경우
         - 스레드 A를 사용하던 객체가 스레드 B에 의해 상태가 변경될 수 있기 때문에 스레드 A가 의도했던 결과와 다를수 있다.
@@ -210,6 +214,7 @@ public void method(){
 }
 ```
 ## Thread Status (스레드 상태)
+---
 1. (**NEW**) 스레드 객체 생성
 2. start() 메소드 호출
 3. (**RUNNABLE**) 실행 대기 
@@ -384,7 +389,8 @@ public class ThreadEx extends Thread{
 }
 ```
 
-## 데몬 스레드
+## Daemon Thread (데몬 스레드)
+---
 - 데몬(daemon) 스레드는 주 스레드의 작업을 돕는 보조적인 역할을 수행하는 스레드이다.
 - 주 스레드가 종료되면 데몬 스레드는 강제적으로 자동 종료된다.
     - 주 스레드의 보조 역할을 수행하므로 주 스레드가 종료되면 존재 의미가 없어지기 때문!
@@ -407,6 +413,46 @@ public static void main(String[] args){
     - start() 메소드 호출 전에 setDaemon(true)를 호출해야 한다.
 - isDaemon() : 현재 실행중인 스레드가 데몬 스레드인지 구별하는 메소드
     - 리턴값이 true 일경우 데몬 스레드이다.
+
+
+## ThreadGroup (스레드 그룹)
+---
+- **목적** : 관련된 스레드를 묶어서 관리하기 위함
+- 스레드는 반드시 하나의 스레드 그룹에 포함된다.
+    - 기본적으로 자신을 생성한 스레드와 같은 스레드 그룹에 속한다.
+    - 작업 스레드의 대부분은 main 스레드가 생성하므로 기본적으로 main 스레드에 속한다.
+### 스레드 그룹 이름 얻기
+
+```java
+ThreadGroup group = Thread.currentThread().getThreadGroup();
+String groupName = group.getName();
+
+//Thread의 정적 메소드인 getAllStackTraces()
+// 프로세스 내에서 실행하는 모든 스레드의 대한 정보를 얻음
+Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces(); 
+```
+
+### 스레드 그룹 생성
+
+```java
+ThreadGroup tg = new ThreadGroup(String name); //현재 스레드가 속한 그룹의 하위그룹으로 생성 & 이름 지정
+ThreadGroup tg = new ThreadGroup(ThreadGroup parent, String name);//부모 그룹을 지정, & 이름 지정
+
+//Thread 객체 생성시 생성자 매개값으로 스레드 그룹을 지정해주면된다. 
+Thread t = new Thread(ThreadGroup group, Runnable target);
+Thread t = new Thread(ThreadGroup group, Runnable target, String name);
+Thread t = new Thread(Threadgroup group, Runnable target, String name, long stackSize);
+Thread t = new THread(Thraedgroup group, String name);
+//Runnable 타입의 target은 Runnable 구현 객체
+//long 타입의 stackSize는 JVM이 이 스레드에 할당한 stack 크기이다.
+```
+
+### 스레드 그룹의 일괄 interrupt()
+- Thread의 Group 이점
+    - 그룹 내에 포함된 모든 스레드를 일괄 interrupt 할수 있다.
+        - 스레드 그룹의 interrupt() 메소드는 포함된 모든 스레드의 interrupt() 메소드를 내부적으로 호출한다.
+        - 개별 스레드에서 발생하는 InterruptedException에 대한 예외처리를 하지 않는다. -> 개별스레드로 예외처리 추천
+
 
 ## 작성 방법
 - java.lang.Thread : 클래스를 이용하는 방법

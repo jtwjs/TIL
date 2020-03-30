@@ -240,7 +240,7 @@ public class LinkedList{
     }
 
     //Node 삭제(마지막 노드 삭제)
-    public void deleteNode){
+    public void deleteNode(){
         ListNode preNode;
         ListNode tempNode;
 

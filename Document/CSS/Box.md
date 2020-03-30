@@ -1,5 +1,5 @@
-# Box
-
+## Box
+---
 ## Box Model
 
 ![boxmodel](https://user-images.githubusercontent.com/60641307/77846453-1f099480-71f1-11ea-802c-2b3f7ce81706.png)
@@ -54,3 +54,24 @@
     box-sizing: border-box;
 }
 ```
+
+## Box Type
+- Display
+    - Block -> 길막?
+        - 따로 width를 선언하지 않은 경우, **width = 부모의 content-box의 100%**
+        - 따로 width를 선언한 경우, **남은 공간은 margin으로 자동으로 채움**
+        - margin:0 auto;
+            - top:bottom -> 0; 
+            - right:left -> auto, 자동으로 생기는 margin을 왼쪽 오른쪽에 배치
+            - 가운데 배치 
+        - width,height,padding,border,marign 모두 적용 가능
+        - 따로 부모의 height를 선언하지 않을 경우, **자식 요소의 height의 합 = 부모의 height**
+    - inline -> 흐름
+        - **width**,**height**,padding-**top**,padding-**bottom**,border-**top**,border-**bottom**,margin-**top**,margin-**bottom** **사용불가!!**
+            - 인라인의 줄간격 흐름을 박살내는 녀석들..
+    - inline-block -> block + inline
+    
+|BLOCK|INLINE|
+|:----|:-----|
+|면(영역)|선(흐름)|
+

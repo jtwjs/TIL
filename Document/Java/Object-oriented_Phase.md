@@ -3,8 +3,8 @@
 
 ## 1. Object-Oriented Analysis: OOA(객체지향 분석)
 >문제를 정의하고 이 정의로부터 모형(Model)들을 제작하여 실세계(real-world)의 중요한 특성들을 보여주는 단계이다.
-1. **Object model(객체 모형)**: 객체들과 그 특성을 식별하여 객체들의 정적 구조(static structure)와 그들간의 관계(interface)를 보여주는 **객체 다이어그램(object diagram)**을 작성한다.
-2. **Dynamic model(동적 모형)**: 시간 흐름에 따라 시스템의 변화를 보여주는 **상태 다이아그램(state diagram)**을 작성한다. 실시간(real-time)시스템에서는 반드시 필요
+1. **Object model(객체 모형)**: 객체들과 그 특성을 식별하여 객체들의 정적 구조(static structure)와 그들간의 관계(interface)를 보여주는 **객체 다이어그램(object diagram)** 을 작성한다.
+2. **Dynamic model(동적 모형)**: 시간 흐름에 따라 시스템의 변화를 보여주는 **상태 다이아그램(state diagram)** 을 작성한다. 실시간(real-time)시스템에서는 반드시 필요
 3. **Function model(기능 모형)**: 시스템 내에서 데이터 값이 변하는 과정을 보여주는 것으로 잘 알려진 자료 흐름도 (DFD)가 사용된다.
 
 ## 2. Object-Oriented Design: OOD(객체지향 설계)
