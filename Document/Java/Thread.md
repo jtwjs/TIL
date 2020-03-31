@@ -454,6 +454,150 @@ Thread t = new THread(Thraedgroup group, String name);
         - 개별 스레드에서 발생하는 InterruptedException에 대한 예외처리를 하지 않는다. -> 개별스레드로 예외처리 추천
 
 
+## 스레드풀
+---
+- **목표** : 갑작스런 병렬 작업의 폭증으로 인한 스레드의 폭증을 막음
+    - 작업 처리에 사용되는 스레드를 제한된 개수만큼 정해 놓고 작업 큐(Queue)에 들어오는 작업들을 하나씩 스레드가 맡아 처리
+    - 작업이 끝난 스레드는 다시 새로운 작업을 가져와 처리
+
+```
+java.util.concurrent 
+ExecutorService Interface  
+Executorse Class : 다양한 정적메소드 이용해 ExcecutorService 구현 객체를 만듬 -> 스레드풀
+```
+### 생성
+
+1. newCachedThreadPool()
+    - 초기 스레드 수 : 0 [ 객체가 생성될 때 기본적으로 생성되는 스레드 수]
+    - 코어 스레드 수 : 0 [ 최소한 유지해야할 스레드 수]
+    - 최대 스레드 수 : Integer.MAX_VLAUE : [ 스레드풀에서 관리하는 최대 스레드 수]
+    - 1개 이상의 스레드가 추가되었을 경우 60초동안 추가되 스레드가 아무작업을 하지 않으면 추가된 스레드는 종료하고 스레드풀에서 제거한다.
+
+    ```
+    ExecutorService executorService = Executors.newCachedThreadPool();
+    ```
+2. newFixedThreadPool(int nThreads)
+    - 초기 스레드 수 : 0 [ 객체가 생성될 때 기본적으로 생성되는 스레드 수]
+    - 코어 스레드 수 : nThreads [ 최소한 유지해야할 스레드 수]
+    - 최대 스레드 수 : nThreads : [ 스레드풀에서 관리하는 최대 스레드 수]
+    - 스레드가 작업을 처리하지 않고 놀고 있더라도 스레드 개수가 줄지 않는다.
+
+    ```
+    ExecutorService executorService = Executors.newFixedThreadPool(
+        Runtime.getRuntime().availableProcessors()//CPU 코어의 수만큼
+    );
+    ```
+3. Method 사용하지않고 ThreadPoolExecutor 객체 생성
+    - 위 두 메소드도 내부적으로 ThreadPoolExecutor 객체를 생성해서 리턴한다.
+
+```java
+ExecutorService threadPool = new ThreadPoolExecutor(
+    3,      //코어 스레드 개수
+    100,    //최대 스레드 개수
+    120L,   //놀고 있는 시간
+    TimeUnit.SECONDS,   //놀고 있는 시간 단위
+    new SynchronousQueue<Runnable>() //작업 큐
+)
+```
+### 종료
+- main() 메소드가 실행이 끝나도 애플리케이션 프로세스는 종료되지 않는다.
+    - 스레드풀을 종료시켜 스레드들이 종료상태가 되도록 처리해줘야 한다.
+
+    ```
+    executorService.shutdown(); //남아있는 작업 모두 마무리 후 종료
+    또는
+    executorService.shutdownNow();// 강종
+    ```
+
+|Return Type|Method|Explain|
+|:----------|:-----|:------|
+|void|shutdown()|현재 처리중인 작업뿐만 아니라 작업 큐에 대기하고 있는 모든작업을 처리한뒤 스레드풀 종료|
+|List< Runnable >|shutdownNow()|현재 작업 처리중인 스레드를 interrupt해서 작업 중지를 시도하고 스레드풀 종료<br>리턴값은 작업 큐에 있는 미처리된 작업의 목록이다.|
+|boolean|awaitTermination(long timeout,TimeUnit unit)|shutdown()메소드 호출 이후,모든 작업처리를 timeout 시간내에 완료하면 true<br>     완료하지 못하면 작업처리 중인 스레드를 interrupt하고 false 리턴|
+
+#### 작업 생성
+하나의 작업은 **Runnable** 또는 **Callable** 구현 클래스로 표현됨
+- Runnable 구현 클래스 vs Callable 구현 클래스
+    - 차이점 : 작업 처리 완료 후 리턴값 유무
+#### 작업 처리 요청
+ExecutorService의 작업 Queue에 Runnable 또는 Calable 객체를 넣는 행위
+- execute() vs sumbit()
+    - execute() : 작업 처리 결과를 받지 못함
+         - 예외발생시 스레드 종료후 스레드풀에서 제거
+    - submit() : 작업처리 결과를 받을수 있도록 Future을 리턴함
+         - 예외발생해도 종료되지 않고 다음 작업을 위해 재사용됨
+         - 스레드 오버헤더를 줄이기위해 **submit() 사용!**
+
+
+|Return Type|Method|Explain|
+|:----------|:------|:-----|
+|void|execute(Runnable command)|- Runnable을 작업 큐에 저장<br>- 작업 처리 결과를 받지 못함|
+|Future<?><br>Future< V ><br>Future< V >|submit(Runnable task)<br>submit(Runnable task,V result)<br>submit(Callable< V > task)|- Runnable 또는 Callable을 작업 큐에 저장<br>- 리턴된 Future을 통해 작업 처리 결과를 얻을수있음|
+
+
+#### 블로킹(지연)방식 작업완료 통보
+ExecutorService의 submit() 메소드는 매개값으로 준 Runnable or Callable 작업을 스레드풀의 작업 큐에 저장하고 즉시 Future 객체리턴
+- Future : 지연완료(pending completion) 객체라고 함.
+    - get() 메소드 호출시 스레드가 작업을 완료할때까지 블로킹되었다가 작업을 완료하면 처리결과를 리턴
+
+|Return Type|Method|Explain|
+|:----------|:------|:-----|
+|V|get()|작업이 완료될 떄까지 블로킹되었다가 처리 결과 V를 리턴|
+|V|get(long timeout,TimeUnit unit)|timeout 시간 전에 작업이 완료되면 결과 V를 리턴,<br>작업완료전이면 TimeoutException 발생시킴|
+- 리턴타입인 V
+    - submit(Runnable task, V result)의 두번째 매개값인 V 타입이거나
+    - submit(Callable< V > task)의 Callable 타입 파라미터 V 타입이다.
+- **주의할점**
+    - 처리하는 스레드의 작업이 완료되기전까지 get() 메소드가 블로킹되므로 다른 코드를 실행할 수 없다.
+    - 그러므로 get() 메소드를 호출하는 스레드는 새로운 스레드이거나 스레드풀의 또다른 스레드가 되어야한다.
+
+#### 리턴값이 없는 작업 완료 통보
+- Runnable 객체로 생성하는 경우 리턴값이 없다.
+- 결과값이 없는 작업 처리 요청은 submit(Runnable task) 메소드를 이용하면 된다.
+- 결과값이 없음에도 Future 객체를 리턴한다. 
+    - 스레드가 작업처리를 정상적으로 완료했는지, 예외가 발생헀는지 확인하기 위해;
+
+    ```java
+    Runnable task = new Runnable(){
+        @Override
+        public void run(){
+            //스레드가 처리할 작업 내용
+        }
+    };
+
+    Future future = executorService.submit(task);
+    //작업처리가 정상적으로 완료했으면 Future의 get()는 null값 반환
+    //처리도중 interrup되면 InterruptedException 발생
+    //처리도중 예외발생시 ExecutionException 발생
+    // 그러므로 예외처리코드 필요
+    try{
+        future.get();
+    }catch(InterruptedException e){
+    }catch(ExecutionException e){}
+    ```
+#### 리턴값이 있는 작업 완료 통보
+- Callable 객체로 생성하는 경우 리턴값이 있다.
+- 제네릭 타입 파라미터 T는 call() 메소드가 리턴하는 타입이 되도록한다.
+- 작업 처리 요청은 submit() 메소드를 호출하면 된다.
+    - 작업 큐에 Callable 객체를 저장하고 즉시 Future< T >를 리턴한다.
+    - Future< T >의 get() 메소드는 블로킹이 해제되고 T 타입의 값을 리턴한다.
+
+    ```java
+    Callable<T> task = new CallableK<T>(){
+        @Override
+        public T call() thorws Exception {
+            //스레드가 처리할 작업 내용
+            return T;
+        }
+    };
+
+    Future<T> future = executorService.submit(task);
+    //작업 큐에 Callable 객체를 저장하고 즉시 Future<T>를 리턴한다.
+    try{
+        T result = future.get();
+    }catch(InterruptedException e){
+    }catch(ExecutionException e){}
+    ```
 ## 작성 방법
 - java.lang.Thread : 클래스를 이용하는 방법
 - java.lang.Runnable : 인터페이스를 이용하는 방법 

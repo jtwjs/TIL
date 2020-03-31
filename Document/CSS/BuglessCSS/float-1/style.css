@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: "Roboto", sans-serif;
+    letter-spacing: -0.02em;
+    height:100vh;
+    background-color:black;
+
+  }
+  
+  a {
+    font-size: 18px;
+    line-height: 20px;
+    color: #8492a6;
+    text-decoration: none;
+  }
+  ul{
+    list-style-type:none;
+    display:inline-block;
+    height:52px;
+    width:540px;
+    padding-left:0;
+    background-color:white;
+  }
+  li{display:inline-block;
+    padding:16px 20px 18px;
+    margin-right:16px;
+  }
+  li:nth-child(2) {
+    border-bottom: 2px solid #2860E1;
+  }
+  li:nth-child(5){
+    margin-right:94px;
+  }
+  li:nth-child(2) a{
+    color: #2860E1;
+  }
+  /* ▼ WHERE YOUR CODE BEGINS */
