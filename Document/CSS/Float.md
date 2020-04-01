@@ -30,9 +30,8 @@ Block 요소들을 가로배치 하기위해 쓰인다.
         - pseudo Element[::befor, ::after] + clear: left|right|both
     - Pseudo Element
         - HTML에는 존재하지 않는 **가상 요소**
-        - ::before, ::after
         - 순전히 CSS로 처리하는 기법 
-        - 각 요소당 2개씩 만들수 있다.
+        - 각 요소당 2개씩 만들수 있다. (::before, ::after)
         - **conent**: 반드시 적어야하는 property
 
 
@@ -88,3 +87,226 @@ Block 요소들을 가로배치 하기위해 쓰인다.
 
         
 - Result	&#128526;
+
+```CSS
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: "Roboto", sans-serif;
+    letter-spacing: -0.02em;
+    height:100vh;
+    background-color:black;
+
+  }
+  
+  a {
+    font-size: 18px;
+    line-height: 20px;
+    color: #8492a6;
+    text-decoration: none;
+  }
+  .menu-bar{
+      background-color:white;
+      padding-left:0;
+      width:540px;
+      border-bottom:1px solid #E5EAEF;
+  }
+  .menu-bar::after{
+      content:" ";
+      display:block;
+      clear:left;
+  }
+  .menu-bar-item{
+      float:left;
+      list-style-type:none;
+      margin-right:16px;
+  }
+  
+  .menu-bar-item a{
+      display:block;
+      padding:16px 20px;
+    
+  }
+
+  .menu-bar-item.selected a{
+      color: #2860E1;
+      border-bottom:2px solid #2860E1;
+      font-weight:500;
+  }
+  
+  .menu-bar-item:last-child{
+      margin-right:0;
+  }
+```
+
+![결과](https://user-images.githubusercontent.com/60641307/78091388-9c0e5700-7407-11ea-929f-1303980b7cc0.png)
+
+---
+## Float-2 실습
+- TRY 	&#128531;
+
+```CSS
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: "Noto Sans KR", sans-serif;
+    letter-spacing: -0.02em;
+    background-color:black;
+    height:100vh;
+
+  }
+  
+  h1 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1f2d3d;
+    line-height: 1.25;
+  }
+  
+  strong {
+    font-size: 14px;
+    font-weight: 400;
+    color: #afb3b9;
+    line-height: 1.4285714286;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #79818b;
+    line-height: 1.5;
+  }
+  .card{
+      background-color:white;
+      width:531px;
+   
+
+  }
+  .card::after{
+      display:block;
+      content:" ";
+      clear:left;
+  }
+  .card-user{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      float:left;
+     display:block;
+     margin:20px 20px 56px 20px
+     
+    
+  }
+  .card-content{
+      
+      float:left;
+      padding-top:20px;
+      padding-bottom:20px;
+  }
+  .card-content-strong{
+      padding-top:4px;
+      padding-bottom:12px;
+      display:block;
+  }
+```
+
+![float2-mine](https://user-images.githubusercontent.com/60641307/78126268-3e9cf900-744d-11ea-87be-7c41e8129eea.png)
+
+- Result	&#128526;
+
+```CSS
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1f2d3d;
+  line-height: 1.25;
+}
+
+strong {
+  font-size: 14px;
+  font-weight: 400;
+  color: #afb3b9;
+  line-height: 1.4285714286;
+}
+
+p {
+  font-size: 16px;
+  color: #79818b;
+  line-height: 1.5;
+}
+
+/* ▼ WHERE YOUR CODE BEGINS */
+
+.card {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.card::after {
+  content: "";
+  display: block;
+  clear: left;
+}
+
+.card-user {
+  float: left;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.card-content {
+  float: left;
+}
+
+.card-content h1 {
+  margin-bottom: 4px;
+}
+
+.card-content strong {
+  display: block;
+  margin-bottom: 12px;
+}
+```
+
+- Tip
+  1. < li > 와 < a > padding을 줄 때
+     - 무조건 anchor 태그에게 padding을 줄것
+     - list_item 에게 패딩을 주면 anchor 영역은 딱 content 부분으로 한정됨
+        - target 영역이 좁아서 클릭하기 힘듬
+     - 사용성까지 고려한다면 target 영역을 넓힐수 있는 < a >태그에게 padding을 먹이자 !
+  2. margin-top & bottom 둘 중 하나만 일관적으로 사용하자
+      - 나도 bottom 파!
+      - top,bottom을 둘다쓰면 나중에 보기에 헷갈린다 ~
+  3. image 는 기본적으로 inline 이라고 적힌 요소지만 inline-block 같은 요소
+      - float 할 경우 display가 block으로 변경됨
+  4. 자주쓰는 코드를 클래스로 따로 만들어 놓는다.
+
+    ```CSS
+    - ex:) .clearfix::after{/*자주쓰는 코드*/
+      content:'';
+      display:block;
+      clear:both;//범용적이라 both씀
+    }
+    ```
+
+- Point
+  1. 가로배치 할 녀석을 파악 후 float 줄 것!
+  2. 그 요소를 감싸는 부모요소에게 clearfix 할것~
+    
