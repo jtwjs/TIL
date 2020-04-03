@@ -1,5 +1,8 @@
 ## GUI (Graphic User Interface) 
 >사용자가 그래픽을 통해 컴퓨터와 정보를 교환하는 작업 환경
+
+![GUI](https://user-images.githubusercontent.com/60641307/78314802-048b3e80-7596-11ea-9f8c-92605ba7680e.png)
+
 ---
 - java.awt 패키지의 클래스 이용
     - heavy weight Component
@@ -36,7 +39,7 @@
 ## Swing GUI 
 
 ```
-0. @import javax.swing.*; (Swing package 이용)
+0. import javax.swing.*; (Swing package 이용)
 1. Frame 만들기 (최상위 컨테이너 만들기)
 2. Frame에 Swing Component 붙이기
 3. main() 메소드 작성
@@ -150,8 +153,70 @@ JTextArea(String text)//text문자열로 초기화된 텍스트영역
 JTextArea(String text,int rows,int cols)//입력창이 rows * cols 개의 문자크기이며 text문자열로 초기화된 텍스트필드
 ```
 
+## 자주쓰는 Method
+- Container cp = getContentPane(); //JFRame을 상속받은클래스에서나 씀 
+- setTitle(String s) : 타이틀 설정
+- setSize(int width,int height) : 프레임 크기 설정
+    - setSize(): 크기를 결정하는 메소드지만 layout에따라 사용못하기도 한다.
+    - setPreferredSize(new Dimension(int width,intheight));
+        - Dimesion객체를 인자로 받으면서 해당 컴포넌트의 기본크기를 결정
+        - BorderLayout을 사용중이면 영향을 줄수 없다.
+        - Dimesion 객체: 컴포넌트의 경우에는 ContantPnae 에서의 컴포넌트에서 폭과 높이를 지정하기 위해서 쓰이는 클래스
+- setResizable(false) : 크기 조절 불가능
+- setLocationRelativeTo(null) : 프레임 위치 중앙
+- setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) :  프레임이 닫히면 프로그램 종료
+- setVisible(true) : 프레임을 화면에 보이게함
+- setLayout(null) : 레이아웃설정을 없애서 위치조절 설정할수 있음
+- pack() : 컴포넌트들을알맞은사이즈로 자동변경
 
+---
+## JPanel
+> 컴포넌트들을 그룹 별로 묶어서 처리할 때 사용하는 컨테이너 <br> 일반적으로 Frame에 컴포넌트들을 직접 붙이지 않고 Panel 사용 <br> 생성자
 
+- JPanel() : 디폴트의 레이아웃 사용해 새로운 Panel 생성
+- JPanel(LayoutManager layout) : 지정된 배치관리자를 이용하여 새로운 Panel 생성
+- JPanel(boolean isDoubleBuffered) : 지정된 버퍼를 이용해 새로운 Panel 생성
 
+## JScrollPane
+> 스크롤을 이용해서 컴포넌트들을 보여주는 컴포넌트<br> 스크롤을 이용해서 보여주는 화면을 상하좌우로 이동하여 포함된 컴포넌트의 원래크기 유지<br> JList,JTextArea,JTextPane 이용
 
-    
+---
+## JTable
+
+```Java
+// 테이블 생성 ex:)
+String[] colNames = {"이름","나이","성별"};
+Object[][] data = {{"김철순",25,'남'},{"홍언택",26,'남'}};
+                                // ▼칼럼 이름이 있는 1차원배열
+JTable table = new JTable(data,colNames);
+                        // ▲데이터 항목이 있는 2차원배열
+
+JScrollPane scrollPane = new JScrollPane(table); //테이블이 올려진 스크롤판 생성
+contentPane.add(scrollPane);//등록 ㅋ
+```
+- 테이블의 데이터는 JTable 객체가 아닌 별도의 객체(Model)에 저장됨
+
+    ```java
+    TableModel model = table.getModel(); //테이블의 모델을 가져오는 메소드
+    Object obj = model.getValueAt(int row, int col); //(row,col)위치에 있는 데이터를 가져옴
+    model.setValueAt(Obejct aValue,int row,int col);
+    //(row,col)위치에 있는 데이터를 aValue로 바꾼다.
+
+    ```
+- DefaultTabelModel
+    - 디폴틑 테이블 모델을 생성 후에 JTable에 넣어줄 수 있다.
+    - JTable은 GUI 요소이고 여기에 들어갈 데이터는  2차원 배열로 표현해주는데
+    - 2차원배열을 다루기 불편한점을 DefaultTableModel이라는 객체로 쉽게 다룰수 있음
+
+    ```java
+    String[] colNames = {"이름","나이","성별"};             //▼ 행의 수
+    DefaultTableModel model = new DefaultTableModel(colNames,0);
+                                                    // ▲컬럼 이름이 있는 1차원 배열 
+    JTable table = new JTable(model); //이 모델을 데이터를 저장하는 테이블에 생성
+
+    model.addRow(data);//테이블 마지막행에 추가
+    model.insertRow(int row,data);// 지정한 행 위치에 추가
+    model.removeRow(int row); //지정한 위치에 있는 행을 삭제
+    ```
+---
+## JOptionPane
