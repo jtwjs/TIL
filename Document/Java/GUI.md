@@ -220,3 +220,76 @@ contentPane.add(scrollPane);//등록 ㅋ
     ```
 ---
 ## JOptionPane
+---
+## Graphics
+>Graphic 클래스는 선이나 원, 사각형 등의 도형을 그려주는 클래스이다. <br>그런데 JPanel,JLabel,JButton등의 GUI 객체들이 자기자신을 그리기 위해서 이 Graphics 클래스를 사용한다.<br>ex:) 버튼의 모양등이 Grpahics 클래스를이용해서 만드는것
+
+Graphics 객체를 이용해서 우리가 원하는 그림을 그리기 위해서는 이 방법을 역으로 이용한다. <br> GUI객체가 자기자신을 그리는 메소드(paintComponent)를 오버라이드하여, 다른 그림을 그리도록 바꾸어버린다.
+
+
+- 도화지 역할 : Pannel 클래스 (JPanel의 서브클래스)
+- 필기구 역할 : java.awt.Graphics 클래스
+- 그림그리는 순서
+    1. 그림이 그려질 패널을 만든다
+
+        ```java
+        //1) JPanel의 서브클래스를 선언
+        class CarDrawingPanel extends JPanel{
+            public void paint(Graphics g){
+                /*그림을 그리는 명령문을 이곳에씀*/
+            }//이렇게 선언된 paint 메소드는 패널이 디스플레이될때 JDK라이브러리 모듈에 의해 자동으로 호출됨
+        
+        }
+        //2) paint 메소드 안에 다음과 같은 메소드 호출문을 써서 그림을 그린다.
+        //매개변수(X좌표,Y좌표,Width,Height)
+        g.drawRect(100,110,200,40); //직사각형
+        g.drawOval(125,150,30,30); //원
+        g.drawLine(50,180,350,180); //직선
+        ```
+    2. 그 패널을 contentPane 위에 올려놓는다.
+
+    ## Graphic을 처리하는 paint() 메소드
+    - 그래픽 출력 이벤트 : 애플릿에 그림을 그리려 할때 발생하는 이벤트
+    - paint()메소드 : 그래픽 이벤트가 발생하였을 때 호출하는 메소드
+        - 실제 그림을 그리는것은 **paint()** 메소드의 매개변수를 통해 전달되는 **Graphics 객체**
+    - 그래픽 출력을 위한 메소드로 **update()**와 **repaint()**가 있다.
+    - **update() 메소드** : 이미지 출력 작업(화면)을 갱신하고 싶을 때 사용
+        - 시스템에 의해 자동으로 호출되는 메소드이기때문에 주로 화면의 깜빡거림을 막기 위해 사용
+    - **repaint() 메소드** : 강제로 paint() 메소드를 한번 더 호출하고 싶을 때 사용
+        - 방금 처리한 작업을 화면에 바로 보여주고 싶으면 repaint()메소드를 호출하여 paint()메소드 호출
+## 이미지 디스플레이
+1. **Toolkit(툴킷)**
+> Toolkit을 이용한 이미지 생성<br>Frame을 만들면 자동으로 생성, 프레임으로부터 툴킷을 넘겨 받아 사용
+
+```java
+//1) JPanel의 서브클래스 선언
+class ImagePanel extends Jpanel{
+    public void paint(Graphics g){
+        /*이미지를 디스플레이하는 명령문을 이부분엔씀*/
+    }
+}
+//2) Image 객체를 만드는데 필요한 Toolkit 객체를 얻는다.
+Toolkit toolkit = panel.getToolkit(); //Toolkit 객체를 리턴하는 메소드
+
+//3) Toolkit 객체를 이용해서 Image 객체를 만든다.
+Image image = toolkit.getImage("이미지파일경로");
+                        // ▲이미지파일을 읽어서 Image객체로 만들어 리턴
+
+//4)Image객체를 가지고 drawImage 메소드를 호출하면 이미지가 디스플레이된다.
+g.drawImage(image,0,0,this);
+ // ▲ 패널의 (0.0) 위치에 image를 디스플레이한다.
+```
+> 프로그램의 성능에 문제를 일으키는 방법<Br> draaImage 메소드 호출문을 제외한 나머지를 paint 메소드 밖으로 빼내는것이 좋음
+2. **ImageIcon**
+> 아주 작은 이미지 즉, 아이콘을 이미지객체로 만든 것<br>이 객체는 javax.swing.ImageIcon 클래스를 이용해 만든다.<br>  Image 클래스와 별로 관계가 없지만, 이 클래스를 이용해서 이미지를 만들수 있다.
+
+```java
+//생성자로 경로를 넘겨주면 저절로 ImageIcon 클래스의 객체가 생성이된다. 
+ImageIcon imageIcon = new ImageIcon("파일경로");
+
+// 이 클래스는 Image 클래스와는 상관이없다.
+//Image클래스의 객체로 만들어 반환하는 메소드인 getImage() 메소드를 호출하면 된다.
+Image image = imageIcon.getImage():
+```
+---
+## 오디오파일
