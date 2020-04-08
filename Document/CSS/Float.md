@@ -284,7 +284,7 @@ p {
   margin-bottom: 12px;
 }
 ```
-
+---
 - Tip
   1. < li > 와 < a > padding을 줄 때
      - 무조건 anchor 태그에게 padding을 줄것
