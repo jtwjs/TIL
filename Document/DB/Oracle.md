@@ -19,14 +19,16 @@ conn 계정명/패스워드  // 연결
 ```
 
 ---
-## SQL 작성규칙
+## SQL
+> DBMS에게 질의하는 명령어 
+### SQL 작성규칙
 - SQL문은 특별히 표시하지 않는 한 대소문자를 구분하지 않는다.
-- SQL문은 여러 라인에 걸쳐서 작성이 가능하고 가독성을 위해 들여쓰기를 하는것이 좋ㄷ.ㅏ
+- SQL문은 여러 라인에 걸쳐서 작성이 가능하고 가독성을 위해 들여쓰기를 하는것이 좋다.
 - 키워드는 여러 행에 나누어 쓰거나 약어로 쓸 수 없다.
 - 여러 컬럼을 검색할 때 쉼표로 컬럼을 구분한다.
-- SELECT절에서 출력 겨로가에 표시할 순서대로 컬럼을 지정한다.
+- SELECT절에서 출력 결과에 표시할 순서대로 컬럼을 지정한다.
 - SELECT결과 열 머리글(Heading)은 기본적으로 대문자로 표시된다.
-
+- SQL명령어는 하나의 문장으로 구성되어야 하는데 여러개의 절이 모여서 문장이 되는것이고<br> 이러한 문장들은 반드시 세미콜론(;)으로 마쳐야 한다
 ### Data Type of Oracle
 - NUMBER : 숫자 데이터를 저장하기 위한 자료형
     - NUMBER(precision, scale)
@@ -42,51 +44,103 @@ conn 계정명/패스워드  // 연결
 - VARCHAR2 : 가변적인 길이의 문자열을 저장하기 위해 제공
     - 저장되는 데이터에 의해 저장공간이 할당되므로 메모리 낭비를 막음
 
-### 명령어 
->SQL명령어는 하나의 문장으로 구성되어야 하는데 여러개의 절이 모여서 문장이 되는것이고<br> 이러한 문장들은 반드시 세미콜론(;)으로 마쳐야 한다
- [] -> 생략가능, null -> 알수없는 값, nvl(comm,value) : null값을 value값으로 바꾼다.
-
 - **DESC[RIBE] 테이블명** : 테이블 구조를 확인하는 명령어
     - DESC명령어는 테이블의 칼럼 이름, 데이터 형, 길이와 NULL 허용 유무<br> 등과 같은 특정 테이블의 정보를 알려줌
-- **SELECT 문**
-    >데이터를 조회하기 위한 명령어
-    - 컬럼은 대소문자를 구분하지 않는다.
-    - 컬럼의 중복도 상관 없다.
-    - 칼럼을 이용한 연산이 가능하다.(기존테이블에는 영향이없다.->값을 꺼낸후 연산)
+    - []: 대괄호는 생략가능
+
+### 오라클 내장함수 [문자열함수]
+|함수명|인자(입력값|리턴값|
+|:------:|:------:|:-------------|
+|LOWER|문자열|입력값을 소문자로 반환|
+|UPPER|문자열|입력값을 대문자로 반환|
+|INITCAP|문자열|입력값의 첫문자를 대문자로<br>나머지는 소문자로|
+|LPAD|문자열1,n[문자열2]|문자열1의 좌측에 문자열2의 문자를 채워 <br>n자리로 만들어서 리턴|
+|RPAD|문자열1,n[문자열2]|문자열1의 우측에 문자열2의 문자를 채워<br>n자리를 만들어서 리턴|
+|SUBSTR|문자열,n[,m]|문자열의 n번째 문자부터 m개의 문자를 리턴|
+|INSTR|문자열1,문자2|문자열1에서 문자2가 나오는 최초의 위치를 리턴|
+|LTRIM|문자열[.SET]|문자열의 좌측부터 시작해서 SET문자열이 <br>안나올떄까지 문자를 삭제|
+|RTRIM|문자열[.SET]|문자열의 우측부터 시작해서 SET문자열이 <Br>안나올떄까찌 문자를 삭제|
+|SOUNDEX|문자열|지정한 단어와 발음이 동일한 문자열을 리턴|
+|TRANSLATE|문자열,S1,S2|모든 S1을 S2로 치환 한 후 리턴|
+|CHR|문자열|지정된수치와 일치하는 ASCII 코드를 리턴|
+|ASCII|문자열|지정된 문자의 ASCII 코드값을 리턴|
+|REPLACE|문자열,STR1,STR2|문자열에서 STR1을 모두 STR2로 치환후 리턴,<br>STR2를 입력하지 않으면 문자열에서 STR1을 모두삭제|
+|CONTCAT|문자열1,문자열2|문자열1과 문자열2를 합쳐서 리턴|
+|TRIM|LEADING/TRAINING/BOTH 혹은<br>트림할 문자열 + FROM 원문자열|trim(LEADING 트림할문자열 FROM 원본문자열)<br>:문장의 앞에서 트림할 문자열 제거<br>trim(TRAINING 트림할문자열 FROM원본문자열)<br>:문장의 위에서 트림<br>trim(BOTH 트림할문자열 FROM 원본문자열)<br>:양쪽에서 다 트림<br>TRIM(원본문자열):앞 뒤 공백을 제거<br>TRIM():null을 반환
+|LENGTH|문자열|입력한 캐릭터셋으로 계싼한 문자열의 길이를 반환<br>바이트를 반환하고 싶으면 LENGTHB를 사용|
+
+### 오라클 내장함수 [날짜함수]
+- **SYSDATE**
+    - 현재 날짜와 시간을 시스템 기준으로 얻어온다.(최소단위 1초)
+    - 얻어온 숫자에 연산이 가능하다.
+    - **TO_CHAR**: 숫자나 날씨를 문자형식으로 변환 해주는 것
+        - 그 날짜를 조회할때 to char 형식으로 출력
+    - **TO_DATE**: 숫자나 문자형식을 날짜형식으로 변환 해주는 것
+        - 날짜를 넣어줄때 to date 형식 사용
+
+- **사용법**
+    - 기본 사용법 : 
+        - SELECT SYSDATE <Br>FROM dual; (dual은 가상테이블)
 
     ```
-    //SELECT문은 반드시 SELECT, FROM 2개의 키워드로 구성되어야함
-    SELECT [DISTINCT] {*,column[Ailas],..} // *-> 모든 칼럼
-    //SELECT절은 출력하고자 하는 칼럼이름을 기술한다.
-    FROM table_name; 
-    //FROM절 다음에는 조회하고자 하는 테이블이름을 기술
+    SELECT TO_DATE(SYSDATE, 'yyyy n dd') AS "현재시간" FROM DUAL;
+    SELECT TO_CHAR(SYSDATE, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간" From DUAL;
+    SELECT TO_CHAR(SYSDATE-1, 'RRR-MM-DD HH24:MI:SS') AS "현재시간" FROM DUAL; //1일 전
+    SELECT TO_CHAR(SYSDATE-1/24, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간"  FROM DUAL; //1시간 전
+    SELECT To_CHAR(SYSDATE-1/24/60, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간" FROM DUAL; //1분 전
+
+    // 일(day) 구하기 ★★★
+    SELECT TO_DATE('2017-11-10','YYYY-MM-DD') - TO_DATE('2017-09-12','YYYY-MM-DD') AS "day" FROM DUAL;
+
     ```
-    - **Ailas : 별칭**
-        - 컬럼명을 원래의 이름이아닌 별도의 이름으로 지정
-        - 컬럼명 다음에 **AS**를 쓴 뒤 그 뒤에 별칭으로 사용할 단어를 제시(AS는 생략가능)  
-            - 대소문자를 구분하지 않는다.
-        - 특수문자나 공백을 컬럼의 별칭으로 사용하고자 한다면 큰 따옴표("")를 사용 
-            - 큰따옴표를 쓰게되면 대소문자를 구분하게된다. 
-        
-- **Concatenation(연결 연산자)**
-    > Concatenation 사전적인 의미는 연결<br> 컬럼 또는 문자를 다른 컬럼과 연결해서 표현할때 사용
-    - Concatenation 연산자로 "||"수직 바를 사용
-        - 컬럼과 특정 값 사이에 공백이 생김 
-        - ex:) select ename || 'is a '|| job from emp;
-- DISTINCT 키워드
-    >중복행을 제거 
-    -ex:) select distinct deptno from emp;bb
+- YYYY와 RRRR의 차이점
+    - TO_CHAR을 이용하여 뽑아오는것은 동일하나
+    - TO_DATE를 이용해 DATE로 변형할떄는 다르다.
 
----
-## WHERE 조건과 비교 연산자
+    - yy(00~99): 2000년대(21세기,현재세기)
+    - yy(00~49): 2000년대(21세기,현재세기)
+    - yy(50~99): 1900년대(20세기,직전세기)
 
-```
-SELECT *[column1,column2...,clumnn]
-FROM table_name
-WHERE 조건절;
-// 조건절의 구성-> WHERE SAL   >=   3000;
-                        ▲컬럼 ▲연산자 ▲비교대상값 
-```
-- 문자열은 단일 따옴표('')안에 기술한다. 대소문자를 구분한다.
-- 날짜 데이터도 문자열과 마찬가지로 단일 따옴표 안에 기술한다.
-    - ex:) WHERE HIRDEATE<='1982/01/01';
+
+
+### 오라클 내장함수 [숫자함수]
+- ROUND
+    - ROUND(n,m)함수는 반올림값을 반환한다.
+    - n값을 반올림하고, m은 끊어줄 즉 보여줄 소수점
+    
+    ```
+    SELECT ROUND(192.153) as BANOLIM from dual; //192;
+    SELECT ROUND(192.153,1) as BANOLIM from dual; //192.2
+    SELECT ROUND(192.153,-1) as BANOLIM from dual; //190
+    SELECT ROUND(192.153,-2) as BANOLIM from dual; //200
+    ```
+- TRUNC
+    - TRUNC(n,m)함수는 절사하여 값을 반환한다.
+    - n값을 절사하고 m은 보여줄 소수점 자릿수
+    - 절사란 반올림 내림 올림 이런거 없이 무조건 잘라내는것
+
+    ```
+    SELECT TRUNC(7.55992,2) AS "TRUNC" FROM DUAL; //7.55
+    SELECT TRUNC(7.55992,-2) AS "TRUNC" FROM DUAL; //700
+    ```
+
+### 오라클 데이터타입 변환
+> TO_[데이터타입]
+
+![오라클형변환](https://user-images.githubusercontent.com/60641307/78874082-c6ef4f80-7a86-11ea-99c5-cae8c2d98450.png)
+
+- TO_CHAR
+    - 날짜형 혹은 숫자형을 문자형으로 변환
+    
+    |구분|설명|
+    |:---|:---|
+    |0|자릿수를 나타내며 자릿수가 맞지 않을 경우 0으로 채움|
+    |9|자릿수를 나타내며 자릿수가 맞지 않아도 채우지 않음|
+    |L|각 지역별 통화 기호를 앞에 표시|
+    |.|소수점|
+    |,|천 단위 자리 구분|
+    - ex:) to_char(숫자데이터,'L999,999') 
+- TO_DATE
+    - 문자형을 날짜형으로 변환
+- TO_NUMBER 
+    - 문자형을 숫자형으로 변환
