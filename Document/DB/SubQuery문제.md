@@ -48,3 +48,14 @@
 23. IN 연산자를 이용하여 부서별로 가장 급여를 많이 받는 사원의 사원번호, 급 여, 부서번호를 출력하시오.
 
 24. 30번 부서의 사원중에서 급여를 가장 많이 받는 사원보다 더 많은 급여를 받는 사원의 이름과 급여를 출력하시오.
+
+/*01*/select deptno,round(avg(sal),2) 
+from emp
+where sal>=1000
+group by deptno
+having avg(sal)>=2000;
+
+/*02*/select deptno, job, count(*)
+from emp
+group by deptno, job 
+order by deptno;
