@@ -13,9 +13,9 @@
 ### account unlock 
 
 ```
-alter user 계정명 account unlock;  // 계정 unlock
-alter user identified by 설정할패스워드  // 비번설정
-conn 계정명/패스워드  // 연결
+alter user 계정명 account unlock;  -- 계정 unlock
+alter user identified by 설정할패스워드  -- 비번설정
+conn 계정명/패스워드  -- 연결
 ```
 
 ---
@@ -85,11 +85,11 @@ conn 계정명/패스워드  // 연결
     ```
     SELECT TO_DATE(SYSDATE, 'yyyy n dd') AS "현재시간" FROM DUAL;
     SELECT TO_CHAR(SYSDATE, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간" From DUAL;
-    SELECT TO_CHAR(SYSDATE-1, 'RRR-MM-DD HH24:MI:SS') AS "현재시간" FROM DUAL; //1일 전
-    SELECT TO_CHAR(SYSDATE-1/24, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간"  FROM DUAL; //1시간 전
-    SELECT To_CHAR(SYSDATE-1/24/60, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간" FROM DUAL; //1분 전
+    SELECT TO_CHAR(SYSDATE-1, 'RRR-MM-DD HH24:MI:SS') AS "현재시간" FROM DUAL; --1일 전
+    SELECT TO_CHAR(SYSDATE-1/24, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간"  FROM DUAL; -- 1시간 전
+    SELECT To_CHAR(SYSDATE-1/24/60, 'RRRR-MM-DD HH24:MI:SS') AS "현재시간" FROM DUAL; -- 1분 전
 
-    // 일(day) 구하기 ★★★
+    -- 일(day) 구하기 ★★★
     SELECT TO_DATE('2017-11-10','YYYY-MM-DD') - TO_DATE('2017-09-12','YYYY-MM-DD') AS "day" FROM DUAL;
 
     ```
@@ -144,3 +144,28 @@ conn 계정명/패스워드  // 연결
     - 문자형을 날짜형으로 변환
 - TO_NUMBER 
     - 문자형을 숫자형으로 변환
+
+
+### 선택을 위한 DECODE 함수
+> switch case 문과 같은 기능을 갖음
+
+```
+-- DECODE 함수의 기본 형식
+DECODE (표현식,조건1,결과1,
+              조건2,결과2,
+              조건3,결과3,
+              기본결과n
+              )
+```
+
+### 조건에 따라 서로 다른 처리가 가능한 CASE 함수
+> if else 구문과 같은 기능
+
+```
+CASE 표현식  WHEN=조건 THEN 결과
+            WHEN=조건2 THEN 결과2
+            WHEN=조건3 THEN 결과3
+            WHEN=조건4 THEN 결과4
+            ELSE 결과  --나머지 결과 
+        END as 별칭
+```

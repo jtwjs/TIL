@@ -31,7 +31,7 @@
     - null 값 : 알수없는 값
 - [group by] 특정 칼럼을 기준으로 한 그룹으로 묶어 합게,평균 등을 조회
     - select 칼럼1, 칼럼2, 칼럼3 <br>from 테이블<br>group by 칼럼1;
-    - ex:) select seq,avg,sum <br>from emp<br>group by seq;
+    - ex:) select seq,avg(seq),sum(sal) <br>from emp<br>group by seq;
         - seq를 기준으로 emp 테이블의 평균과 합계를 그룹으로 묶어 조회
 - [having] 그룹으로 묶인 기준 칼럼이나 함수에 조건을 걸어 조회
     - select 칼럼1,칼럼2,칼럼3<br>from emp<br>group by 칼럼1 having 칼럼2<값;
@@ -44,7 +44,7 @@
 SELECT *[컬럼1,컬럼2,컬럼3,...]
 FROM 테이블명
 WHERE 조건절;
-// 조건절의 구성-> WHERE SAL   >=   3000;
+-- 조건절의 구성-> WHERE SAL   >=   3000;
                         ▲컬럼 ▲연산자 ▲비교대상값 
 ```
 - 문자열은 단일 따옴표('')안에 기술한다. 대소문자를 구분한다.
