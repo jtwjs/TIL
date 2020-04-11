@@ -35,3 +35,48 @@
 ### 다중행 서브쿼리
 > 두개 이상의 행(값)을 반환한다.
 - 다중행 연산자( in, > any, > all,...)사용
+---
+### SubQuery를 쓰면 안되는 경우
+>SubQuery와 Join의 성능은 차이 없다. <br> 하지만 SubQuery를 쓰면 안되는 경우가 존재한다.
+
+- SubQuery와 Join의 성능 차이가 없는 이유
+    - SubQuery를 쓰든 Join으로 풀어서 짜든 어떤것이 유리한지<br>
+     옵티마이저가 알아서 판단 후 실행기억을 작성해줌 (성능과 무관)
+     - 실행기억을 확인하는 방법
+        - SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(null,null,'ALLSTATS LAST'));
+      
+- SubQuery를 쓰면 안되는 경우 
+    
+    ```
+    -- 1) SubQuery에 같은 테이블을 덧쓴 경우
+    SELECT A.EMPLOYEE_ID,
+           A.FIRST_NAME,
+           A.LAST_NAME,
+           A.SALARY
+        FROM EMPLOYEES A
+    WHERE A.SALARY = (SELECT MIN(SALARY) FROM EMPLOYEES)
+        OR A.SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES);
+
+    --2) 테이블을 한번만 access한 경우
+    SELECT B.EMPLOYEE_ID,
+        B.FIRST_NAME,
+        B.LAST_NAME,
+        B.SALARY
+    FROM(
+            SELECT A.EMPLOYEE_ID,
+                A.FIRST_NAME,
+                A.LAST_NAME,
+                A.SALARY
+                ROW_NUMBER() OVER(ORDER BY SALARY) MINSEL.
+                ROW_NUMBER() OVER(ORDER BY SALARY DESC) MAXSAL,
+                FROM EMPLOYEES A
+            ) B
+    WHERE B.MINSAL = 1 OR B.MAXSAL = 1;
+    --minsel은 오름차순 maxsel은 내림차순이라 1이 최소값 최대값이 됨
+    ```
+
+1)의 경우 테이블에 3번 ACCESS해서 18번의 BUFFER을 읽었다.<br>
+2)의 경우 테아블에 1번 ACCESS하고 6번의 BUFFER을 읽었다. <br>
+데이터수가 별로 없는경우에는 시간의 차가 별로 안나보이지만 <br>
+대량의 데이터 테이블이였을 경우 엄청난 성능의 차이가 발생!!<br>
+이런 경우에 SubQuery를 쓰면 안된다!

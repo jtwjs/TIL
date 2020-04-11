@@ -111,7 +111,7 @@ display가 block으로 변함
 ![제목 없음](https://user-images.githubusercontent.com/60641307/78451212-259b7e80-76bf-11ea-9c74-ce84eeee59bf.png)
 
 
-- Result	&#128526;
+- Answer	&#128526;
 
 ```CSS
 * {
@@ -220,7 +220,7 @@ display가 block으로 변함
 ![position2](https://user-images.githubusercontent.com/60641307/78467461-144a8480-7748-11ea-9e12-a8b56fc48cd0.png)
 
 
-- Result	&#128526;
+- Answer	&#128526;
 
 ```CSS
 * {
@@ -434,7 +434,7 @@ display가 block으로 변함
 
 ![position3](https://user-images.githubusercontent.com/60641307/78468421-f8001500-7752-11ea-8aac-6a85a8171fff.png)
 
-- Result	&#128526;
+- Answer	&#128526;
 
 ```CSS
 * {

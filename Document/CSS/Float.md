@@ -86,7 +86,7 @@ Block 요소들을 가로배치 하기위해 쓰인다.
 ![float1-내가한거](https://user-images.githubusercontent.com/60641307/78023038-e6a0bc80-7390-11ea-8b77-fbc62d22757c.png)
 
         
-- Result	&#128526;
+- Answer	&#128526;
 
 ```CSS
 * {
@@ -217,7 +217,7 @@ Block 요소들을 가로배치 하기위해 쓰인다.
 
 ![float2-mine](https://user-images.githubusercontent.com/60641307/78126268-3e9cf900-744d-11ea-87be-7c41e8129eea.png)
 
-- Result	&#128526;
+- Answer	&#128526;
 
 ```CSS
 * {

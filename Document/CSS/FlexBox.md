@@ -39,10 +39,185 @@
     /* flex-start(시작부분) | center | flex-end(끝부분) */
     /* space-between(요소들 사이의 간격을 같게 해줌) |
     /* space-around(요소 양옆간격이 같아진다)
-    
-    ```
+        ```
 - **order** : 요소의 순서를 지정해준다.
+---
+## flex-3 실습
+- TRY 	&#128531;
+
+```CSS
+
+  
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: "Muli", sans-serif;
+    color: #273444;
+    background-color:#273444;
+  }
+  
+  .profile-name {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3333333333;
+  }
+  
+  .profile-location {
+    font-size: 14px;
+    line-height: 1.4285714286;
+    color: #8492a6;
+  }
+  
+  .profile-detail dt {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.6666666667;
+    color: #8492a6;
+  }
+  
+  .profile-detail dd {
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.25;
+    color: #0066ff;
+  }
+  
+  /* ▼ WHERE YOUR CODE BEGINS */
+  .profile{
+      background-color:white;
+      border-radius:16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      width:386px;
+      height:304px;
+  }
+  .profile img{
+      width:80px;
+      border-radius:80px;
+      display:block;
+      margin-bottom:16px;
+  }
+  .profile h1{
+      width:118px;
+      margin-bottom:4px;
+  }
+  .profile p{
+      margin-bottom:32px;
+  }
+  .profile-detail{
+      display:flex;
+      justify-content:space-around;
+      width:306px;
+      height:64px;
+      margin-bottom:32px;
+  }
+```
+![flex3](https://user-images.githubusercontent.com/60641307/79044018-c4832600-7c3d-11ea-859b-fb7fd8c59d29.png)
+
+
+- Answer	&#128526;
+
+```CSS
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: "Muli", sans-serif;
+  color: #273444;
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3333333333;
+}
+
+.profile-location {
+  font-size: 14px;
+  line-height: 1.4285714286;
+  color: #8492a6;
+}
+
+.profile-detail dt {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6666666667;
+  color: #8492a6;
+}
+
+.profile-detail dd {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.25;
+  color: #0066ff;
+}
+
+/* ▼ WHERE YOUR CODE BEGINS */
+
+body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 386px;
+  padding: 32px 40px;
+  border-radius: 16px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.profile-image {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.profile-name {
+  margin-bottom: 4px;
+}
+
+.profile-location {
+  margin-bottom: 32px;
+}
+
+.profile-detail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.profile-detail dt {
+  margin-bottom: 4px;
+}
+```
+
+![flex3-1](https://user-images.githubusercontent.com/60641307/79045028-f0a1a580-7c43-11ea-867d-041339313dff.png)
+
+
 ---
 - TIP 
     1. 선 align-itmes 후 align-content
-
+    2. 글자 정렬은 text-align: left|center|right
+    3. body width :100%; height: 100vh; (뷰포트 100%)
