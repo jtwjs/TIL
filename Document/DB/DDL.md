@@ -1,5 +1,6 @@
 ## DDL (Data Definition Language) 데이터정의어
 
+- DDL의 모든 삭제하는 명령어는 복구불가능..
 ### Create(테이블 생성)
 ```
 CREATETABLE 테이블명(
@@ -38,7 +39,6 @@ CREATE TABLE EX_TABLE
 - SYSDATE
     - 현재 날짜를 뜻함
 
----
 ### 서브 쿼리로 테이블 생성하기
 - 원하는 컬럼으로 구성된 복제 테이블 생성
     ```
@@ -63,7 +63,7 @@ CREATE TABLE EX_TABLE
 
 
 ### DROP(테이블 삭제)
-1. **DROP TABLE : 테이블의 모든 데이터 및 구조를 삭제한다.**
+1. **DROP : 테이블의 모든 데이터 및 구조를 삭제한다.**
 
     ```
     DROP TABLE 테이블명 [CASCADE CONSTRAINT];
@@ -85,7 +85,7 @@ CREATE TABLE EX_TABLE
     ```
 ---
 ### ALTER(테이블 수정)
-
+> 기존 테이블의 구조를 변경하기위한 DDL 명령문
 1. **ADD : 테이블에 컬럼을 추가한다.**
 
     ```
@@ -119,6 +119,7 @@ CREATE TABLE EX_TABLE
     --EX)
     ALTER TABLE EMP DROP COLUMN EMP_ADDR;
     --EMP 테이블에 EMP_ADDR이라는 컬럼을 삭제
+    
     ```
 4. **RENAME : 테이블에 컬럼이름을 변경한다.**
 
@@ -129,5 +130,22 @@ CREATE TABLE EX_TABLE
     ALTER TABLE EMP RENAME COLUMN EMP_ADDR TO EMP_ADDR1;
     --EMP 테이블에 EMP_ADDR이라는 컬럼명을 EMP_ADDR1으로 변경
     ```
+5. **SET UNUSED : 컬럼의 사용을 논리적으로 제한함(삭제X)**
+    >특정 테이블에서 칼럼을 삭제하는경우 다음과같이 무조건 삭제하는 것은 위험
+    <br>테이블에 저장된된 내용이 많을경우(몇만건에 대한 자료)
+    <br>칼럼을 삭제하는데 꽤 오랜시간이 걸리게됨 
+    <br>(칼럼을 삭제하는 동안 다른사용자가 해당컬럼에 접근을 못함)
+
+    ```
+    --문법
+    ALTER TABLE 테이블명
+    SET UNUSED (컬럼명);
+
+    ```
 ---
 ### TRUNCATE(테이블에 있는 모든 데이터 삭제)
+> 기존에 사용하던 테이블의 모든 로우를 제거하기 위한 명령어
+
+    ```
+    TRUNCATE  테이블명
+    ```
