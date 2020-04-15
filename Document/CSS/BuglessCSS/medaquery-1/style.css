@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: "Noto Sans KR", sans-serif;
+    letter-spacing: -0.01em;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .landing {
+    background-image: url("./assets/img-bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .landing-title {
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  
+  .landing-title strong {
+    display: block;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: -0.01em;
+  }
+  
+  .landing-link {
+    line-height: 1;
+    color: #fff;
+  }
+  
+  .banner-title a {
+    color: #1f2d3d;
+  }
+  
+  /* ▼ WHERE YOUR CODE BEGINS */
+
+  .banner{
+      background-color: #FFC82C;
+      text-align:center;
+      height:64px;
+      padding:20px 102px;
+      position:absolute;
+      bottom:0;
+      width:100%;
+  }
+  .baaner-title{
+    min-width:171px;
+    height:24px;
+  }
+  .banner-title a{
+        display:block;
+      
+      font-size:17px;
+      line-height:24px;
+  }
+  .landing-link{
+      border-radius:16px;
+      border:2px solid #FFF;
+      background:rgba(0,0,0,0.5);
+      width:160px;
+      height:52px;
+      padding:14px 37px;
+      font-size:14px;
+  }
+  .landing{
+    height:100vh;
+    text-align:right;
+    padding: 196px 20px;
+  }
+  .landing-title{
+    margin-bottom:38px;
+  }
+
+  @media screen and (min-width:1440px){
+      .banner{ top:0;}
+      .landing{
+          text-align:center;
+          padding:242px 536px;
+      }
+      .landing-link{
+          width:180px;
+      }
+      .landing-title{
+          font-size:49px;
+        
+      }
+  }

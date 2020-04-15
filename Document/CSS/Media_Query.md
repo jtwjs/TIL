@@ -49,3 +49,246 @@
     1. @media screen and 선언
     2. 내가 적용시키고자 하는 가로 길이의 조건을 명시해줌
     3. 새로운 CSS공간에 변화해야할 값들을 쓴다.
+
+---
+## MediaQuery-1 실습
+- TRY 	&#128531;
+
+```CSS
+    * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: "Noto Sans KR", sans-serif;
+    letter-spacing: -0.01em;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .landing {
+    background-image: url("./assets/img-bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .landing-title {
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  
+  .landing-title strong {
+    display: block;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: -0.01em;
+  }
+  
+  .landing-link {
+    line-height: 1;
+    color: #fff;
+  }
+  
+  .banner-title a {
+    color: #1f2d3d;
+  }
+  
+  /* ▼ WHERE YOUR CODE BEGINS */
+
+  .banner{
+      background-color: #FFC82C;
+      text-align:center;
+      height:64px;
+      padding:20px 102px;
+      position:absolute;
+      bottom:0;
+      width:100%;
+  }
+  .baaner-title{
+    min-width:171px;
+    height:24px;
+  }
+  .banner-title a{
+        display:block;
+      
+      font-size:17px;
+      line-height:24px;
+  }
+  .landing-link{
+      border-radius:16px;
+      border:2px solid #FFF;
+      background:rgba(0,0,0,0.5);
+      width:160px;
+      height:52px;
+      padding:14px 37px;
+      font-size:14px;
+  }
+  .landing{
+    height:100vh;
+    text-align:right;
+    padding: 196px 20px;
+  }
+  .landing-title{
+    margin-bottom:38px;
+  }
+
+  @media screen and (min-width:1440px){
+      .banner{ top:0;}
+      .landing{
+          text-align:center;
+          padding:242px 536px;
+      }
+      .landing-link{
+          width:180px;
+      }
+      .landing-title{
+          font-size:49px;
+        
+      }
+  }
+```
+
+#### DeskTop
+
+![mediaqueryMine](https://user-images.githubusercontent.com/60641307/79300250-2800a280-7f21-11ea-9518-d375687f4442.png)
+
+
+#### Mobile
+
+![mediaqueryMobileMine](https://user-images.githubusercontent.com/60641307/79300331-57171400-7f21-11ea-811b-12d018a46138.png)
+
+- Answer	&#128526;
+
+```CSS
+* {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  body {
+    font-family: "Noto Sans KR", sans-serif;
+    letter-spacing: -0.01em;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .landing {
+    background-image: url("./assets/img-bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  
+  .landing-title {
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  
+  .landing-title strong {
+    display: block;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: -0.01em;
+  }
+  
+  .landing-link {
+    line-height: 1;
+    color: #fff;
+  }
+  
+  .banner-title a {
+    color: #1f2d3d;
+  }
+  
+  /* ▼ WHERE YOUR CODE BEGINS */
+
+  .banner{
+    background:#FFC82C;
+    position:fixed;
+    bottom:0;
+    width:100%;
+  }
+  .banner-title a{
+    height:64px;
+    font-size:18px;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+  }
+  .landing{
+    width:100%;
+    height:100vh;
+    padding:0 20px;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:flex-end;
+  }
+  .landing-title{
+    text-align:right;
+    font-size:32px;
+    margin-bottom:24px;
+  }
+  .landing-link{
+    width:160px;
+    height:52px;
+    border-radius:16px;
+    border:2px solid #FFF;
+    background:rgba(0,0,0,0.5);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:15px;
+  }
+  
+  @media screen and (min-width:768px){
+    .banner{
+      top:0;
+      bottom:auto;
+    }
+    .banner-title a{
+      height:80px;
+    }
+    .landing{
+      align-items:center;
+    }
+    .landing-title{
+      text-align:center;
+      font-size:50px;
+      margin-bottom:32px;
+    }
+    .landing-link{
+      font-size:18px;
+      width:180px;
+      height:56px;
+    }
+  }
+
+```
+#### DeskTop
+![mediaqueryMine2desk](https://user-images.githubusercontent.com/60641307/79304508-7e271300-7f2c-11ea-998c-4d39b0b5eac8.png)
+
+
+
+#### Mobile
+![mediaqueryMine2](https://user-images.githubusercontent.com/60641307/79304456-5a63cd00-7f2c-11ea-9e79-aa8c42c9ddd7.png)
+
+
+
+
+---
+- Tip
+    1. 반응형 웹은 모바일 부터 만들자!
+        - 확장공사가 편하다 ㅎㅎ
+    2. 아이폰5/SE 기준으로 작업을 시작하자
+        - 320px이 제일 작다. 이곳에서 스타일이 제데로되면 왠만하면 안깨진다.
+    3. 정렬할때는 무조건 display:flex를 써보자!
+      - text도 자식태그인것을 명심!
+    4. fixed로 viewport 위치를 고정시킨 경우 변화를줄떄 auto로 효력없애자
