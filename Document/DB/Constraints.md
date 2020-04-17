@@ -13,7 +13,7 @@
     - 항상 유일값을 갖는다.
 - **PRIMARY KEY**
     - NULL을 허용하지않고 중복된 값을 허용하지 않는다.
-    - NOT NULL 조건과 UNIQUE 조건을 결합한 형태
+    - NOT NULL 조건과 UNIQUE 조건을 결합한 형태V
 - **FOREIGN KEY**
     - 참조되는 테이블의 칼럼의 값이 존재하면 허용한다.
 - **CHECK**
@@ -25,8 +25,8 @@
 - PK의 값은 항상 유일하며 NULL을 허용해선 안된다.
 
 ### 참조 무결성(Referential Integrity)
-- 테이블은 FK를 통하여 서로 관계를 맺고 있는데, 다른 테이블 또는 자신 table 의 <br> Primary Key값을 참조하는 칼럼을 말한다.
-- 참조 무결성이 지켜지기 위해서는 FK 칼럼의 값은 참조하는 테이블의 <br> PK 칼럼 값중 하나이거나 널을 허용 하는 경우 NULL이어야 한다.
+- 테이블은 FK를 통하여 서로 관계를 맺고 있는데, 다른 테이블 또는 자신 Table 의 <br> Primary Key값을 참조하는 칼럼을 말한다.
+- 참조 무결성이 지켜지기 위해서는 FK 칼럼의 값은 참조하는 테이블의 <br> PK 칼럼 값중 하나이거나 NULL을 허용 하는 경우 NULL이어야 한다.
 
 
 ---
@@ -71,7 +71,22 @@
     );
     column_name을 반드시 작성 해야한다.
     ```
+### 제약조건 추가하기 
+>테이블 생성이 끝난 후에 제약조건을 추가하려면 ATLER TABLE문에 ADD절을 사용
+- 별도로 제약조건 추가하는방식은 TABLE 레벨로 실행
+- DEFUALT 는 테이블을 생성 할때만 작성할수 있다.
+```
+ALTER TABLE 테이블명
+ADD [CONSTRAINT 제약조건명]
+제약조건타입 (컬럼명)
+```
 
+- **NOT NULL 조건 추가하기**
+    > 이미 존재하는 테이블에 NOT NULL 제약조건 추가는 MODIFY절 사용
+    ```
+    ALTER TABLE 테이블명
+    MODIFY 컬럼명 CONSTRAINT 제약조건명 NOT NULL;
+    ```
 
 ### CHECK 제약조건
 >입력되는 값을 체크하여 설정된 값 이외에 값이 들어오면 오류 메시지와 함께 명령이 수행되지 못하게 하는것
@@ -86,3 +101,55 @@
 ### 제약조건에 이름 붙이기
 > 제약조건 설정시 **CONSTRAINT 키워드**를 사용해서 제약조건에 대한 이름을 지정해 줄 수 있다.
 - 이름을 지정하지 않으면 자동으로 생성되는데 나중에 제약조건을 비활성하거나 삭제하는 등의 관리를 위해서 제약조건에 이름을 지정해주는것이 좋다.
+
+### 제약조건 확인하기 
+```
+SELECT * FROM ALL_CONSTRAINTS
+WHERE TABLE_NAME = '테이블명'; -- 테이블명 대문자로
+```
+- **USER_CONSTRAINTS : 제약조건 정보**
+    - 어떤 컬럼에 제약조건이 부여되었는지 확인 불가
+```
+SELECT TALBE_NAME, CONSTRAINT_NAME,CONSTRAINT_TYPE,R_CONSTRAINT_NAME
+FROM USER_CONSTRAINTS
+WHERE TABLE_NAME IN('테이블명') -- 테이블명 대문자로
+```
+- **USER_CONS_COLUMNS : 현재 USER가 가지고 있는 COLUMN에 할당된 제약조건에 대한 정보**
+    - 제약조건을 가진 컬럼에 대한 정보를 조회
+    - 제약 조건의 종류는 확인 불가능
+```
+SELECT CONSTRAINT_NAME, TABLE_NAME, COLUMN_NAME
+FROM USER_CONS_COLUMNS
+WHERE TABLE_NAME IN('테이블명') -- 테이블명 대문자로
+```
+
+- **USER_TAB_COLUMNS : 컬럼에 대한 정보**
+    - 테이블의 컬럼 정보를 알수 있다.
+```
+SELECT COLUMN_NAME, DATA_TYPE, DATA_DEFAULT
+FROM USER_TAB_COLUMNS
+WHERE TABLE_NAME IN('테이블명') -- 테이블명 대문자로
+```
+
+### 제약조건 제거하기
+>제약조건 제거는 DROP CONSTRAINT 다음에 제거할 제약조건명 명시
+- 제약조건을 제거하기 위해서는 **반드시 제약조건명을 제시**해야한다.
+```
+ALTER TABLE 테이블명
+DROP [CONSTRAINT 제약조건명];
+```
+
+### 제약 조건의 비활성화와 CASCADE
+- **제약 비활성화**
+    - 제약 비활성은 제약조건을 삭제하지 않고도 제약조건을 비활성화하여 사용을 잠시 보류하는 기능
+    - 제약조건이 설정되면 항상 그 규칙에 따라 데이터 무결성이 보장된다.
+    - 특별한 업무를 수행하는 과정에서 이러한 제약조건때문에 작업이 진행되지 못하는경우 사용<BR>
+    ``` 제약 비활성 ALTER TABLE 테이블명 DISABLE CONSTRAINT 제약조건; ```<BR>
+    ``` 제약 활성 ALTER TABLE 테이블명 ENABLE CONSTRAINT 제약조건; ```
+- **CASCADE CONSTRAINTS**
+>부모 테이블과 자식테이블 간에 참조 설정이 되어 있을 때 부모 테이블의 제약조건을 비활성화<BR> 시키면서 이를 참조하고 있는 자식 테이블의 제약조건까지 함께 비활성화 시키기 위해 사용
+- CASCADE를 쓰면 일시적으로 참조관계를 끊을수 있다.
+- 강제로 참조관계를 끊고 부모 테이블을 삭제하는 법
+    - ``` DROP TABLE 테이블명 CASCADE CONSTRAINTS; ```
+- 강제로 참조관계를 끊고 부모 테이블의 제약조건을 삭제하는 법
+    - ``` ALTER TABLE 테이블명 DROP CONSTRAINTS 제약조건명 CASCADE; ```
