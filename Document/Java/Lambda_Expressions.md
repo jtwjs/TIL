@@ -101,6 +101,52 @@ MyFunctionalInterface fi = (x,y) -> { return x+y; }
 MyFunctionalInterface fi = (x,y) -> { return sum(x,y); }
 -> MyFunctionalInterface fi = (x,y) -> sum(x,y);
 
-//매개값으로 2와5를 주면 람다식의 x변수에2,y변수에5가 대입되고 x와y는 중괄호{}에 사용됨
+//매개값으로 2와5를 주면 람다식의 x변수에 2,y변수에 5가 대입되고 x와y는 중괄호{}에 사용됨
 int result = fi.method(2,5); 
 ```
+---
+### 클래스 멤버와 로컬 변수 사용
+- 람다식의 실행 블록에는 클래스의 멤버(필드,메소드)및 로컬 변수를 사용할 수 있다.
+- 클래스의 멤버는 제약 사항 없이 사용 가능하지만,로컬 변수는 제약사항이 따른다.
+#### 클래스의 멤버 사용
+>람다식 실행 블록에는 클래스의 멤버인 필드와 메소드를 제약 사항 없이 사용할 수 있다.
+- **람다식에서 this는 람다식을 실행한 객체의 참조이다**.
+#### 로컬 변수 사용
+>메소드의 매개변수 또는 로컬 변수를 사용하면 이 두 변수는 final 특성을 가져야 한다.
+#### 표준 API의 함수적 인터페이스
+>자바에서 제공되는 표준 API에서 한 개의 추상 메소드를 가지는 인터페이스들은 <br>모두 람다식을 이용해서 익명 구현 객체로 표현이 가능하다.
+- EX:) Runnable 인터페이스
+    ```java
+    /*Runnable 인터페이스는 매개 변수와 리턴값이 없는 run()메소드만 존재하기에 
+    다음과 같이 람다식을 이용해서 Runnable 인스턴스를 생성시킬수 있다.*/
+    Runnable runnable = () -> {
+        for(int i=0; i<10; i++){
+            System.out.println(i);
+        }
+    };
+    Thread thread = new Thread(runnable);
+    thread.strat();
+
+    //Thread 생성자를 호출할 때 다음과 같이 람다식을 매개값으로 대입해도 된다.
+    Thread thread = new Thread( () -> {
+        for(int i=0; i<10; i++){
+            System.out.println(i);
+        }
+    });
+    ```
+- 자바 8부터 빈번히 사용되는 함수적 인터페이스는 java.util.function 표준 API 패키지로 제공한다.
+    - 목적은 메소드 또는 생성자의 매개 타입으로 사용되어 람다식을 대입할 수 있도록 하기 위해서이다.
+- **java.util.function 패키지**의 함수적 인터페이스
+    - **Consumer**
+        - 매개값은 있고, 리턴값은 없음
+    - **Supplier**
+        - 매개값은 없고, 리턴값은 있음
+    - **Function**
+        - 매개값도 있고, 리턴값도 있음
+        - 주로 매개값을 리턴값으로 매핑(타입변환)
+    - **Operator**
+        - 매개값도 있고, 리턴값도 있음
+        - 주로 매개값을 연산하고 결과를 리턴
+    - **Predicate**
+        - 매개값은 있고, 리턴타입은 boolean
+        - 매개값을 조사해서 true/false를 리턴

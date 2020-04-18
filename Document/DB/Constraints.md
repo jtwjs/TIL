@@ -13,7 +13,7 @@
     - 항상 유일값을 갖는다.
 - **PRIMARY KEY**
     - NULL을 허용하지않고 중복된 값을 허용하지 않는다.
-    - NOT NULL 조건과 UNIQUE 조건을 결합한 형태V
+    - NOT NULL 조건과 UNIQUE 조건을 결합한 형태
 - **FOREIGN KEY**
     - 참조되는 테이블의 칼럼의 값이 존재하면 허용한다.
 - **CHECK**

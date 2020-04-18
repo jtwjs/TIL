@@ -292,3 +292,9 @@
     3. 정렬할때는 무조건 display:flex를 써보자!
       - text도 자식태그인것을 명심!
     4. fixed로 viewport 위치를 고정시킨 경우 변화를줄떄 auto로 효력없애자
+    5. 보통 DeskTop min-width: 768px !!
+    6. html head태그안에 meta태그 외우기 
+    
+      ```CSS 
+      <meta name="viewport" content="width=device-width" />
+      ```
