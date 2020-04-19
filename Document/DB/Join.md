@@ -1,5 +1,7 @@
 ## JOIN
-> JOIN은 각 테이블간에 공통된 컬럼(조건)으로 데이터를 합쳐 표현하는것<br>JOIN은 크게 INNER JOIN,OUTER JOIN이 있다.
+>JOIN은 2개의 테이블에 대해 연관된 튜플들을 결합하여 하나의 새로운 릴레이션을 반환한다. 
+- JOIN은 크게 INNER JOIN, OUTER JOIN으로 구분된다.
+- JOIN은 일반적으로 FROM절에 기술하지만, 릴레이션이 사용되는 어느곳에서나 사용할 수 있다.
 
 ### JOIN의 기본사용방법
 - 두개의 테이블에 하나라도 같은 컬럼이 있어야한다.
@@ -13,157 +15,99 @@
 |Non-Equi Join|동일 칼럼이 없이 다른 조건을 사용하여 조인|
 |Outer Join|조인 조건에 만족하지 않는 행도 나타낸다|
 |Self Join|한 테이블 내에서 조인|
-### SELECT FROM을 이용한 조인
-- ex:) 회원 테이블과 부서 테이블 조인
 
-```
--- DEPART_ID가 공통컬럼
--- MEM 테이블의 dEPART_ID와 DEPART테이블의 DEPART_ID를 연결하여 준다.
-SELECT MEM.MEM_ID, MEM.NAME, MEM.DEPART_ID, DEPART.DEPART_NAME
-FROM MEM, DEPART
-WHERE MEM.DEPART_ID = DEPART.DEPART_ID;
-```
-- 이떄 테이블명이 긴 경우 별칭을 쓸수 있다.
-
-```
-SELECT A.MEM_ID, A.NAME, A.DEPART_ID, B.DEPART_NAME
-FROM MEM A   --FROM이 젤 첫번째 시작부분이므로 별칭지정 
-    ,DEPART B
-WHERE A.DEPART_ID = B.DEPART_ID
--- 결과는 동일하다.
-```
-
-
-#### EQUL JOIN(등가 조인)
-> 가장 많이 사용하는 JOIN 방법 <br>
-**조인 조건이 정확히 일치하는 경우에사용** (PK(기본키)와 FK(외래키)를 사용하는 JOIN)<br>
-**JOIN 조건에 '='를 이용하는 조인을 보통 등가 조인(Equi-join)**이라 한다.
-
-```
-SELECT *
-FROM EMP.DEPT
-where emp.deptno = dept.deptno;
-```
-
-- **주의할점**
-    1. **각각 테이블에 대한 AS를 반드시 명시**
-        - 가독성 좋게 명시해주는 것이 좋다.
-        - (해당 칼럼역시 어느 테이블의 칼럼인지 명시해주어야한다)
-    2. **양쪽 테이블에 모두 데이터가 존재해야함**
-        - 매칭이 안되는 부분은 누락이 되고 나머지만 Join하게 된다.
-
-### NON-EQUI JOIN(비등가 조인)
->비등가 조인(NON EQUI)는 등가 조인과는 반대로 '='연산자가 아닌 다른 조건으로 JOIN을 수행하는 방법<br>
-- ex:) (부등호,between and,is null, is not null, in)등등
-- 동등연산자가 아닌 경우에는 비등가 조인이라 부름
+### INNER JOIN
+>INNER JOIN은 일반적으로 EQUI JOIN과 NON-EQUI JOIN 으로 구분된다.
+- **EQUI 조인**
+    - JOIN 대상 테이블에서 공통속성을 기준으로 '='비교에 의해 같은 값을 가지는 행을 연결하여 결과를 생성하는 JOIN 방법
+    - **NATURAL JOIN**
+        - JOIN 조건이 '='일 때 동일한 속성이 두번 나타나게 되는데 이 중 중복된 속성을 제거하여 같은 속성을 한번만 표기하는것
+    - EQUI JOIN 에서 연결 고리가 되는 공통 속성을 JOIN 속성이라고 한다.
+    - **WHERE 절을 이용한 EQUI JOIN의 표기형식** [**실무에서 가장많이 사용**]
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명, ···
+        FROM 테이블명1, 테이블명2,···
+        WHERE 테이블명1.속성명 = 테이블명2.속성명;
+        ```
+    - **NATURAL JOIN을 이용한 EQUI JOIN의 표기형식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1 NATURAL JOIN 테이블명2;
+        ```
+    - **JOIN ~ USING절을 이용한 EQUI JOIN의 표기 형식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1 JOIN 테이블명2 USING(속성명);
+        ```
+- **NON-EQUI JOIN**
+    - JOIN 조건에 '=' 조건이 아닌 나머지 비교 연산자, 즉>,<,<>,>=,<= 연산자를 사용하는 JOIN 방법
+        - between A and B : A 와 B 사이 값
+        - is null : 값이 null 인 조건
+        - is not null : 값이 null이 아닌 조건
+        - in(A,B): A또는 B를 포함한 값
+    - **표기형식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1,테이블명2,···
+        WHERE (NON-EQUI JOIN 조건);
+        ```
+### OUTER JOIN
+>OUTER JOIN은 릴레이션에서 JOIN 조건에 만족하지 않는 튜플도 결과로 출력하기 위한 JOIN 방법
+<BR> LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN 등이 있다.
+- **LEFT OUTER JOIN** : 
+    - INNER JOIN의 결과를 구한 후, 우측 항 릴레이션의 어떤 튜플과도 맞지 않는 <BR>좌측 항의 릴레이션에 있는 튜플들에 NULL 값을 붙여서 INNER JOIN의 결과에 추가한다.
+    - **표기형식**
+        - **ANSI SQL 표준방식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1 LEFT OUTER JOIN 테이블명2
+        ON 테이블명1.속성명 = 테이블명2.속성명;
+        ```
+        - **오라클 방식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1,테이블명2
+        WHERE 테이블명1.속성명 = 테이블명2.속성명(+);
+        ```
+- **RIGHT OUTER JOIN**
+    - INNER JOIN의 결과를 구한 후, 좌측 항 릴레이션의 어떤 튜플과도 맞지 않는<bR> 우측 항의 릴레이션에 있는 튜플들에 NULL값을 붙여서 INER JOIN의 결과에 추가한다.
+    - **표기형식**
+        - **ANSI SQL 표준방식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1 RIGHT OUTER JOIN 테이블명2
+        ON 테이블명1.속성명 = 테이블명2.속성명;
+        ```
+        - **오라클 방식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1,테이블명2
+        WHERE 테이블명1.속성명(+) = 테이블명2.속성명;
+        ```
+- **FULL OUTER JOIN**
+    - LEFT OUTER JOIN과 RIGHT OUTER JOIN을 합쳐 놓은 것
+    - **표기형식**
+        - **ANSI SQL 표준방식**
+        ```
+        SELECT [테이블명1.]속성명,[테이블명2.]속성명,···
+        FROM 테이블명1 FULL OUTER JOIN 테이블명2
+        ON 테이블명1.속성명 = 테이블명2.속성명;
+        ```
 
 ### SELF JOIN(셀프 조인)
->자기조인,자체조인,자기참조조인,셀프조인 등등 으로 불림
+>같은 테이블에서 2개의 속성을 연결하여 EQUI JOIN을하는 JOIN 방법
 - JOIN 대상이 나와 또다른 나 이다.
 - 자기자신과 조인하기 때문에 컬럼명이 같아서 꼭 별칭(ALIAS)를 명시해주어야 함
-
-```
-SELECT a.ename AS emp_name, b.eane AS 사원명
-from emp a, emp b;
-```
-
-### OUTER JOIN(아우터 조인)
->INNER JOIN과 반대 개념
-- **데이터가 양쪽에 없어도 보여줄 수있는 JOIN**<br>
-    (Equi Join은 두개의 테이블중 한쪽 컬럼에 값이 없다면 <br>나머지 테이블의 값을 반환하지 못한다.)
-- Outer join의 연산자는 "(+)" (Oracle 한정)
-- "(+)"는 양쪽에 오지 못한다.
-- 조인시 값이 없는 조인측에 "(+)"를 위치시킴
-
-```
-SELECT DISTINCT emp.deptno, dept.deptno AS 팀번호
-FROM emp,dept
-WHERE emp.deptno(+) = dept.deptno;
-
--- 추가 조건절에도 (+)를 붙여줘야 한다.
-SELECT DISTINCT emp.deptno, dept.deptno AS 팀번호
-FROM emp,dept
-WHERE emp.deptno(+) = dept.deptno
-    AND emp.name(+) LIKE '김%';
-```
-
-#### ANSI SQL 표준
-- ANSI SQL 표준은 값이 더있는 쪽을 지목해야 한다.
-    - LEFT OUTER JOIN (왼쪽값이 더 있다.)
-    - RIGHT OUTER JOIN (오른값이 더 있다.)
-    - FULL OUTER JOIN (양쪽 다 각기 다른값이 존재)
-
+- **표기형식**
     ```
-    SELECT emp.deptno, dept.deptno AS 팀번호
-    FROM emp RIGHT OUTER JOIN dept
-    ON emp.deptno = dept.deptno;
+    SELECT [별칭1.]속성명,[별칭1.]속성명,···
+    FROM 테이블명1 [AS] 별칭1 JOIN 테이블명1 [AS] 별칭2
+    ON 별칭1.속성명 = 별칭2.속성명;
 
-    SELECT emp.deptno, dept.deptno AS 팀번호
-    FROM emp LEFT OUTER JOIN dept
-    ON emp.deptno = dept.deptno;
-
-    SELECT emp.deptno, dept.deptno AS 팀번호
-    FROM emp FULL OUTER JOIN dept
-    ON emp.deptno = dept.deptno;
+    //HWERE 절을 이용한 방법
+    SELECT [별칭1.]속성명,[별칭1.]속성명,···
+    FROM 테이블명1 [AS] 별칭1, 테이블명2 [AS] 별칭2
+    WHERE 별칭1.속성명 = 별칭2.속성명;
     ```
-- **되도록이면 ANSI 표준 SQL 방식을 이용하는 편이좋음**
-    - 모든 DB에서 같은 문법으로 사용 가능
 
-### ANSI JOIN
 
-```
-SELECT *
-FROM EMP CROSS JOIN DEPT;
-```
-
-#### ANSI Inmer Join (Oracle의 Equi Join)
-
-```
-SELECT ENAME, DNAME
-FROM EMP INNER JOIN DEPT
-ON EMP.DEPTNO=DEPT.DEPTNO
-WHERE ENAME='SCOTT';
-```
-
-- USING을 이용한 조인 조건 지정하기
-    - ON 대신 사용
-    - 부등호 대신 하나로 묶어서 명시
-    - ()괄호 안에 서브쿼리 사용가능
-    - **조인에 사용된 컬럼에는 테이블명을 기술하지 않아야한다.**
-
-```
-SELECT * 
-FROM table1 JOIN table2
-USING(공통컬럼)
-```
-
-### NATURAL JOIN(자연조인)
-> 등가조인의 한종류
-- 두 테이블의 동일한 컬럼명을 갖는 컬럼은 모두 조인이된다.
-    - 조인에 사용된 컬럼에는 테이블명을 기술하지 않는다!
-- 조건절 없이 양쪽에 해당하는 컬럼을 적어줌으로써 그 컬럼에 자동으로 등가조인이 실시
-- 서로 동일한 컬럼앞에 ALIAS된 테이블의 별칭을 적어주면 에러발생<br>(동일한 컬럼이 두개 이상이여도 상관 X)
-- 등가조인인 '='쓸때 동일한 컬럼과 두번 명시 해주어야해서 이 중복을 제거하기 위해 사용
-
-```
-SELECT *
-FROM EMP NATURAL JOIN DEPT;
-```
-
-### INNER JOIN(내부조인)
-> 등가조인의 한종류
-- 두개의 테이블 혹은 두개 이상의 테이블을 조인하는곳에 INNER JOIN을 붙임
-- (INNER)은 생략 가능
-- 조건절에 WHERE 대신 ON을 사용(등가조인용)한다.
-
-```
-SELECT d.deptname, e.ename
-    FROM dept d INNER JOIN emp e
-    ON e.deptno = d.deptno;
-
--- INNER 생략가능
-SELECT d.deptname, e.ename
-    FROM dept d JOIN emp e
-    ON e.deptno = d.deptno;
-
-```
