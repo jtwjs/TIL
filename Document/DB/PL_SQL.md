@@ -26,15 +26,209 @@
 ### 기본 특징
 - 블록 단위의 실행을 제공 
     - BEGIN , END;를 사용
-    - 마지막 라인에 /를 입력하면 해당블록이 실행
+    - **마지막 라인에 /를 입력하면 해당블록이 실행**
 - 변수, 상수 등을 선언하여 SQL과 절차형 언어에서 사용
-- 변수의 선언은 DECLARE절에서만 가능, BEGIIN섹션에서 새로운 값이 할당될 수 있다.
+- 변수의 선언은 DECLARE절에서만 가능, BEGIN 섹션에서 새로운 값이 할당될 수 있다.
 - IF문을 사용하여 조건에 따라 문장들을 분기 가능
 - LOOP문을 사용하여 일련의 문장을 반복 가능
 - 커서를 사용하여 여러 행을 검색 및 처리
 - **PL/SQL에서 사용가능한 SQL은 Query,DML,TCL이다.**
     - DDL(CREATE,DROP,ALTER,TURNCATE...),DCL(GRANT,REVOKE)명령어는 동적 SQL을 이용할때만 사용 가능
 - **PL/SQL의 SELECT문은 해당 SELECT의 결과를 PL/SQL Engine으로 보낸다**
+### 스칼라 변수/레퍼런스 변수
+>PL/SQL에서 변수를 선언하기 위해 사용할 수 있는 데이터형은 크게 스칼라와 레퍼런스로 나눌수 있다.
+- **스칼라(Scalar)**
+    - PL/SQL에서 변수를 선언 자료형은 SQL에서 사용하던 자료형과 거의 유사
+    - NUMBER : 숫자를 저장
+    - VARCHAR2 : 문자를 저장
+    ```SQL
+    변수_명 NUMBER(4);
+    변수_명 VARCHAR2(10);
+    ```
+- **레퍼런스(Reference)**
+    - **%TYPE**
+        - 이전에 선언된 다른 변수 또는 데이터베이스 컬럼에 맞추어 변수를 선언하기 위해 %TYPE속성을 사용
+        - 컬럼의 자료형이 변경되더라도 컬럼의 자료형과 크기를 그대로 참조 (수정필요X)
+        - **유지보수에 용이**
+        - **표기형식**
+        ```PL
+        변수_명 테이블.컬럼%TYPE;
+        변수_명 테이블.컬럼%TYPE;
+        ```
+
+    - **%ROWTYPE**
+        - 로우(행) 단위로 참조
+        - DB의 테이블 또는 VIEW의 일련의 컬럼을 **RECORD로 선언하기위해** 사용
+        - 특정 테이블의 컬럼의 개수와 데이터형식을 모르더라도 지정 가능 
+        - SELECT 문장으로 로우를 검색할 때 유리
+        - **표기형식**
+        ```PL
+        변수_명 테이블%ROWTYPE;
+        ```
+        - **레코드(RECORD)**
+            - PL/SQL에서 제공하는 데이터타입 중 하나인 복합형구조
+            - 변수를 선언하면 여러개의 값을 가질 수 있음
+            - 테이블과 달리 레코드가 가질 수 잇는 로우의 수는 단 한개
+            - 커서와 동일한 방식으로 선언(구조적으로 커서도 레코드에 속함)
+### PL/SQL 구조
+ - **선언부**(DECLARE SECTION)
+    - PL/SQL에서 사용하는 모든 변수나 상수를 선언하는 부분으로서 **DECLARE**로 시작
+- **실행부**(EXECUTABLE SECTION)
+    - 절차적 형식으로 SQL문을 실행할 수 있도록 절차적 언어의 요소인 로직을 기술 **BEGIN**으로 시작
+- 예외처리(EXCEPTION SECTION)
+    - PL/SQL 문이 실행되는중 예외사항이 발생했을때 이를 해결하기 위한 문장을 기술
+
+```sql
+-- PL/SQL의 기본 블록 구조 (프로그램 단위 -> block)
+
+DECLARE [선택] --변수와 상수, 프로시저와 함수 서브프로그램, 커서 등을 선언
+    선언문
+    ....
+
+------------------------
+BEGIN [필수] --처리할 명령문들을 절차적으로 기술
+             -- 모든 SQL문, 대입문, 반복 처리문, 조건 판단문, 제어 흐름문, 커서 처리문
+    실행문
+    ....
+------------------------
+EXCEPTION [선택] --오류 처리에 관한 예외처리 명령문을 기술
+
+    예외처리문
+    ....
+------------------------
+END; [필수]
+
+```
+- **DBMS_OUTPUT.PUT_LINE()**
+    - PL/SQL은 기본적으로 처리된 PL/SQL 문장의 결과를 화면에 출력하지 않는다.
+    - 따라서 결과를 화면에 출력하고 싶으면 사전에 **SET SERVEROUTPUT ON;** 작성하자
+        - SET SERVEROUTPUT ON; : 화면 출력기능을 활성화
+- **SET verify OFF**
+    - SQL 명령어나 PL/SQL 에서 &를 이용한 치환 변수 등을 사용할 때 <BR>치환되기 전 후의 자세한 값을 보일 건지의 여부를 결정 (기본값은 ON)
+
+- **작성요령**
+    1. 블록내에서는 한 문장이 종료될때마다 세미콜론(;) 사용
+    2. END 뒤에 ;를 사용하여 하나의 블록이 끝났다는 것을 명시
+    3. 단일행 주석은 --이고 여러행 주석은 /**/이다.
+    4. 쿼리문을 수행하기 위해서 /가 반드시 입력되어야 PL/SQL블록은 행에 /가 있으면 종결된것으로 간주
+### PL/SQL Block의 종류
+1. 익명 블록 : 이름이 없는 PL/SQL Block
+2. 이름 있는 블록 : DB의 객체로 저장되는 블록
+    - 프로시저 : 리턴 값을 하나 이상 가질 수 있는 프로그램
+    - 함수 : 리턴 값을 반드시 반환해야 하는 프로그램
+    - 패키지 : 하나 이상의 프로시저,함수,변수,예외 등의 묶음
+    - 트리거 : 지정된 이벤트가 발생하면 자동으로 실행되는 PL/SQL 블록
+
+### PL/SQL - SELECT문
+> DB에서 정보를 추출할 필요가 있을 때 또는 DB로 변경된 내용을 적용할 때 SQL을 사용
+- PL/SQL은 SQL에 있는 DML 명령을 지원
+- **테이블의 행에서 질의된 값을 변수에 할당**시키기 위해 SELECT문장 사용
+- PL/SQL의 SELECT문은 INTO절 필요
+    - INTO절에는 데이터를 저장할 변수를 기술
+    - SELECT 절에 컬럼과 INTO절에 변수와 1:1 대응하기에 개수,데이터타입 길이가 일치해야함
+- SELECT문은 INTO절에 의해 **하나의 행**만을 저장할 수 있다.
+- **표기형식**
+    ```SQL
+    SELECT 열의 목록(행 함수 | 그룹 함수 | 표현식)
+    INTO 저장할 변수
+    FROM 테이블_명
+    WHERE 조건;
+    ```
+### TABLE(테이블) TYPE
+>PL/SQL 테이블은 오라클 **SQL에서의 테이블과는 다르다**. <BR>**PL/SQL에서의 테이블은 일종의 일차원배열**
+- 테이블은 크기에 제한이없다.
+- BINARY_INTEGER 타입의 인덱스 번호로 순서가 정해짐
+- 하나의 테이블은 한개의 컬럼데이터를 저장
+- **표기형식**
+    ```PL
+    TYPE 테이블타입_명 IS TABLE OF 데이터타입
+    INDEX BY BINARY_INTEGER;
+    IDENTIFIER(변수명) 테이블타입_명;
+    ```
+    - IDENTIFIER: 전체 PL/SQL 테이블을 나타내는 식별자 이름(**변수명**)
+- EX:)
+    ```SQL
+    DECLARE 
+        --테이블 타입을 정의
+        TYPE EMP_TABLE_TYPE IS TABLE OF EMP%ROWTYPE
+            INDEX BY BINARY_INTEGER;
+        --테이블 타입으로 변수 선언
+        EMP_TABLE EMP_TABLE_TYPE;
+        
+        I BINARY_INTEGER := 0;
+        
+    BEGIN
+        -- EMP 테이블에서 사원이름과 직급을 얻어옴
+        FOR K IN (SELECT * FROM EMP) LOOP
+        I := I +1; --인덱스증가
+        EMP_TABLE(I).EMPNO := K.EMPNO;
+        EMP_TABLE(I).ENAME := K.ENAME;
+        EMP_TABLE(I).JOB := K.JOB;
+        EMP_TABLE(I).MGR := K.MGR;
+        EMP_TABLE(I).HIREDATE := K.HIREDATE;
+        EMP_TABLE(I).SAL := K.SAL;
+        EMP_TABLE(I).COMM := K.COMM;
+        EMP_TABLE(I).DEPTNO :=K.DEPTNO;
+        END LOOP;
+
+        --테이블에 저장된 내용을 출력
+        FOR J IN 1..I LOOP
+        DBMS_OUTPUT.PUT_LINE(LPAD(EMP_TABLE(J).EMPNO,6)
+            || '/' || LPAD(EMP_TABLE(J).ENAME,6)
+            || '/' || LPAD(EMP_TABLE(J).JOB,10)
+            || '/' || LPAD(EMP_TABLE(J).MGR,6)
+            || '/' || LPAD(EMP_TABLE(J).HIREDATE,10)
+            || '/' || LPAD(EMP_TABLE(J).SAL,6)
+            || '/' || LPAD(EMP_TABLE(J).COMM,6)
+            || '/' || LPAD(EMP_TABLE(J).DEPTNO,4));
+        END LOOP;
+    END;
+    /
+    ```
+
+### RECORD(레코드) TYPE
+>PL/SQL 레코드는 **여러개의 데이터 타입을 갖는 변수들의 집합**이다.
+- 스칼라, RECORD, 또는 PL/SQL TABLE datatype 중 하나 이상의 요소로 구성됨
+- 논리적 단위로서 필드 집합을 처리 할수 있도록 해준다.
+- 변수 선언시 여러개의 값을 가질수 있다.
+- 테이블과 달리 레코드가 가질 수 있는 로우의 수는 단 한 개뿐이다
+- PL/SQL 테이블과 다르게 개별 필드의 **이름을 부여**할 수 있고 **선언시 초기화** 가능
+- **표기형식**
+    ```PL
+    TYPE 레코드_명 IS RECORD
+    (필드이름1 필드유형1 [NOT NULL {:= | DEFAULT} 식],
+     필드이름2 필드유형2 [NOT NULL {:= | DEFAULT} 식],
+     필드이름3 필드유형3 [NOT NULL {:= | DEFAULT} 식]);
+
+     IDENTIFIER(변수명) 레코드_명;
+     ```
+- EX:)
+    ```SQL
+    DECLARE 
+        --레코드 타입을 지정
+        TYPE EMP_RECORD_TYPE  IS RECORD(
+        V_EMPNO EMP.EMPNO%TYPE,
+        V_ENAME EMP.ENAME%TYPE,
+        V_JOB EMP.JOB%TYPE,
+        V_DEPTNO EMP.DEPTNO%TYPE);
+        --레코드 변수선언
+        EMP_RECORD EMP_RECORD_TYPE;
+    BEGIN
+        -- SCOTT 사원의; 정보를 레코드 변수에 저장
+        SELECT EMPNO,ENAME,JOB,DEPTNO
+            INTO EMP_RECORD
+            FROM EMP
+            WHERE ENAME = UPPER('SCOTT');
+        --레코드 변수에 저장된 사원 정보를 출력
+        DBMS_OUTPUT.PUT_LINE('사원번호 :' || TO_CHAR(EMP_RECORD.V_EMPNO));
+        DBMS_OUTPUT.PUT_LINE('이   름 :' || EMP_RECORD.V_ENAME);
+        DBMS_OUTPUT.PUT_LINE('담당업무 :' || EMP_RECORD.V_JOB);
+        DBMS_OUTPUT.PUT_LINE('부서번호 :' || TO_CHAR(EMP_RECORD.V_DEPTNO));
+    END;
+    /
+
+    ```
+
 
 ### PL/SQL에서 제공하는 명령문
 - 모든 SQL문
@@ -51,31 +245,4 @@
 - 데이터베이스 트리거(Database Trigger)
 - 애플리케이션 로직(Application Logic)
 
-```
-// PL/SQL의 기본 블록 구조 (프로그램 단위 -> block)
 
-DECLARE [선택] //변수와 상수, 프로시저와 함수 서브프로그램, 커서 등을 선언
-    선언문
-    ....
-
-------------------------
-BEGIN [필수] //처리할 명령문들을 절차적으로 기술
-             //- 모든 SQL문, 대입문, 반복 처리문, 조건 판단문, 제어 흐름문, 커서 처리문
-    실행문
-    ....
-------------------------
-EXCEPTION [선택] //오류 처리에 관한 예외처리 명령문을 기술
-
-    예외처리문
-    ....
-------------------------
-END; [필수]
-
-```
-### PL/SQL Block의 종류
-1. 익명 블록 : 이름이 없는 PL/SQL Block
-2. 이름 있는 블록 : DB의 객체로 저장되는 블록
-    - 프로시저 : 리턴 값을 하나 이상 가질 수 있는 프로그램
-    - 함수 : 리턴 값을 반드시 반환해야 하는 프로그램
-    - 패키지 : 하나 이상의 프로시저,함수,변수,예외 등의 묶음
-    - 트리거 : 지정된 이벤트가 발생하면 자동으로 실행되는 PL/SQL 블록
