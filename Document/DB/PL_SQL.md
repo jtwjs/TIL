@@ -35,6 +35,22 @@
 - **PL/SQL에서 사용가능한 SQL은 Query,DML,TCL이다.**
     - DDL(CREATE,DROP,ALTER,TURNCATE...),DCL(GRANT,REVOKE)명령어는 동적 SQL을 이용할때만 사용 가능
 - **PL/SQL의 SELECT문은 해당 SELECT의 결과를 PL/SQL Engine으로 보낸다**
+
+### PL/SQL에서 제공하는 명령문
+- 모든 SQL문
+- 변수 및 상수 등의 선언문
+- 대입문
+- 조건 판단문
+- 제어 흐름문
+- 반복 처리문
+
+### PL/SQL로 작성할수 있는것은?
+- SQL Plus 스크립트(Script)
+- 프로시저(Procedure),함수(Function) 서브프로그램
+- 패키지(Package)
+- 데이터베이스 트리거(Database Trigger)
+- 애플리케이션 로직(Application Logic)
+
 ### 스칼라 변수/레퍼런스 변수
 >PL/SQL에서 변수를 선언하기 위해 사용할 수 있는 데이터형은 크게 스칼라와 레퍼런스로 나눌수 있다.
 - **스칼라(Scalar)**
@@ -228,21 +244,124 @@ END; [필수]
     /
 
     ```
+### 선택문 (IF-THEN-END IF)
+>**IF절 다음에는 비교 대상과 조건을 기술한다**. 조건을 만족할 경우 THEN 이후의 문장이 수행됨
+- PL/SQL 에서는 변수에 값을 할당하기 위해서는 := 를 사용한다.<BR>변수를 선언할 때도 := 연산자를 이용해서 변수에 기본값을 정의할수 있다.
+- **표기형식**
+    ```SQL
+    IF 조건식 THEN --조건문
+    STATEMENTS  -- 조건에 만족할 경우 실행되는 문장
+    END IF;
 
+    -- IF-THEN-ELSE IF-END IF
+    IF 조건식 THEN
+    STATEMENTS
+    ELSIF 조건식 THEN
+    STATEMENTS
+    END IF;
 
-### PL/SQL에서 제공하는 명령문
-- 모든 SQL문
-- 변수 및 상수 등의 선언문
-- 대입문
-- 조건 판단문
-- 제어 흐름문
-- 반복 처리문
+    -- IF-THEN-ELSE-END IF
+    IF 조건식 THEN
+    STATEMENTS
+    ELSE
+    STATEMENTS
+    END IF;
+    ```
+- EX:)
+    ```sql
+    SET SERVEROUTPUT ON;
 
-### PL/SQL로 작성할수 있는것은?
-- SQL Plus 스크립트(Script)
-- 프로시저(Procedure),함수(Function) 서브프로그램
-- 패키지(Package)
-- 데이터베이스 트리거(Database Trigger)
-- 애플리케이션 로직(Application Logic)
+    DECLARE 
+        VEMPNO NUMBER(4);
+        VENAME VARCHAR2(20);
+        VDEPTNO EMP.DEPTNO%TYPE;
+        VDNAME VARCHAR2(20):=NULL;
+    BEGIN
+        SELECT EMPNO,ENAME,DEPTNO 
+        INTO VEMPNO,VENAME,VDEPTNO
+        FROM EMP
+        WHERE EMPNO=7788;
+        
+        IF(VDEPTNO = 10) THEN
+            VDNAME := 'ACCOUNTING';
+        END IF;
+        IF(VDEPTNO = 20) THEN
+            VDNAME := 'RESERACH';
+        END IF;
+        IF(VDEPTNO = 30) THEN
+            VDNAME := 'SALES';
+        END IF;
+        IF(VDEPTNO = 40) THEN
+            VDNAME := 'OPERATIONS';
+        END IF;
+        
+        DBMS_OUTPUT.PUT_LINE('사번    이름  부서명');
+        DBMS_OUTPUT.PUT_LINE(VEMPNO||'  '||VENAME||'    '||VDNAME);
+    END;
+    /
+    ```
 
+### 반복문 (LOOP | WHILE | FOR)
 
+- **BASIC LOOP**문
+    - EXIT를 누락하면 해당 LOOP는 무한루프에 빠지게되니 주의
+    - **표기형식**
+    ```SQL
+    LOOP
+    처리문
+    EXIT[조건식];
+    END LOOP
+    ```
+    - EX:)
+    ```SQL
+    DECLARE 
+    N NUMBER := 1;
+    BEGIN
+        LOOP
+            DBMS_OUTPUT.PUT_LINE( N ); --출력
+            N := N +1;      --N = N + 1
+            EXIT WHEN N >5; --N이 5보다 크면 LOOP 종료
+        END LOOP;
+    END;
+    /
+    ```
+- **WHILE**문
+    - WHILE에 조건식을 쓰므로 EXIT 생략가능
+    - **표기형식**
+    ```SQL
+    WHILE 조건
+    LOOP
+    처리문;
+    END LOOP;
+    ```
+    - EX:)
+    ```SQL
+    DECLARE 
+        NUM1 NUMBER := 1;
+    BEGIN
+        WHILE(NUM<10) -- NUM이 10보다 작을때까지 LOOP발생
+        LOOP
+        DBMS_OUTPUT.PUT_LINE(NUM1); --출력
+        NUM1 := NUM1+1; --NUM = NUM + 1
+        END LOOP;
+    END;
+    /
+    ```
+- **FOR**문
+    - 증가치는 따로 없다. 무조건 1
+    - FOR문의 증감변수는 정수타입이나 레코드타입이 올수 있다.
+    - **표기형식**
+    ```SQL
+    FOR 증감변수 IN [REVERSE] 초기값..최종값 LOOP
+    처리문;
+    END LOOP;
+    ```
+    - EX:)
+    ```SQL
+    BEGIN
+        FOR I IN 1..9 LOOP
+        DBMS_OUTPUT.PUT_LINE('안녕!?'); --출력
+        END LOOP
+    END;
+    / 
+    ```
