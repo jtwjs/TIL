@@ -365,3 +365,106 @@ END; [필수]
     END;
     / 
     ```
+
+### EXCEPTION (예외처리문)
+- 컴파일 에러: PL/SQL 블럭이 파싱(PARSING)될 때 '사용자 오타'등으로 인해 발생하는 에러
+- **런타임 에러:(=Exception)**
+    - PL/SQL블럭이 실행되는 동안 발생하는 에러로 **일반적으로 런타임에러를 "EXCEPTION"이라 부름**
+    - **오라클 예외**
+        - **ACCESS_INTO_NULL** : 정의되지 않은 오브젝트 속성에 값을 할당하고자 했을때 발생하는 예외
+        - **CASE_NOT_FOUND** : CASE문의 WHEN절에 해당하는 조건이 없고, ELSE절도 없을 경우 발생
+        - **COLLECTION_IS_NULL** : 선언되지 않은 컬렉션에 존재하는 메소드
+        - **CURSOR_ALREADY_OPEN** : 이미 열려진 커서를 열려고 시도 했을때 발생
+        - **DUP_VAL_ON_INDEX** : 유일인덱스에 중복값을 입력햇을 때 발생하는 예외 
+        - **INVALID_CURSOR** : 잘못된 커서 조작이 실행될 때 발생되는 예외
+        - **INVALID_NUMBER** : 문자를 숫자로의 변환 시 실패가 될 때 발생하는 예외
+        - **LOGIN_DENIED** :  잘못된 사용자명이나 암호로 로그인시도시 발생하는 예외
+        - **NO_DATA_FOUND** : PL/SQL Select문이 한 건도 리턴하지 못하는 경우 발생하는 예외. 
+        - **NOT_LOGGED ON** : 접속되지 않은 상태에서 데이터베이스에 대한 요청이 PL/SQL 프로그램으로 실행된 경우 발생되는 예외
+        - **PROGRAM_ERROR** : PL/SQL이 내부적인 문제를 가지고 있는 경우 발생되는 예외.
+        - **ROWTYPE_MISMATCH** : 할당문에서 호스트 커서 변수와 PL/SQL 커서 변수의 데이터 형이 불일치할 때 발생되는 예외
+        - **STORAGE_ERROR** : PL/SQL이 실행될 때 메모리가 부족하거나 메모리상에 문제가 일어났을 대 발생하는 예외.
+        - **SUBSCRIPT_BEYOND_COUNT** : 컬렉션의 요소 갯수보다 더 큰 첨자 값으로 참조한 경우 발생
+        - **SUBSCRIPT_OUTSIDE_LIMIT** : 컬렉션의 첨자 한계를 벗어난 참조가 일어났을 때 발생
+        - **SYS_INVALID_ROWD** : 문자열을 ROWID로 변환할 때 무효한 문자열의 표현일 경우 발생되는 예외.
+        - **TIMEOUT_ON_RESOURCE** : 자원에 대한 대기시간이 초과했을 때 발생하는 예외.
+        - **TOO_MANY_ROWS** : PL/SQL select문이 두건이상의 행을 리턴햇을 때 발생되는 예외.
+        - **VALUE_ERROR** : 산술,변환,절삭 크기 제약에 에러가 생겼을 때 발생되는 예외.
+        - **ZERO_DIVIDE** : 0으로 나누려 했을 때 발생하는 예외.
+    - **사용자 정의 예외**
+    - **표기형식**
+    ```SQL
+    DECLARE --(선언부에서)
+    예외_명 EXCEPTION;
+    -- BEGIN 부나 EXCEPTION부에서 RISE 문을 이용하여 예외를 발생시킨다.
+
+    --EXCEPTION부 형식 (예외 발생시 어떻게 처리할 것인지 예외처리 내용이 어감)
+    Exception
+        when 예외명1 then
+            실행문1
+        when 예외명2 then
+            실행문2
+        ...
+        when Other then
+        실행문 n
+    ```
+
+- **RAISE_APPLICATION_ERROR(사용자 에러코드 함수)** 
+    - 프로시저를 사용하여 사용자가 특정 상황에 발생한 에러를 정의하고 에러 처리부를 사용하지 않고<BR> 실행부에서 즉시 예외처리를 하는방식 사용자가 임의로 지정 가능한 에러번호는 20000 ~20999 번 까지 사용가능
+    - **표기형식**
+        ```SQL
+        RAISE_APPLCATION_ERROR([에러코드],[에러메시지])
+       -- 에러코드: -20000 ~ -20999 사이의 코드
+        ```
+    - EX:)
+        ```SQL
+        CREATE OR REPLACE PROCEDURE exception_ex04
+        (vempno number)
+        IS 
+            no_empno EXCEPTION ;
+        BEGIN
+            DELETE FROM EMP01 WHERE empno = vempno;
+            IF SQL%NOTFOUND THEN
+                RAISE_APPLICATION_ERROR(-20001, '존재하지 않는 사원번호');
+            END IF;
+            DBMS_OUTPUT.PUT_LINE('사원번호 '||vempno||'사원 삭제 성공');
+        END;
+        /
+        ```
+- **SQLCODE / SQLERRM**
+>SQLCODE,SQLERRM 구문을 사용해서 WHEN OTHERS문으로 트랩(Trap)되는 오류들의 실제 오류코드와 설명을 볼수 있다.
+- **SQLCODE**
+    - 실행된 프로그램이 성공적으로 종료했을때는 오류번호 0을 포함하며<BR>그렇지 못할 경우 해당 오류코드 번호를 포함한다
+- **SQLERRM** 
+    - SQLCODE에 포함된 오라클 오류 번호에 해당하는 메시지를 가진다.
+
+    |SQLCODE Value|설명|
+    |:-----:|:---------|
+    |0|오류 없이 성공적으로 종료|
+    |1|사용자 정의 예외 번호|
+    |+100|NO_DATA_FOUND 예외 번호|
+    |음수|위에 것을 제외한 오라클 서버 에러 번호|
+
+    ```sql
+    CREATE OR REPLACE PROCEDURE exception_ex05
+    (vempno number)
+    IS
+        v_ename emp.ename%type;
+        v_code NUMBER;
+        v_errm VARCHAR2(100);
+    BEGIN
+        SELECT ename INTO v_ename
+        FROM emp
+        WHERE empno = vempno ;
+        DBMS_OUTPUT.PUT_LINE('사원번호' || vempno || '의 이름은' ||v_ename||'입니다.');
+        
+    EXCEPTION 
+        -- 어느예외에도 속하지 않는 기타 예외를 뜻하며 가장 마지막에 기술
+        -- when 에만 사용한다. 
+        WHEN OTHERS THEN
+            v_code := SQLCODE;
+            v_errm := SUBSTR(SQLERRM,1,100);
+            DBMS_OUTPUT.PUT_LINE('에러코드(Error Code) : '||v_code||'-'||v_errm); --에러코드 확인
+    END;
+    /
+    ```
