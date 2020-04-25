@@ -62,7 +62,7 @@
         - 변수에 값을 치환할 때는 예약어 SET을 사용
     - EX:)
     ```sql
-    CREATE OR REPLACE PROCEDURE emp_change_s(IN i_사원번호 integer)
+    CREATE OR REPLACE PROCEDURE emp_change_s(i_사원번호 In number)
     BEGIN
         UPDATE 급여
         SET 지급방식 = 'S'
