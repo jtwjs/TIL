@@ -85,10 +85,96 @@ font-family: "Poppins", "Roboto", sans-serif;
         - 알파 값은 색의 투명도,즉 배경색과 혼합되는 정도를 의미
         - 0(완전투명) ~ 1(불투명) 사이의 값을 가짐
         - rgba(0,102,255,1)
+---
+### text-align (글자 정렬)
+>글자 정렬 
+- ```text-align : left | center | right ```
 
- ---
+### text-indent (글자 들여쓰기)
+>글자 들여쓰기
+- ``` text-indent : px ```
 
+### text-transform (텍스트 변형)
+- none
+    - 기본상태
+- capitalize
+    - 앞 알파벳은 대문자가됨
+- uppercase
+    - 모든 문자가 대문자
+- lowercase
+    - 모든 문자가 소문자
+
+### text-decoration (텍스트 꾸미기)
+- none
+    - 텍스트 기본값
+- underline
+    - 밑줄 생성
+- line-through
+    - 취소선 생성
+- overline
+    - 텍스트 위에 줄 생성
+### font-style
+> 문자에 기울기를 주고싶을 때!
+- normal
+    - 기본값
+- italic
+    - 문자 기울임
+- oblique
+    - 문자 기울임2
+---
+### Webfont
+- **웹폰트를 쓰는방법**
+- 갖다 쓴다
+    - [무료 웹폰트 사이트](fonts.google.com)
+    1. [HTML] head 태그에 'Embed font' link 태그 추가하기
+        - EX:)
+         ``` HTML
+        <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
+        ```
+    2. [CSS] 원하는 태그에 font-family로 아래와 같이 추가 <br> Body 태그에 추가하면 전체에 적용됨 
+        - EX:)
+        ```CSS      
+        font-family: 'Libre Baskerville', serif;
+        ```
+
+- 직접 제공한다
+    1. 원하는 Font를 다운 받는다.
+    2. Project 파일에 'assets'폴더 추가 
+    3. Font 디렉토리 생성 후 폰트 파일들을 붙여놓기
+    4. CSS 작성(fonts.css 파일 만들기)
+    ```CSS
+    @font-face{
+        font-family: '폰트명'; /*폰트명을 원하는 이름으로 짓는다.*/
+        font-style: normal | italic /*폰트파일에 맞는 스타일로*/
+        font-weight: /*폰트 굵기 설정 300:PLAIN, 700:BOLD */
+        src: url('webfont.eot'); /* IE9 Compat Modes */
+        src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
+             url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
+             url('webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+            /*url(웹폰트_경로.확장자) */
+             /*내가 갖고있는 폰트의 해당하는 부분만 수정해서 쓰자*/
+    } 
+    ```
+    5. fonts.css파일 연동시키기
+        - [HTML] head 태그에 link 태그 추가하는방법
+        ```HTML
+        <link rel="stylesheet" href="./fonts.css"> //fonts.css파일에 상대적인 경로 적기
+        ```
+        - [CSS] 직접 CSS파일에 추가하는 방법
+        ```CSS
+        @import url("./fonts.css");/*fonts.css파일에 상대적인 경로*/
+        ```
+    6. 원하는 태그에 font-family로 아래와 같이 추가 <br> Body 태그에 추가하면 전체에 적용됨 
+        - EX:)
+        ```CSS      
+        font-family: '지정한 웹폰트명', serif;
+        ```
+---
 - Tip
     1. line-height를 사용했을 때에는 글자는 그  줄간격에 가장 가운데에 배치된다.
         - 수직으로 무언가 정렬할 때 line-height를 자주사용한다.
-
+    2. lorem[글자수] (HTML)
+        - 글자수 만큼 더미 텍스트를 생성해준다.
+    
