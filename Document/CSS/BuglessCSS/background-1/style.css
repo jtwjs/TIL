@@ -1,0 +1,81 @@
+.like-button {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ▼ WHERE YOUR CODE BEGINS */
+*{box-sizing:border-box;
+  margin:0;
+}
+body{
+  background-color:black;
+}
+.card{
+  display:flex;
+  width:840px;
+  height:248px;
+  background-color:white;
+ padding:24px;
+  justify-content:center;
+ 
+}
+.card-image{
+  
+  position:relative;
+  width:300px;
+  height:200px;
+  background-image:url(./assets/img-house.jpg);
+  background-size:111% 100%;
+  border-radius:6px;
+  background-repeat:no-repeat;
+  margin-right:24px;
+  
+}
+.like-button{
+  position:absolute;
+  left:12px;
+  top:12px;
+  background-image:url(./assets/icon-favorite.svg);
+  width:36px;
+  height:36px;
+  border-radius:100px;
+  background-repeat:no-repeat;
+  background-size: cover;
+  
+}
+.property-type{
+  color: #7D858F;
+}
+.plus-badge{
+  background-color:#92174D;
+  border-radius:4px;
+  color:white;
+  width:48px;
+  height:22px;
+}
+.card-header{
+  display:flex;
+  justify-content: space-between;
+  height:32px;
+  align-items:flex-end;
+  margin-bottom:9px;
+}
+.icon-star{
+  background-image:url(./assets/icon-star.svg);
+  background-repeat:no-repeat;
+  width:13px;
+  height:13px;
+  background-size:cover;
+  position:relative;
+  top:17px;
+  left:-18px;
+}
+.card-title{
+  font-size:20px;
+  color:#151B26;
+  line-height:1.6;
+  margin-bottom:16px;
+}
+dd{
+  color:#7D858F;
+  margin-bottom:8px;
+}

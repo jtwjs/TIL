@@ -177,8 +177,8 @@ font-family: "Poppins", "Roboto", sans-serif;
         - 수직으로 무언가 정렬할 때 line-height를 자주사용한다.
     2. lorem[글자수] (HTML)
         - 글자수 만큼 더미 텍스트를 생성해준다.
-    3. 웹페이지가 로드될 때 이왕이면 폰트와 관련된것들은 더 빨리 로딩되면 좋으니 제일먼저 적어주자<br> (센스있게..)
-        -EX
+    3. 웹페이지가 로드될 때 이왕이면 폰트와 관련된것들은 더 빨리 로딩되면 좋으니 제일먼저 적어주자(센스있게..)
+        - EX:)
         ```CSS
         /* css 파일 링크 태그 위에 적어주자*/
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -186,8 +186,24 @@ font-family: "Poppins", "Roboto", sans-serif;
         ```
     4. libray 만들때 tip 
         - 항상 이름을 일관적으로 정해주자
-        - ex:) font와 관련된 라이브러리 작성 -> .fs-
+        - ex:) font와 관련된 라이브러리 작성 
+         ```CSS
+         /*Font Size*/
+         .fs-large
+         .fs-medium
+         /*Font Weight*/
+         .fw-medium
+         .fw-bold
+         /*Font Colors*/
+         .text-dark
+         .text-info
+         .text-error
+         ```
+
     5. line-height 작성은 px보단 em형식으로~!! (단 em표기는 생략)
-        - ex:) font-size : 12px, line-height: 16px일 때 16을 12로 나눈 값을 적용
-        - line-height : 1.3333;
+        ```CSS
+         /*ex:) font-size : 12px, line-height: 16px일 때 16을 12로 나눈 값을 적용*/
+         font-size: 12px;
+         line-height: 1.3333; /*16px*/
+        ```
     6. emmet을 배워서 써먹자
