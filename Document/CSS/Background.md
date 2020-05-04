@@ -116,3 +116,32 @@ dd{
     1. 이미지태그보다는 background-image CSS를 사용하자 
     2. 가상요소를 활용하자
     3. overflow:hidden, background-position:center center; 애용하자
+    4. dl태그 (definition list) : 용어를 정리할때 사용하는 태그
+      - 반드시 그안에 dt(정의하고자 하는 용어), dd(설명) 태그가 있어야함 
+      ```HTML
+      <dt>Rooms and beds</dt>
+      <dd>
+          <span>설명1</span>
+          <span>설명2</span>
+          <span>설명3</span>
+          <span>설명4</span>
+      </dd>
+      ```
+    5. sr-only(screen-only)라는 범용 클래스(부트스트랩에서 제공하는 유틸리티클래스)
+      - 시맨틱하게 마크업하기 위해..
+      ```HTML
+      <dt class="sr-only">Rooms and beds</dt>
+      ```
+      - 화면에 안보이게하는 방법 
+      ``` CSS
+      .sr-only{
+      /*display: none; */ <- 스크린리더도 인식을 못함 
+      position: absolute  
+      z-index: -100;
+      width: 1px;
+       height: 1px; 
+       overflow:hidden; 
+       opacity:0; }
+      ```
+    6. cursor :pointer;  누르는 타격감 생기게함
+      
