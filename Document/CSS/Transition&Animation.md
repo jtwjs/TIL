@@ -45,4 +45,171 @@ trainsition : property(CSS속성)  duration(지속시간)  [timing-function](변
 ---
 ## Animation
 > 각각의 property를 쪼개서 사용하자! 
+- transition 보다 할 수 있는것이 많음
+- trainsition은 시작하기 위해 이벤트가 필요하지만<br> animation은 시작,정지,반복까지 제어할수 있음
+- 하나 또는 복수의 @keyframes으로 이루어짐
 ### name (@keyframes) 
+- @keyframes 키워드는 애니메이션을 정의하는 키워드라고 할수있음
+    ```CSS
+    @keyframes name {
+        from{
+
+        }
+
+        to{
+
+        }
+    }
+    ```
+- 동작 제어
+    - from/to
+    - a%/b%/c%
+### animation-name(애니메이션 적용)
+- 적용할 애니메이션 이름을 지정
+
+### animation-duration(애닌메이션 지속시간)
+- 애니메이션의 지속시간 (ms/s)
+
+### animation-timing-function(애니메이션 변화속도)
+- 트랜지션과 동일
+
+### animation-delay(애니메이션 지연시간)
+- 애니메이션 지연시간(ms/s)
+
+### animation-iteration-count(반복횟수)
+- 횟수 지정(정수)
+- infinite(무한반복)
+### animation-direction(애니메이션 진행방향)
+- alternate( ↔ 번갈아 가면서 동작)
+
+
+### Transition-1
+```CSS
+/* ▼ WHERE YOUR CODE BEGINS */
+*{
+    box-sizing:border-box;
+    margin:0;
+}
+body{
+    font-family: 'Lato', sans-serif;
+    background-color:#E5E5E5;
+}
+input,button,textarea{
+    font-family: 'Lato', sans-serif;
+}
+.line-button{
+    position:relative;
+    width:110px;
+    height:56px;
+    padding:18px 30px;
+    line-height:1.25;
+    color:#151B26;
+    background-color:#FFFFFF;
+    border:none;   
+}
+.line-button::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0;
+    height:2px;
+    background-color:#0066ff;
+    transition:width 250ms ease-in;
+}
+.line-button:hover::after{
+    width:100%;
+}
+
+```
+
+### Animation-1
+```CSS
+/* ▼ WHERE YOUR CODE BEGINS */
+*{
+    box-sizing:border-box;
+    margin:0;
+}
+body{
+    font-family: 'Muli', sans-serif;
+    background:#E5E5E5;
+}
+.loading{
+    width:500px;
+    height:216px;
+    background:#fff;
+}
+.loading-title{
+    position:absolute;
+    left:210px;
+    top:80px;
+    width:80px;
+    height:24px;
+    font-size:18px;
+    line-height:1.333333333333333‬;
+    color: #151B26;
+    border-radius:100px;
+    animation-name:ani-title;
+    animation-duration:2s;
+    animation-timing-function:ease;
+    animation-iteration-count:infinite;
+    animation-direction:alternate-reverse;
+}
+.progress-bar{
+    position:absolute;
+    left:100px;
+    top:124px;
+    width:300px;
+    height:12px;
+    background: #E5EAEF;
+    border-radius:100px;
+}
+.progress-bar-gauge{
+    position:absolute;
+    left:0;
+    top:0;
+    width:0;
+    height:12px;
+    background:#13CE66;
+    animation-name:ani-bar;
+    animation-duration:5s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+@keyframes ani-title{
+    from{
+        opacity:1;    
+    }
+
+    to{
+        opacity:0;
+    }
+}
+
+@keyframes ani-bar{
+ from{
+     width:0;
+ }   
+ to{
+     width:100%;
+ }
+}
+```
+---
+- Tip
+    1. MDN을 활용하자
+        - CSS의 정보를 검색할때 사용하자
+    2. button, inpput, textarea 같은 from 요소들은 body에 폰트를 적용해도 적용 X 
+        - 따로 선언해주자
+        ```CSS
+        button,input,textarea{
+            font-family:;
+        }
+        ```
+    3. 버튼의 구리구리한 기본옵션들을 해제!
+        ```CSS
+        boder:none;
+        background:white;
+        ```
+    4. 작은 button 들의 interaction은 **250ms**를 자주쓴다.
+    

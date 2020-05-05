@@ -1,0 +1,69 @@
+/* ▼ WHERE YOUR CODE BEGINS */
+*{
+    box-sizing:border-box;
+    margin:0;
+}
+body{
+    font-family: 'Muli', sans-serif;
+    background:#E5E5E5;
+}
+.loading{
+    width:500px;
+    height:216px;
+    background:#fff;
+}
+.loading-title{
+    position:absolute;
+    left:210px;
+    top:80px;
+    width:80px;
+    height:24px;
+    font-size:18px;
+    line-height:1.333333333333333‬;
+    color: #151B26;
+    animation-name:ani-title;
+    animation-duration:2s;
+    animation-timing-function:ease;
+    animation-iteration-count:infinite;
+    animation-direction:alternate-reverse;
+}
+.progress-bar{
+    position:absolute;
+    left:100px;
+    top:124px;
+    width:300px;
+    height:12px;
+    background: #E5EAEF;
+    border-radius:100px;
+}
+.progress-bar-gauge{
+    position:absolute;
+    left:0;
+    top:0;
+    width:0;
+    height:12px;
+    background:#13CE66;
+    border-radius:100px;
+    animation-name:ani-bar;
+    animation-duration:5s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+@keyframes ani-title{
+    from{
+        opacity:1;    
+    }
+
+    to{
+        opacity:0;
+    }
+}
+
+@keyframes ani-bar{
+ from{
+     width:0;
+ }   
+ to{
+     width:100%;
+ }
+}
