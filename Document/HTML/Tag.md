@@ -12,7 +12,8 @@
 - ```<strong> </strong>```
 ### Anchor(링크) 태그
 - ```<a>  </a>```
-- 반드시 명시해야할 속성
+- **Syntax Alert 문법주의**
+    - href 속성 반드시 작성
     - **href(hypertext reference): 주소값**
     - ``` <a href="주소"> </a> ```
 - ```target="_blank" ```
@@ -28,11 +29,63 @@
     - ```<a href="tel:전화번호"> </a>```
 ### Image(이미지) 태그
 - ```<img src="#" alt="" /> ```
-- 반드시 명시해야할 속성
+- **Syntax Alert 문법주의**
+    - src, alt 속성을 반드시 작성
     - **src** (**s**ou**rc**e) 
         - 이미지 파일의 상대 경로
         - 이미지의 주소값
     - **alt** (**al**ternative **t**ext 대체 텍스트) 
         - 이미지가 안뜰경우 어떤이미지인지 명시해줄 Text
         - 시각 장애인들을 위한 screen reader(스크린 리더)에서 이미지 대신 읽어줄 Text
-### <br/; break> 태그
+### List(목록) 태그
+- **ul**(**u**noredered **l**ist)
+    - ```<ul> </ul>```
+- **ol**(**o**rderd **l**ist)
+    - ```<ol> </ol>```
+- **li**(**l**ist **i**tem)
+    - ```<li> </li>```
+- **Syntax Alert 문법주의**
+    - ul과 ol의 자식요소는 무조건 **li만 가능**
+### Description List(정의 목록)
+
+- **dl**(**d**escription **l**ist)
+    - ```<dl> </dl> ```
+    - 정의 목록 리스트를 만들겠다 선언
+- **dt**(**d**escription **t**erm)
+    - ```<dt> </dt> ```
+    - key(용어)값에 해당
+- **dd**(**d**escription **d**ata)
+    - ```<dd> </dd> ```
+    - key(용어)값에 대한 설명
+- **dfn**(**d**e**f**i**n**ition) 
+    - ```<dfn> </dfn> ```
+    - key(용어)의 정의를 나타낼때 사용 
+- **Syntax Alert 문법주의**
+    - dl 태그에는 반드시 dt, dd 태그가 함께 따라와야한다.
+    - dl의 직계 자식 태그로 쓸수있는 태그 (div, dt, dd)
+    - dt와 dd는 단독적으로 dl태그 없이 사용할수 없다.
+- 사용 용도
+1. 용어를 **정의**할때 
+2. **key-value**로 정보를 제공할 때
+    - ```{key:value} ```
+### Quotations(인용) 태그
+- blockquote (문단이나 내용전체가 인용문일때 사용)
+    - ```<blockquote> 인용내용 </blcokquote> ```
+    - cite (attribute)
+        - ``` <blockquote cite="https://..."> ```
+        - 출처의 URL을 적음
+- q(quote 문장내의 살짝 들어간 인용문)
+    - ```<q> </q> ```
+    - 따옴표("") 생성효과 발생
+- cite (인용문의 출처가 Text로 되어있을때 사용)
+    - ```<cite> </cite> ```
+### div, span 태그
+> 아무런 의미가 없는 태그
+- CSS스타일링 할때 요소를 묶을때 유용함
+- div(division; 다양하게 아무때나 사용가능)
+    -```<div> </div>```
+- span(Text level)
+    - ```<span> </span> ```
+    - Text의 일부분을 그룹핑하고싶을때 사용
+
+### <br/; line break> 태그

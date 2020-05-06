@@ -81,7 +81,7 @@ trainsition : property(CSS속성)  duration(지속시간)  [timing-function](변
 - infinite(무한반복)
 ### animation-direction(애니메이션 진행방향)
 - alternate( ↔ 번갈아 가면서 동작)
-
+- alternate-reverse
 
 ### Transition-1
 ```CSS

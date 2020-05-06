@@ -1,0 +1,132 @@
+@charset "EUC-KR";
+
+*{
+	box-sizing: border-box;
+	margin:0 auto;
+	}
+	
+body{
+	font-family: 'Nanum Gothic Coding', monospace;
+	font-size:12px;
+}
+
+table{
+    border-collapse:collapse;
+    width:100%;
+}
+th,td{
+    height:18px;
+    
+}
+.border-top-none{
+    border-top:none;
+}
+.border-bottom-none{
+    border-bottom:none;
+}
+.border-left-none{
+    border-left:none;
+}
+.border-right-none{
+    border-right:none;
+}
+.back-blue{
+    background:#0066ff;
+}
+.right-align{
+    text-align:right;
+}
+.center-align{
+    text-align:center;
+}
+.left-algin{
+    text-align:left;
+}
+.matter-tab{
+    width:25px;
+}
+
+
+.resume{
+    width:600px;
+    height:100vh;
+    padding:100px 50px;
+}
+.title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    margin-bottom:20px;
+    
+}
+.title h1{
+    text-align:center;
+    letter-spacing: 25px;
+}
+.title-division{
+    margin:0;
+    font-size:10px;
+}
+
+.basic-tb{
+    height:100px;
+    margin-bottom:10px;
+    text-align:center;
+    border:2px solid black;
+}
+.basic-th{
+    width:53px;
+}
+.basic-empty{
+    width:120px;
+}
+.basic-photo{
+    width:110px;
+    background-image:url(./assets/위풍당당황제펭귄.png);
+    background-size:cover;
+    background-repeat:no-repeat;
+    text-indent:-100000px;
+}
+
+.main-info{
+    height:78%;
+    
+    border:2px solid black;
+    
+}
+
+
+.main-tab2:first-child{
+    
+    border-top:none;
+}
+.main-tab3:first-child{
+    height:40px;
+    border-top:none;
+}
+.tab3-empty{
+    width:90px;
+}
+
+
+
+
+.bottom{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    padding:15px;
+}
+.bottom p{
+    margin-bottom:10px;
+}
+
+.bottom-sub2 p{
+    letter-spacing: 10px;
+}
+.bottom-sub3{
+    position:absolute;
+    right:5px;
+    bottom:0;
+}
