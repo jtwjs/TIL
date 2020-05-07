@@ -284,7 +284,11 @@ dd{
       width: 1px;
        height: 1px; 
        overflow:hidden; 
-       opacity:0; }
+       opacity:0; 
+       
+       또는 visibilty:hidden;<-고급진방법
+       }
+
       ```
     6. cursor :pointer;  누르는 타격감 생기게함
       

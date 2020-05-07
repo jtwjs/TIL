@@ -9,7 +9,6 @@
     - API 주소 : form을 처리할 로직이 있는 URL
     - 사용자가 입력한 데이터를 전송할 서버의 URL
     - Back-End 개발자가 form을 처리하는 로직을 담은 서버쪽 코드에 접근할수있는 경로를 넣는다
-    - 없을때는 임시방편으로 #을 넣어주자
 - method="GET | POST"
     - 사용자가 입력한 데이터를 **전송하는 방법**으로 GET, POST가 있다.
     - GET : 사용자의 입력 데이터를 url에 표시하며, 데이터 크기에 제한이있고 쿼리형식
@@ -131,3 +130,13 @@
         - ```<option value="" > </option>```
         - 서로를 구분할수 있게 value값 주자..
         
+### TextArea
+>여러줄에 걸쳐 많은양의 Text를 받을때 사용
+- ```<textarea></textarea> ```
+### Buttons
+- ```<button> </button>```
+- **Syntax Alert 문법주의**
+    - **type=""**(attribute) 반드시 명시
+        - ```type="button"```(일반버튼)
+        - ```type="submit"```(Form제출)
+        - ```type="reset"```(초기화)

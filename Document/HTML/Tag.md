@@ -83,7 +83,7 @@
 > 아무런 의미가 없는 태그
 - CSS스타일링 할때 요소를 묶을때 유용함
 - div(division; 다양하게 아무때나 사용가능)
-    -```<div> </div>```
+    - ```<div> </div>```
 - span(Text level)
     - ```<span> </span> ```
     - Text의 일부분을 그룹핑하고싶을때 사용

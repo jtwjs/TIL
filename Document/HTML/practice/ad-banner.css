@@ -1,0 +1,56 @@
+*{
+    box-sizing:border-box;
+    margin: 0;
+}
+body{
+    background-color:#1f2d3d;
+}
+.banner{
+    position:fixed;
+    top:30%;
+    left:40%;
+    display:flex;
+    flex-direction:column;
+    width:350px;
+    height:300px;
+    padding:40px;
+    background-color:#FFF;
+    border-radius:10px;
+}
+.banner_content{
+    margin-bottom:20px;
+    font-size:20px;
+    line-height: 1.4;
+    font-weight:600;
+    color:#474747;
+}
+
+.banner_price{
+    font-size:12px;
+    line-height:1.6;
+    font-weight:500;
+    color:#797979;
+    margin-bottom:20px;
+}
+.banner_button{
+    
+}
+.banner_button a{
+display:block;
+height:58px;
+padding:15px;
+font-size:18px;
+color:#fff;
+text-decoration:none;
+text-align:center;
+background-color:#03D3D3;
+border-radius:10px;
+
+}
+.water-mark{
+    position:fixed;
+    top:68%;
+    left:48%;
+    font-size:12px;
+    color:#fff;
+}
