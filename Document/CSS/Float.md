@@ -32,7 +32,7 @@ Block 요소들을 가로배치 하기위해 쓰인다.
         - HTML에는 존재하지 않는 **가상 요소**
         - 순전히 CSS로 처리하는 기법 
         - 각 요소당 2개씩 만들수 있다. (::before, ::after)
-        - **conent**: 반드시 적어야하는 property
+        - **content**: 반드시 적어야하는 property
 
 
 ---
