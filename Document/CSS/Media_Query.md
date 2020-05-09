@@ -298,3 +298,4 @@
       ```CSS 
       <meta name="viewport" content="width=device-width" />
       ```
+    7. 모바일 시안과 데스크탑 시안의 중단점 Breakpoint는 768px로~~
