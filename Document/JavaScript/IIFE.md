@@ -72,7 +72,7 @@ console.log(textList);//전역에 textList가 저장되지 않음
 ## 4.라이브러리 전역 변수의 충돌
 >JQuery나 Prototype 라이브러리는 동일한 $라는 전역 변수를 사용한다.<br>만약, 이두개의 라이브러리를 같이 사용한다면 $변수 충돌이 생김<br>**즉시 실행 함수를 사용하여 $전역 변수의 충돌을 피할 수 있다.**
 ```javascript 
-(funcyion ($){
+(function ($){
     //$는 jQuery object
 })(jQuery);
 ```

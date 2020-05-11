@@ -49,8 +49,8 @@ nums.push(5); // 스택형식으로 쌓음(LIFO)
 nums.push(10);
 nums.push(21);
 var n1 = nums.pop(); //최근에 들어온 데이터순으로 방출
-var n2 = nums/pop(); //방출된 데이터를 변수에 저장
-var n3 = nums/pop(); //값을 꺼내면 사라짐
+var n2 = nums.pop(); //방출된 데이터를 변수에 저장
+var n3 = nums.pop(); //값을 꺼내면 사라짐
 ```
 - push/pop 메소드를 이용한 데이터 관리 : List
 
@@ -131,6 +131,36 @@ exam.math = 80;
 ## 연산자
 ## 제어구조
 ## 함수
+- 함수 정의(또는 함수 선언)는 다음과 같은 함수 키워드로 구성되어 있다.
+    - 함수의 이름
+    - 괄호 안에서 쉼표로 분리된 함수의 매개변수 목록
+    - 중괄호 { } 안에서 함수를 정의하는 자바스크립트 표현
+
+- ex:)
+    ```js
+    function squre(number) {
+        return number * number;
+    }
+    //함수 squre은 number라는 하나의 매개변수를 가진다.
+    // return문은 함수에 의해 반환된 값을 지정한다.
+    ```
+### 함수 표현식
+>함수 표현식(function experssion)에 의해서 함수가 만들어 질수 있다.<br> = 익명함수(모든함수가 이름을 가질 필요가없다.)
+    ```js
+    const squre = function(number) { return number * number};
+    let x = suqre(4);
+    ```
+- 함수 표현식에서 함수의 이름을 지정가능
+- 함수 내에서 자신을 참조하는데 사용되거나, 디버거 내 스택 추적에서 함수를 식별하는데 사용될수 있다.
+
+    ```js
+    let factorial = function fac(n) { return n<2 ? 1 :n*fac(n-1) };
+
+    console.log(factorial(3));
+     ```
+
+
+
 ## Document Object
 ## Browser Object
 ## OOP
