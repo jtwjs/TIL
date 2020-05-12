@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script> 
+        $(document).readey(function () {
+            // 문서 객체를 추가한다.
+            let output = '';
+            for ( let i = 0; i< 256; i++){
+                output += '<div></div>';
+            }
+            document.body.innerHTML = output;
+
+            //스타일을 적용한다.
+            $('div').css({
+                height: 2,
+                backgroundColor: function (i) {// div갯수만큼 반복 호출함
+                    return 'rgb('+i+','+i+','+i+')';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

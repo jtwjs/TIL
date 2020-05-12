@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <!-- onblur -> 포커스를 잃어버렷을때 Event 발생 -->
+    <!-- String 객체 예제 -->
+    <form name="form1">
+        string객체 예제<br />
+        ID를 입력후 다음 양식으로 커서를 옮기면 입력한 ID를 대문자로 변경합니다.
+         <br /><br />
+                  
+
+        <!-- ID : <input type="text" name="id" onblur="trans();" /> <br /><br /> -->
+
+        <!-- ID : <input type="text" name="id" onblur="trans(this.form);" /> <br /><br /> -->
+        ID : <input type="text" name="id" onblur="trans(this);" /> <br /><br />
+        Email : <input type="text" name="email" />
+    </form>
+    <hr>
+
+    <form name="form2">
+        string객체 예제 <br />
+        Email을 체크합니다.<br /><br />
+        Email : <input type="text" name="email" onblur="check2();" />
+            <br /><br />
+        ID : <input type="text" name="id" />
+    </form>
+
+    <hr>
+
+    <!-- Radio 객체 예제 -->
+    <form name="form3">
+            radio객체 예제2<br />
+            주민등록번호 : <input type="text" name="jumin1" /> - <input type="text" name="jumin2" onblur="check3(this);" />
+                <br />
+            남자<input type="radio" name="sex" value="남자" /> &nbsp;&nbsp;
+            여자<input type="radio" name="sex" value="여자" /> &nbsp;&nbsp;
+    </form>
+
+    <hr>
+
+    <!-- onsubmit -> submit버튼 누를시 이벤트발생-->
+    <!-- Form 객체 예제 -->
+    <form name="form4" action="submit2.html" onsubmit="return check4();">
+        Form 객체 예제<br />
+        submit을 확인하면 sumbit2.html로 이동한다.. <br /><br />
+        <input type="submit" value="확인" />
+    </form>
+
+    <hr>
+    
+    <form name="fomr5" action="submit2.html">
+        Form 객체 예제<br />
+        submit을 확인하면 sumbit2.html로 이동한다.. <br /><br />
+        <input type="button" onclick="check5();" value="확인" />
+    </form>
+
+    <hr>
+
+    <form name="form6">
+        Password : <input type="password" name="pw" /> Password확인 : 
+        <input type="password" name="pw1" onblur="check6();" /> <br />
+        <input type="button" value="확인" />
+    </form>
+
+    <hr>
+
+    <!-- onChange  -> 내용 변경-->
+    <!-- Select 객체 예제 -->
+    <form name="form7">
+        Select 객체 예제<br />
+        과일 선택이 변경되면 선택된 과일을 경고창에 출력한다. <br /> <br />
+        과일 <select name="fruit" onchange="select();">
+                <option value="">과일을 선택하세유</option>    
+                <option value="사과">사과</option>    
+                <option value="딸기">딸기</option>    
+                <option value="복숭아">복숭아</option>    
+        </select>
+    </form>
+
+    <hr>
+
+    <form name="form8">
+        select객체 예제<br />
+        지역을 선택하세요.<br /><br />
+        시.도 <select name="city" onchange="select_city(this.form);">
+            <option> 지역을 선택하세요</option>
+            <option> 서울</option>
+            <option> 경기</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;
+        시.구 <select name="gu">
+                <option>선택하세요</option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+        </select>
+    </form>
+
+    <hr>
+
+    <!-- CheckBox 객체 예제 -->
+    <form name="form9">
+        checkbox객체 예제<br />
+        스포츠 <input type="checkbox" name="hobby" value="스포츠" /> &nbsp; &nbsp;
+        음악 <input type="checkbox" name="hobby" value="음악" />&nbsp;&nbsp;
+        독서 <input type="checkbox" name="hobby" value="독서" />&nbsp;&nbsp;
+        게임 <input type="checkbox" name="hobby" value="게임" />&nbsp;&nbsp;
+        여행 <input type="checkbox" name="hobby" value="여행" />&nbsp;&nbsp;
+        <input type="button" value="확인" onclick=check9(this.form); />
+    </form>
+
+    <script type="text/javascript" src="Form_stringObject.js"></script>
+</body>
+</html>

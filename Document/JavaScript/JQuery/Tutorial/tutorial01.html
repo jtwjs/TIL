@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script>
+        //이벤트를 연결한다.
+        $(document).ready(function () {
+            //속성을 추출  
+            //aatr() 매개변수 1개 -> 속성값 추출
+            //aatr() 매개변수 2개 -> 속성값 지정
+             let src = $('body').attr('bgcolor','red');
+
+             //출력한다.
+             alert(src);
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

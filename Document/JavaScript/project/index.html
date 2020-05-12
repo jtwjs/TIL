@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="" name="form" onsubmit="print()">
+        <table border="1" style="border-collapse : collapse">
+            <tr>
+                <th>
+                    <label for="idInput">아이디</label>
+                </th>
+                <td>
+                    <input id="idInput" name="id" type="text" minlength="6" maxlength="10"
+                    placeholder="최소6~최대10, 숫자와 알파벳만 사용" required onblur="idCheck()"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="pwInput">비밀번호</label>
+                </th>
+                <td>
+                    <input id="pwInput" name="pw" type="password" minlength="6" maxlength="10"
+                    placeholder="최소6~최대10, 숫자와 알파벳만 사용" required onblur="pwCheck()"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="pw2Input">비밀번호 확인</label>
+                </th>
+                <td>
+                    <input id="pw2Input" name="pw2" type="password" minlength="6" maxlength="10"
+                    placeholder="최소6~최대10, 숫자와 알파벳만 사용" required onblur="equalCheck()" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="rrnInput">주민번호</label>
+                </th>
+                <td>
+                    <input id="rrnInput" name="rrn1" type="text" maxlength="6" required onblur="birthCheck()" /> 
+                    &#8208;
+                    <input name="rrn2" type="text" maxlength="7" required onblur="rrnCheck()"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="genderBox">성별</label>
+                </th>
+                <td>
+                    <input id="man" type="radio" name="gender" value="man"><label for="man">남자</label>
+                    <input id="woman" type="radio" name="gender" value="woman"><label for="woman">여자</label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="telInput">전화번호</label>
+                </th>
+                <td>
+                    <select name="tel1">
+                        <option value="010">
+                            010
+                        </option>
+                        <option value="011">
+                            011
+                        </option>
+                        <option value="016">
+                            016
+                        </option>
+                        <option value="017">
+                            017
+                        </option>
+                        <option value="018">
+                            018
+                        </option>
+                        <option value="019">
+                            019
+                        </option>
+                    </select>
+                    &#8208;
+                    <input id="telInput" type="text" name="tel2" maxlength="4" onblur="telCheck(this)" />
+                    &#8208;
+                    <input type="text" name="tel3" maxlength="4" onblur="telCheck(this)" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="emailInput">이메일</label>
+                </th>
+                <td>
+                    <input id="emailInput" type="text" name="emailId" maxlength="10" required onblur="mailCheck()" />
+                    &commat;
+                    <select name="mailAddr">
+                        <option value="">
+                            메일주소선택
+                        </option>
+                        <option value="naver">
+                            naver.com
+                        </option>
+                        <option value="daum">
+                            hanmail.com
+                        </option>
+                        <option value="nate">
+                            nate.com
+                        </option>
+                        <option value="google">
+                            gmail.com
+                        </option>
+                    </select>
+                    
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="hobbyBox">취미</label>
+                </th>
+                <td>
+                    <input type="checkbox" id="hk" name="hobby" value="hiking" />
+                    <label for="hk">등산</label>
+                    <input type="checkbox" id="rd" name="hobby" value="reading" />
+                    <label for="rd">독서</label>
+                    <input type="checkbox" id="sk" name="hobby" value="skiing" />
+                    <label for="sk">스키</label>
+                    <input type="checkbox" id="ms" name="hobby" value="music" />
+                    <label for="ms">음악</label>
+                    <input type="checkbox" id="mv" name="hobby" value="movie" />
+                    <label for="mv">영화</label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="self-intro">자기소개</label>
+                </th>
+                <td>
+                    <textarea id="self-intro" cols="50" rows="8" name="self"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" value="입력"/>
+                    <input type="button" value="취소" />
+                </th>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
