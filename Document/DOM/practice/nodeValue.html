@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#">Hi</a>
+    <script>
+        /* DOCUMNET_TYPE_NODE, DOCUMENT_NODE, DOCUMENT_FRAGEMENT_NODE, ELEMENT_NODE에 대해서는 null을 기록 */
+        console.log(document.doctype.nodeValue);
+        console.log(document.nodeValue);
+        console.log(document.createDocumentFragment().nodeValue);
+        console.log(document.querySelector('a').nodeValue);
+
+        //텍스트 문자열을 기록
+        console.log(document.querySelector('a').firstChild.nodeValue);// Hi가 기록됨
+        document.body.firstElementChild.nodeValue = 'Woooo';
+        console.log(document.querySelector('a').firstChild.nodeValue);// Hi가 기록됨
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            //이벤트를 연결한다.
+            $('a').click(function (event){
+                //출력한다.
+                alert('click');
+
+                //기본 이벤트 제거
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+    <a href="http://hanb.co.kr">Hanbit Academy</a>
+    
+</body>
+</html>

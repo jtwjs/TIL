@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script>
+        $(document).readey(function () {
+            $("#btnAdd").click(function() {
+                var row = '<tr><td><input type="text" name="id" size="10"></td>';
+                    row += '<td><input type="text" name="irum" size+10"></td>'
+                    row += '<td><input type="button" class="btnDel" value="Del">'
+                    row += '</td></tr>';
+
+                    $("#list").append(row); //list라는 아이디에 html 추가
+            });
+
+            //list안의 btnDel에 대한 이벤트를 동적응로 등록시 on을 사용
+            $("#list").on("click",".btnDel",function() {
+                $(this).parent().parnet().remove();
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id="btnAdd" value="추가"><br><br>
+    <table id="list" border="1"></table>
+    
+</body>
+</html>

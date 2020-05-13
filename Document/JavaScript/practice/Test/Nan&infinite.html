@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //변수에 숫자 할당
+        var number1 = 1/0;      //infinity
+        var number2 = -1/0;     //-infinity
+        var number3 = 1;
+        var number4 = "1";
+        var number5 = 0/0;
+
+        //유한수 검사
+        console.log(isFinite(number1)); // 1/0은 무한수 flase
+        console.log(isFinite(number2)); // -1/0은 무한수 false
+        console.log(isFinite(number3)); // 1은 유한수 true
+        console.log(isFinite(number4)); // 문자열 1은 유한수 true
+
+
+        //NaN인지 검사
+        console.log(isNaN(number4));    //문자열 "1"은 숫자 형태이기 때문에 false
+        console.log(isNaN(number5));    // true, 0/0은 NaN이다.
+        console.log(isNaN(NaN));        // NaN은 NaN이기 때문에 true
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../jquery-3.5.1.js"></script>
+    <script>
+
+        /*
+            mouseover-mouseout, mouseenter-mouseleave 차이점
+            moseover : 자식 요소위에 마우스를 over 하여도 이벤트 발생
+            mouseenter : 바인딩 된 요소에만 이벤트가 발생
+        */
+        $(document).ready(function () {
+            //스타일 변경 및 이벤트 연결
+            $('#box').css({
+                width:100,
+                height:100,
+                background: 'ornage'
+            }).on('click', function() {
+                    $(this).css('background','red');
+            }).on('mouseenter', function () {
+                    $(this).css('background','blue');
+            }).on('mouseleave', function () {
+                    $(this).css('background','orange');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>

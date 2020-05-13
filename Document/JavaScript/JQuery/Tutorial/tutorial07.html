@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // //내부 글자를 변경한다.
+            // $('h1:nth-child(1)').text('<a href="#">text()</a>'); //그냥 Text
+            // $('h1:nth-child(2)').html('<a href="#">text()</a>'); //태그로서 역할
+
+            //변수 선언
+            let text = $('h1').text();
+            //셀렉터 태그내에 존재하는 자식태그들 중에 html태그는 모두 제외한 채 문자열만 출력하고자
+            //할때 사용되는 함수
+            //html태그까지 모두 문자로 인식시켜주는 함수
+
+            let html = $('h1').html();
+            //셀렉터태그내에 존재하는 자식태그를 통쨰로 읽어올때 사용되는 함수
+            // 태그 동적추가할때 주로 사용되는 함수
+
+            let val = $('셀렉터').val();
+            //input 태그에 정의된 value 속성의 값을 확인하고자할때 사용되는 함수
+            //출력
+            alert("text: "+text);
+            alert("html: "+html);
+        })
+    </script>
+</head>
+<body>
+    <h1>Header - 0</h1>
+    <h1>Header - 1</h1>
+    
+</body>
+</html>

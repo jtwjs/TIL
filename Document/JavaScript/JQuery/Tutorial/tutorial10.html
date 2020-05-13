@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            //이벤트를 연결
+            $('h1').hover(function () {
+                        //색상 변경
+                        $(this).css({
+                            background: 'red',
+                            color: 'white'
+                        });
+                    }, function () {
+                        //색상 제거
+                        $(this).css({
+                            background: '',
+                            color: ''
+                        });
+                    });
+        });
+        
+    </script>
+</head>
+<body>
+    <h1>Click</h1>
+</body>
+</html>

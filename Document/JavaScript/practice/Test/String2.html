@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //문자열 비교
+        console.log("B">"A");       // true, B값이 A값보다 큼
+        console.log("My">"Mi");     // true, y값이 i보다 큼
+        console.log("ABC">"AB");    // true, 비교문자가 없으면 우선순위에 밀림
+        console.log("a">"B");       // true, 소문자 > 대문자
+        console.log("3">"18");      // true, 문자열 비교이기 때문에 "3">"1"
+        console.log(3>18);          // false, 숫자 비교이기 떄문에 3<18
+        console.log(3>"18");        // false, 피연산자가 문자열이 아니면 두 피연산자가 숫자로 변환하요 비교!@
+    </script>
+    
+</body>
+</html>

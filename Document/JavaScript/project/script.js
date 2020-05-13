@@ -143,15 +143,26 @@ function birthCheck(){
 
     function print() {
         //체크박스 체크된 것들 다시 찾아보자
-        let msg;
-        if (document.form.hobby.checked)
-        msg +=document.form.hobby.value + " ";
-         
+        let msg="";
+        if (document.form.hobby1.checked){
+        msg +=document.form.hobby1.value + " ";
+        }
+        if (document.form.hobby2.checked){
+        msg +=document.form.hobby2.value + " ";
+        }
+        if (document.form.hobby3.checked){
+        msg +=document.form.hobby3.value + " ";
+        }
+        if (document.form.hobby4.checked){
+        msg +=document.form.hobby4.value + " ";
+        }
+        if (document.form.hobby5.checked){
+        msg +=document.form.hobby5.value + " ";
+        }
 
-   alert(msg);
 
-
-      let print ="ID: "+document.form.id.value+
+      let print =
+      " ID: "+document.form.id.value+
       "\n Pw: "+document.form.pw.value+
       "\n 주민번호: "+ document.form.rrn1.value+"-"+document.form.rrn2.value+
       "\n 성별: " +document.form.gender.value+
@@ -160,7 +171,8 @@ function birthCheck(){
       "\n 취미: "+msg+
       "\n 자기소개: "+document.form.self.value;
 
-      alert("---------------------------------\n"
-      +print+"\n-----------------------------------------------------\n");
+      alert("-----------------------------------------------------\n"
+      +print
+      +"\n-----------------------------------------------------\n");
         
     }

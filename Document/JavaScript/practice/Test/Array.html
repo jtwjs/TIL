@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var array1 = ["JJ",1,true];// 배열 리터럴을 이용한 배열 생성
+        
+        var array2 = new Array();  // Array() 생성자를 이용한 배열생성
+        array2[0] = "JJ";
+        array2[1] = 1;
+        array2[2] = true;
+
+        var array3 = new Array(3);  // Array() 생성자를 이용한 배열 생성
+        array3[0] = "JJ";
+        array3[1] = 1;
+        array3[2] = true;
+
+        //Array() 생성자에 원소를 전달해 배열 생성
+        var array4 = new Array("JJ",1,true);
+
+        console.log("array1 = " +array1);
+        console.log("array2 = " +array2);
+        console.log("array3 = " +array3);
+        console.log("array4 = " +array4);
+        
+
+        //array 요소 타입을 출력
+        console.log("array1[0] = "+ typeof(array1[0])+", array1[1] =" + typeof(array1[1]))
+    </script>
+
+    
+</body>
+</html>

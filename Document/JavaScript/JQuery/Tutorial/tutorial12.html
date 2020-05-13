@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.out {
+            width: 40%;
+            height: 120px;
+            margin: 0 15px;
+            background-color: #D6EDFC;
+            float: left;
+        }
+
+        div.in {
+            width: 60%;
+            height: 60%;
+            background-color: #FFCC00;
+            margin: 10px auto;
+        }
+
+        p {
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script type="text/javascript" src="../jquery-3.5.1.js"></script>
+</head>
+<body>
+    <div class="out overout">
+        <p>mouse event(mouseover/mouseout)</p>
+        <div class="in overout">
+            <p>mouse event<br>(mouseover/mouseout)</p>
+            <p>0</p>
+        </div>
+            <p>0</p>
+    </div>
+    <div class="out enterleave">
+        <p>mouse event(mouseenter/mouseleave)</p>
+        <div class="in enterleave">
+            <p>mouse event<br>(mouseenter/mouseleave)</p>
+            <p>0</p>
+        </div>
+            <p>0</p>
+    </div>
+        <script>
+            var i =0;
+            $("div.overout").mouseover(function() {
+                $("P:first", this).text("mouse over");
+                $("p:last",this).text(++i);
+            }).mouseout(function() {
+                $("p:first",this).text("mouse out");
+            });
+
+            var n =0;
+            $("div.enterleave").mouseenter(function() {
+                $("p:first", this).text("mouse enter");
+                $("p:last",this).text(++n);
+            }).mouseleave(function(){
+                $("p:first",this).text("mouse leave");
+            });
+        </script>
+</body>
+</html>

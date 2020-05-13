@@ -1,0 +1,88 @@
+* {
+    box-sizing:border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Libre Franklin', sans-serif;
+    color: #333;
+    font-weight: 400;
+}
+
+/* Reset CSS */
+a {
+    color: inherit;
+    text-decoration:none;
+}
+
+button,
+input,
+textarea {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 16px;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+    outline: none;
+    box-shadow: none;
+}
+
+ul,
+ol,
+li {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+
+}
+
+p{
+    font-size: 15px;
+    line-height: 1.25;
+    
+}
+
+    /* Content */
+.content {
+ position: fixed;
+ left:50%;
+ top:15%;   
+ transform: translateX(-50%);
+}
+
+.input-1 {
+    width: 300px;
+}
+.rrn {
+    width: 80px;
+}
+
+.tel {
+    width: 80px;
+}
+
+.email {
+    width: 140px;
+}
+
+.form-table {
+    text-align: left;
+    border-collapse : collapse;
+}
+
+.form-table th,td {
+    padding: 6px;
+}
+
+.button-th {
+    text-align: center;
+}
+
+.submit-btn {
+    margin-right: 10px;
+}

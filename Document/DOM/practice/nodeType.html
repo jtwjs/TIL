@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#">Hi</a>
+    <script>
+        /*  Node.DOCUMENT_TYPE.NODE === 10 이므로 DOCUMENT_TYPE_NODE 또는 nodeType 10 */
+        console.log(
+            document.doctype.nodeName, /*'html'이 기록됨 document.doctype을 시도하면 <!DOCTYPE html>을 얻을수 있음*/
+            document.doctype.nodeType //DOCUMENT_TYPE_NODE에 매핑되는 10이 기록됨
+        );
+        //Node.DOCUMENT_NODE === 9 이므로 DOCUMENT_NODE 또는 nodeType 9
+        console.log(
+            document.nodeName, //'#document'가 기록됨
+            document.nodeType //DOCUMENT_NODE에 매핑되는 9가 기록됨
+        );
+
+        /* Node.DOCUMENT_FRAGMENT_NODE === 11이므로 DOCUMENT_FRAGMENT_NODE 또는 nodeType 11 */
+        console.log(
+            document.createDocumentFragment().nodeName,
+            document.createDocumentFragment().nodeType 
+        );
+
+        //Node.ELEMENT_NODE === 1이므로 ELEMENT_NODE 또는 nodeType 1
+        console.log(
+            document.querySelector('a').nodeName, //'A'가 기록됨
+            document.querySelector('a').nodeType //ELEMENT_NODE에 매핑되는 1이기록
+        );
+        //Node.TEXT_NODE ===3 이므로 TEXT_NODE 또는 nodeType 3
+        console.log(
+            document.querySelector('a').firstChild.nodeName,
+            document.querySelector('a').firstChild.nodeType 
+        );
+
+        //<a>는 ELEMENT_NODE 인가?
+            console.log(
+                document.querySelector('a').nodeType === 1);
+            )
+            console.log(
+                document.querySelector('a').nodeType === Node.ELEMENT_NODE);
+                //<a>가 Element 노드이므로 ture가 기록됨
+            )
+    </script>
+    
+</body>
+</html>
