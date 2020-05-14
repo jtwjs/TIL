@@ -102,6 +102,63 @@ var numbers = [1,2,3,4,5];
 var Strings = ['나무','산','바다'];
 ```
 
+#### **push(), pop()**(LIFO)
+> 배열에 원소를 추가하거나 삭제를 할때 사용 <br> 장점: 주어진 배열의 범위 내에서만 동작하기 때문에 예외처리나 에러 발생확률이 낮다. (잘 사용하지 않는 편)
+- push() ```array.push(item1, item2, ..., itemX) ```
+    - 배열의 끝에 원소를 추가할때 사용
+- pop() ```array.pop() ```
+    - 배열의 마지막 항목을 제거할때 사용
+
+#### **shift(), unshift()**
+- shift() : 배열의 첫번째 항목을 제거 후 그것을 반환
+- ```array.shift() ```
+- unshift() : 배열의 맨 앞에 원소를 추가한 후 배열의 길이 반환
+- ```array.unshift(item1, item2, ..., itemX) ```
+#### **join()**
+> join() 메소드는 인자로 입력된 구분자를 이용하여 배열을 문자열로 변환하는 메소드
+- ```array.join(separator) ```
+    - 이 메소드는 보통 배열에 있는 원소를 모두 문자열로 변경해서 출력할때 사용
+- ex:)
+    ```js
+    var furits = ["Banana", "Orange", "Apple", "Mango"];
+    var energy = fruits.join(" and ");
+    //배열의 과일 이름으로 and로 연결해서 하나의 문자열로 반환 ㅠㅅ
+    -> Banana and Orange and Apple and Mango
+    // 원소가 and로 연결되서 반환됨
+    ```
+#### slice()
+> slice() 메소드는 배열의 특정 범위에 있는 원소를 가져올때 사용<br> 문법은 범위를 나타내는 시작과 끝 index가 입력됨
+- ``` array.slice(start_index[, end_index]) ```
+    ``` js
+    var fruits = ["Banana","Orange","Lemon","Apple","Mango"];
+    var citrus = fruits.slice(1,3); //index 1에서 index 3전까지의 원소를 반환
+    -> Ornage,Lemon // index 1~2까지의 원소가 반환됨
+    ```
+#### reverse()
+> reverse() 메소드는 배열의 원소 순서를 거꾸로 변경할때 사용
+- ```array.reverse() ```
+    ```js
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.reverse();   //fruits 배열의 원소 순서를 거꾸로 바꿈
+    -> Mango,Apple,Orange,Banana // 원소의 index가 바뀜 
+    ```
+
+#### sort()
+>sort() 메소드는 배열의 모든 원소를 문자열로 변환한 후 사전식으로 정렬하는 기능을 제공
+- ```array.sort([compareFunction];``` compareFunction : 정렬을 위한 함수(선택)
+    ```js
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.sort();  //fruits 배열의 원소를 정렬한 배열을 반환
+    -> Apple,Banana, Mango, Ornage //fruits에서 사전식으로 정렬된 배열이 반환됨
+
+    var points = [40,100,1,5,25,10];
+    points.sort(function(a,b){return a-b});
+    //숫자를 오름차순으로 정렬하는 비교 함수 사용
+    -> 1,5,10,25,40,100 //오름차순으로 정렬된 배열이 반환됨
+    ```
+
+
+
 ### Object
 >JavaScript는 객체를 만든후에 정의를한다. (동적인 객체정의)<br> 그러므로 오타에 주의..(버그의 주요인)
 
