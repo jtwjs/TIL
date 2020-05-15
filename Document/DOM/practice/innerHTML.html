@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><i id="elm">how</i>
+    <script>
+        var elm = document.getElementById('elm');        
+
+        elm.insertAdjacentElement('beforebegin','<span>Hey-</span>');
+        elm.insertAdjacentElement('afterbegin','<span>dude-</span>');
+        elm.insertAdjacentElement('beforeend','<span>-are</span>');
+        elm.insertAdjacentElement('beforeend','<span>-you</span>');
+
+        console.log(document.body.innerHTML);
+    </script>
+
+</body>
+</html>

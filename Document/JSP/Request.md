@@ -42,8 +42,7 @@
 브라우저에서 GET방식으로 http://localhost:8080/Web/practice/tutorial00.jsp 요청했다-->
 클라이언트 IP = <%= request.getRemoteAddr() %> <br/>
 <!--클라이언트 IP = 0:0:0:0:0:0:0:1
-IP의 경우 IPv6주소를 리턴했는데 이는 Ipv4에서 127.0.0.1(localhost)와 같은 의미
- -->
+IP의 경우 IPv6주소를 리턴했는데 이는 Ipv4에서 127.0.0.1(localhost)와 같은 의미-->
 서버포트 = <%= request.getServerPort() %> <br/>
 <!--서버포트 = 8080 -->
 컨텍스트 경로 = <%= request.getContextPath() %> <br/>

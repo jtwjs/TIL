@@ -49,3 +49,64 @@
 > 세션은 브라우저 단위로 생성되어지고 최초 요청시 생성되어진다.<br> 또한 서버측에 생성되어진 세션은 브라우저별로 생성된 세션을 구분할 수 있는 세션ID를 갖게되는데<br>세션이 생성되어질때 세션ID를 브라우저측에 응답하고 브라우저는 이것을 쿠키로 저장한다.
 
 ![세션 생성과정](https://user-images.githubusercontent.com/60641307/81899515-fea56600-95f5-11ea-903b-8ddb95432cf4.png)
+
+
+### 세션객체의 메소드
+> JSP/Servlet 환경에서 세션객체는 javax.servlet.http.HttpSession 타입의 객체이다.
+
+|메소드|리턴타입|설명|
+|:---|:--:|:---|
+|setAttribute(String name, Object value)|void|세션에 데이터를 저장한다.<br>name이 저장할 데이터의 이름이되고, value에 저장할 값을 지정한다<br>Object형이므로 모든 객체를 저장 가능|
+|getAttribute(String name)|Object|세션에 저장할 데이터중 name에 해당하는 값을 리턴<br>Obejct형이므로 저장 이전의 원래 타입으로 형변환 사용가능|
+|getId()|String|브라우저별로 생성되어진 세션을 구분하기 위한 ID를 리턴|
+|getCreationTime()|long|세션이 생성된 시간을 구함<br>1970.01.01을 기준으로 몇ms(1/1000초)가 흘럿는지를 정수값으로 리턴|
+|getLastAccessedTime()|long|웹브라우저가 가장 최근에 세션에 접근한 시간을 구함|
+|invalidate()|void|세션을 종료한다.<br>종료된 세션객체는 곧 제거되며, 이후에 요청시 새로운 세션 생성|
+|setMaxInactiveInterval(int interval)|void|세션의 유효시간을 초단위로 지정<br>유효시간은 가장최근에 세션에 접근한 이후 유효한 시간.<br>즉,getLastAccessedTime()메소드를 호출했을때의 시간과 현재시간 사이의 간격을 의미<br>0또는 음수로 지정하는 경우 invaldate() 메소드를 호출하기전까지는 세션이 제거되지않는다.<br>세션 또한 객체이므로 서버의 메모리를차지하므로 주의|
+|getmaxInactiveInterval()|int|세션의 유효시간을 초단위로 구함|
+
+### 세션에 데이터 저장 및 가져오기
+> 세션의 가장 큰 목적은 상태유지에 있다.<br> 즉, HTTP의 상태가 없는 특성을 극복하고자 한 기술이기에 여러가지 데이터를 저장하여 유지할수 있다.
+- login페이지에서 로그인에 성공하면 해당 사용자의 정보 및 로그인 여부를 세션을 생성하여 저장하고<br> 이후 서버의 다른 웹페이지 호출시마다 로그인 여부를 판단하거나 사용자 정보를 얻어올 때 해당 세션을 사용할 수 있다.
+
+
+- login.jsp
+
+    ```jsp
+    <!-- 세션에 데이터를 저장할때는 setAttribute(String name,Object value) 메서드를 사용-->
+    <%@ page contentType="text/html; charset=utf-8" session="true" %>
+    <html>
+    <head>
+    </head>
+    <body>
+    <h1>로그인 페이지</h1>
+    <%
+        session.setAttribute("islogin",true);
+    %>
+    </body>
+    </html>
+    ```
+
+- loginCheck.jsp
+
+    ```jsp
+    <!-- 세션에 저장된 값을 가져올때는 Object getAttribute(String name)메서드를 사용
+    Object 타입의 객체를 리턴하므로 원래 타입으로 형변환하여 사용 -->
+    <%@ page contentType="text/html; charset=utf-8" session="true"%>
+
+    <html>
+    <head>
+    </head>
+    <body>
+    <%
+        Boolean isLogin = (Boolean)Session.getAttribute("islogin");
+        
+        if(isLogin != null && isLogin){
+                out.println("<h1>로그인 성공!</h1>");
+        }else{
+                out.println("<h1>로그인 실패</h1>");
+        }
+        %>
+    </body>
+    </html>
+    ```

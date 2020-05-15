@@ -144,21 +144,13 @@ function birthCheck(){
     function print() {
         //체크박스 체크된 것들 다시 찾아보자
         let msg="";
-        if (document.form.hobby1.checked){
-        msg +=document.form.hobby1.value + " ";
+        let length = document.form.hobby.length;
+        for(let i=0; i<length; i++) {
+            if(document.form.hobby[i].checked){
+                msg+=document.form.hobby[i].value + " ";
+            }
         }
-        if (document.form.hobby2.checked){
-        msg +=document.form.hobby2.value + " ";
-        }
-        if (document.form.hobby3.checked){
-        msg +=document.form.hobby3.value + " ";
-        }
-        if (document.form.hobby4.checked){
-        msg +=document.form.hobby4.value + " ";
-        }
-        if (document.form.hobby5.checked){
-        msg +=document.form.hobby5.value + " ";
-        }
+        
 
 
       let print =
