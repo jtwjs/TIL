@@ -2,9 +2,9 @@
 >데이터를 담기 위한 메모리 공간을 의미<br>**var**키워드로 변수를 선언하며, **선언함과 동시에 값을 할당**할 수 있습니다.<br> 쉼표(,)를 통해 여러 개를 한 문장으로 선언할 수 있다.<br> 지정된 초깃값 없이 선언된 변수는 undefined 값을 갖는다.
 
 
-- var
-- let
-- const
+- var (함수범위 = function )
+- let (중괄호범위 = block )
+- const {중괄호범위 = block }
 
 ```javascript
 var sum; //변수 sum을 선언. undifined
