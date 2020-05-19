@@ -50,11 +50,16 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <Context>
     <!-- Resource를 등록하여 웹에서 JNDI로 호출할 이름과 정보를 설정 -->
-	<Resource name="jdbc/OracleDB" //name: JNDI로 호출될 이름을 설정(접근->java:comp/env/jdbc/OracleDB)
-		auth="Container"            //auth: DBCP를 관리할 관리자(Container or Application)
-		type="javax.sql.DataSource" //type: 해당 resource의 return type(DataSource는 Connection 객체를 반환할수 있다.)
-        factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" //factory: dbcp를 이용하는 관리클래스(Tomcat 5.x에 기본으로 존재하는 클래스)
-        driverClassName="oracle.jdbc.driver.OracleDriver"   //driverClassName: JDBC를 이용하기 위한 드라이버 클래스
+     //name: JNDI로 호출될 이름을 설정(접근->java:comp/env/jdbc/OracleDB)
+	<Resource name="jdbc/OracleDB"
+        //auth: DBCP를 관리할 관리자(Container or Application)
+		auth="Container"            
+        //type: 해당 resource의 return type(DataSource는 Connection 객체를 반환할수 있다.)
+		type="javax.sql.DataSource" 
+        //factory: dbcp를 이용하는 관리클래스(Tomcat 5.x에 기본으로 존재하는 클래스)
+        factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" 
+        //driverClassName: JDBC를 이용하기 위한 드라이버 클래스
+        driverClassName="oracle.jdbc.driver.OracleDriver"  
 		username="scott"           // DB의 계정명
 		password="123456"           // 계정 비번
 		url="jdbc:oracle:thin:@127.0.0.1:1521:ORCL?autoReconnect=true"" //DB의 접속 URL(속성으로 자동 재접속을 선택했다.)
