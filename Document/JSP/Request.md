@@ -8,6 +8,14 @@
     - jspService() : JSP가 서블릿으로 변환되었을 때 요청을 처리하기 위해 실행되는 메소드
 - 때문에 jsp 페이지의 스크립트릿에 따로 선언하지 않아도 기본적으로 사용가능
 
+
+### request.parameter("파라미터_명");
+- String 데이터타입
+- 파라미터 value 값을 받아온다.
+#### request.parameterValues("파라미터_명");
+- 같은 name의 파라미터를 배열로 받는다. (inedx 0 부터 )
+
+
 ### request 내장객체(javax.servlet.http.HttpServletRequest) 의 메소드
 |메소드|리턴 타입|설명|
 |:---|:---|:---|
