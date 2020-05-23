@@ -34,3 +34,7 @@ ResultSet rst = pstmt.executeQuery();
 - **PreparedStatement를 사용해야하는 경우**
     1. 사용자가 입력값으로 쿼리를 생성하는 경우
     2. 쿼리 반복수행 작업일 경우
+
+3. ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE
+    
+    - 양방향 조회가 가능하게 한다!

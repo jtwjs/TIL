@@ -298,7 +298,64 @@ header {
     height: 69.85px;
 }
 
+    /* Footer */
+#Footer {
+    padding: 26px 42px;
+    padding-bottom: 50px;
 
+}
+
+#Footer .section-title {
+    margin-bottom: 0;
+}
+
+#Footer .col-12:first-child {
+    margin-bottom: 25px;
+}
+
+#Footer .col-12:last-child {
+    margin-top: 30px;
+}
+
+.footer-links li {
+    margin-bottom: 19px;
+}
+
+.footer-links li:last-child {
+    margin-bottom: 0;
+}
+
+.footer-links a {
+    font-size: 14px;
+    line-height: 1.2142857142857142857142857142857‬;
+
+}
+
+.footer-addr-mail {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    line-height: 1.2142857142857142857142857142857‬;
+}
+
+.footer-addr-tel {
+    display: block;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+
+}
+
+#Footer .chevronUP-btn img{
+    width: 24px;
+    height: auto;
+
+}
 
 /* ≥768px (Desktop) */
 @media screen and (min-width: 768px) {
@@ -406,8 +463,8 @@ header {
     padding: 0;
 }
 .profile-img {
-    width: 350px;
-    height: 340px;
+    width: 300px;
+    height: 300px;
     margin-right: 125px;
 }
 
@@ -538,7 +595,69 @@ header {
     height: 124px;
 }
 
+    /* Footer */
 
+#Footer {
+    padding: 93px 165px;
+    padding-bottom: 189px;
+
+}
+
+#Footer .section-title {
+    margin-bottom: 51px;
+    font-size: 24px;
+    line-height: 1.2083333333333333333333333333333‬;
+    text-align: left;
+    
+}
+
+#Footer .col-12:first-child {
+    margin-bottom: 25px;
+}
+
+#Footer .col-12:last-child {
+    margin-top: 0;
+}
+
+.footer-links li {
+    margin-bottom: 14px;
+}
+
+.footer-links li:last-child {
+    margin-bottom: 0;
+}
+
+.footer-links a {
+    font-size: 18px;
+    line-height: 1.2222222222222222222222222222222;
+
+}
+
+.footer-addr-mail {
+    display: block;
+    margin-bottom: 14px;
+    font-size: 18px;
+    line-height: 1.2222222222222222222222222222222;
+}
+
+.footer-addr-tel {
+    display: block;
+    font-size: 15px;
+    line-height: 1.2;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+
+#Footer .chevronUP-btn img{
+    width: 24px;
+    height: auto;
+
+}
 
 
 
