@@ -1,0 +1,264 @@
+* {
+    box-sizing:border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: #333;
+    font-weight: 400;
+}
+
+/* Reset CSS */
+a {
+    color: inherit;
+    text-decoration:none;
+}
+
+button,
+input,
+textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+    outline: none;
+    box-shadow: none;
+}
+
+ul,
+ol,
+li {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+
+}
+
+
+.content-title {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 40px;
+    line-height: 1;
+}
+
+.content-desc {
+    display:block;
+    margin-bottom: 30px;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: -0.04em;
+}
+
+.content-btn a {
+    display: block;
+    width: 260px;
+    height: 50px;
+    padding: 15px 30px;
+    border: 1px solid #fff;
+    font-size: 20px;
+    line-height: 1;
+}
+
+
+/* Header */
+
+
+#Header {
+    
+    width: 100%;
+    height: 100vh;
+    background-image: url(./assets/Beat_bg.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+
+}
+
+
+.main-logo {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    line-height: 1;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    
+    width: 100%;
+    padding: 20px 10px;
+    font-size: 10px;
+    line-height: 0.833333;
+    font-weight: 400;
+}
+
+.nav-bar ul {
+    display: flex;
+}
+
+.nav-bar li {
+    margin-right: 1px;
+    transition: opacity 250ms ease-in-out;
+}
+
+.nav-bar li:hover {
+    opacity: 0.5;
+}
+
+.nav-right li:first-child::before {
+    content: "";
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-image: url(./assets/Vector.png);
+    background-size: cover;
+}
+
+
+
+.nav-right li:nth-child(3) {
+    display: none;
+}
+
+.nav-left li:last-child, .nav-right li:last-child {
+    margin-right: 0;
+
+}
+
+#Header .content {
+    margin-top: 330px;
+}
+
+#like-button {
+    position: relative;
+    top: -4px;
+    width: 20px;
+    height: 20px;
+    border:none;
+    background: rgba(0,0,0,0);
+    background-image: url(./assets/wishlist-icon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 15px 13px;
+    cursor: pointer;   
+}
+
+
+
+
+/* ≥768px (Desktop) */
+@media screen and (min-width: 768px) {
+
+    #Header {
+    
+        width: 100%;
+        height: 100vh;
+        background-image: url(./assets/Beat_bg.jpg);
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: #fff;
+    
+    }
+    
+    
+    .main-logo {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 70px;
+        line-height: 1;
+    }
+    
+    .nav-bar {
+        position:relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 40px 80px;
+        font-size: 14px;
+        line-height: 0.833333;
+        font-weight: 400;
+    }
+    
+    .nav-bar ul {
+        display: flex;
+    }
+    
+    .nav-bar li {
+        
+        margin-right: 40px;
+        transition: opacity 250ms ease-in-out;
+    }
+    
+    .nav-bar li:hover {
+        opacity: 0.5;
+    }
+
+    .nav-right li:nth-child(3) {
+        display: block;
+    }
+    
+    .nav-right li:first-child::before {
+        content: "";
+        position: relative;
+        top: 2px;
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-image: url(./assets/Vector.png);
+        background-size: cover;
+    }
+    
+    .nav-left li:last-child, .nav-right li:last-child {
+        margin-right: 0;
+    
+    }
+    
+    #Header .content {
+        margin-top: 330px;
+    }
+
+    
+    
+    #like-button {
+        position: relative;
+        top: -4px;
+        width: 20px;
+        height: 20px;
+        border:none;
+        background: rgba(0,0,0,0);
+        background-image: url(./assets/wishlist-icon.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 15px 13px;
+        cursor: pointer;   
+    }
+    
+
+}
+
+}
+
+/*Custom Grid System - Fix container width**/
+@media screen and (min-width: 1200px){
+    .container {
+        max-width: 960px !important;
+    }
+}

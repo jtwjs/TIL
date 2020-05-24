@@ -302,6 +302,7 @@ header {
 #Footer {
     padding: 26px 42px;
     padding-bottom: 50px;
+    background-color: #FFFAF2;
 
 }
 
@@ -560,8 +561,7 @@ header {
 }
 
 .portfolio-img-box {
-    position: relative;
-    left: 75px;
+    
 }
 
 .portfolio-img-box_1 {
@@ -599,7 +599,7 @@ header {
 
 #Footer {
     padding: 93px 165px;
-    padding-bottom: 189px;
+    padding-bottom: 123px;
 
 }
 
@@ -651,6 +651,12 @@ header {
     justify-content: space-between;
     align-items: flex-start;
 
+}
+
+#Footer .chevronUP-btn {
+    position: relative;
+    bottom: -150px;
+    
 }
 
 #Footer .chevronUP-btn img{
