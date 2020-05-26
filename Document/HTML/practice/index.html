@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form class="join-form">
+		<table class="join-table" border="1">
+			<tr>
+				<th>
+					<label for="ID">아이디</label>
+				</th>
+				<td>
+					<input id="ID" type="text" >
+					<p>(최소 6~ 최대 10 숫자와 알파벳만 사용)</p>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="PW">비밀번호</label>
+				</th>
+				<td>
+					<input id="PW" type="password" >
+					<p>(최소 6~ 최대 10 숫자와 알파벳만 사용)</p>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="PW2">비밀번호 확인</label>
+				</th>
+				<td>
+					<input id="PW2" type="password" >
+					<p>(최소 6~ 최대 10 숫자와 알파벳만 사용)</p>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="Resident">주민번호</label>
+				</th>
+				<td>
+					<input id="Resident" type="text" >
+					-
+					<input  type="text" >
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label>성별</label>
+				</th>
+				<td>
+					<input id="man" type="radio" name="gender" value="남자" checked>
+					<label for="man">남자</label>
+                    <input id="woman" type="radio" name="gender" value="여자" >
+                    <label for="woman">여자</label>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label>전화번호</label>
+				</th>
+				<td>
+					<input class="tel" type="text"   >
+					&#45;
+					<input class="tel" type="text"   >
+					&#45;
+					<input class="tel" type="text"  >
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="Email">이메일</label>
+				</th>
+				<td>
+					<input id="Email" type="text" maxlength="10">
+					&#64;
+					<select name="mailAddr">
+						<option value="naver.com">naver.com</option>
+						<option value="gamil.com">gmail.com</option>
+						<option value="nate.com">nate.com</option>
+						<option value="hanmail.net">hanmail.net</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label>취미</label>
+				</th>
+				<td>
+					<input id="hk" type="checkbox" name="hobby" value="등산">
+					<label for="hk">등산</label>
+					<input id="rd" type="checkbox" name="hobby" value="독서">
+					<label for="rd">독서</label>
+					<input id="sk" type="checkbox" name="hobby" value="스키">
+					<label for="sk">스키</label>
+					<input id="ms" type="checkbox" name="hobby" value="음악">
+					<label for="ms">음악</label>
+					<input id="mv" type="checkbox" name="hobby" value="영화">
+					<label for="mv">영화</label>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="self">자기소개</label>
+				</th>
+				<td>
+					<textarea cols="30" rows="10"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+				<input type="submit">
+				<input type="reset">
+				</th>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

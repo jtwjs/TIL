@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="grid.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signup.css">
     <title>Document</title>
 </head>
 <body>
@@ -25,16 +26,16 @@
                     </li>
                 </ul>
             </div>
-            <h1 class="main-logo">
-                Beat Market
-            </h1>        
+            <div class="main-logo">
+                <img src="assets/logo.png" alt="nike logo" />
+            </div>  
             <div class="nav-right">
                 <ul>
                     <li>
                         <a href="#">SEARCH</a>
                     </li>
                     <li>
-                        <a href="#">SIGN IN</a>
+                        <a id="open" href="#">SIGN IN</a>
                     </li>
                     <li>
                         <a href="#">BAG(0)</a>
@@ -46,6 +47,39 @@
                 </ul>
             </div>
         </nav>
+        <!-- 모달창 -->
+        <div class="signUp-modal hidden">
+            <div class="modal-top">
+                <h1 class="modal-title">CREATE ACCOUNT</h1>
+                <button class="close-icon" type="button"> </button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-input">
+                    <form class="modal-form" action="" method="post">
+                        <input class="modal-input-item"type="text" placeholder="First Name" required/>
+                        <input class="modal-input-item"type="text" placeholder="Last Name"  required />
+                        <input class="modal-input-item"type="email" placeholder="Email"  value="account" required/>
+                        <input class="modal-input-item"type="text" placeholder="Password" value="password" required/>
+                    </form>
+                </div>
+                <div class="modal-bottom">
+                    <div class="promo-subscription">
+                        <button id="check-box"tpye="button" value="uncheck" onclick="check_toggle()"></button>
+                        <p class="promo-desc">
+                            Let's get personal! We'll send you only the good stuff;<br>
+                            Exclusive early access to Sale, new Arrivals and promotions. No nasties.
+                        </p>
+                    </div>
+                    <p class="legal-policy">
+                        By signing up you agree to <span class="emphasize">Terms of Service</span> and <span class="emphasize">Privacy Policy</span>
+                    </p>
+                    <button class="signUp-btn" type="submit">SIGN UP</button>
+                    <a href="#" class="sign-in-link">I HAVE AN ACCOUNT</a>
+    
+                
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="row">                
                 <div class="col-12 col-md-7">
@@ -66,6 +100,9 @@
             </div>
         </div>
     </header>
-    <script type="text/javascript" src="script.js">
+    <script type="text/javascript" src="./script.js"></script>
+   
+
+</script>
 </body>
 </html>

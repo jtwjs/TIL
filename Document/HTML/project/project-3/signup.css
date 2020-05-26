@@ -5,7 +5,7 @@
 
 body {
     font-family: 'DM Sans', sans-serif;
-    color: #333;
+    color: #000F08;
     font-weight: 400;
     background-color: #333;
 }
@@ -48,9 +48,9 @@ li {
     top:15%;
     left: 50%;
     width: 526px;
-    height: 594px;
+    
     padding: 42px;
-    color:  #000F08;;
+    color:  #000F08;
     background-color: #fff;
     transform: translateX(-50%);
     
@@ -73,17 +73,33 @@ li {
     height: 16px;
     border: none;
     background-color: rgba(0,0,0,0);
-    background-image: url(./assets/close-icon.png);
+    background-image: url(./assets/close-icon\ \(1\).png);
     background-repeat: no-repeat;
     background-size: cover;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
 }
 
+
+
+.close-icon:active {
+    background-image: url(./assets/close-icon.png);
+}
+
+
 /* modal-input */
+
+.modal-content {
+    padding: 0 6px;
+}
+
 .modal-form {
     display: flex;
     flex-direction: column;
 }
 .modal-input-item {
+    width: 421px;
+    margin: 0 auto;
     margin-bottom: 32px;
     padding-bottom: 10px;
     border: none;
@@ -94,12 +110,19 @@ li {
 }
 
 /* modal-bottom */
+
+.modal-bottom {
+    display: flex;
+    flex-direction: column;
+}
+
 .promo-subscription {
     display: flex;
     align-items: center;
+    margin-bottom: 21px;
 }
 
-.check-box {
+#check-box {
     display: block;
     width: 18px;
     height: 18px;
@@ -107,12 +130,45 @@ li {
     padding: 0;
     border: none;
     background-color: #000;
-    background-image: url(./assets/checkbox-icon.png);
-    background-position: 2px 3px;
+    background-position: 3px 3px;
     background-repeat: no-repeat;
     background-size: 13px 11px;
+    cursor: pointer;
 }
 
 .promo-desc {
+    width: 391px;
     font-size: 12.675px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.legal-policy {
+    margin-bottom: 32px;
+    font-size: 12.6775px;
+    line-height: 1.5;
+    color: #8C8C8C;
+}
+
+.legal-policy .emphasize {
+    color:  #000F08;
+    text-decoration: underline;
+}
+
+.signUp-btn {
+    width: 253px;
+    height: 52px;
+    margin: 0 auto;
+    margin-bottom: 32px;
+    border:none;
+    font-size: 17px;
+    color: #fff;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.sign-in-link {
+    font-size: 12.675px;
+    line-height: 1;
+    text-decoration: underline;
 }

@@ -67,7 +67,9 @@ li {
     line-height: 1;
 }
 
-
+.hidden {
+    display: none;
+}
 /* Header */
 
 
@@ -75,22 +77,25 @@ li {
     
     width: 100%;
     height: 100vh;
-    background-image: url(./assets/Beat_bg.jpg);
-    background-position: center center;
+    background-image: url(./assets/onTheRun.jpg);
+    background-position: center 0;
     background-size: cover;
     background-repeat: no-repeat;
     color: #fff;
+    
 
 }
 
 
-.main-logo {
+.main-logo img{
     position: absolute;
-    top: 20px;
+    top: -20px;
     left: 50%;
-    transform: translateX(-50%);
+    width: 100px;
+    height: auto;
     font-size: 30px;
     line-height: 1;
+    transform: translateX(-50%);
 }
 
 .nav-bar {
@@ -114,7 +119,7 @@ li {
     transition: opacity 250ms ease-in-out;
 }
 
-.nav-bar li:hover {
+.nav-bar li a:hover {
     opacity: 0.5;
 }
 
@@ -140,9 +145,7 @@ li {
 
 }
 
-#Header .content {
-    margin-top: 330px;
-}
+
 
 #like-button {
     position: relative;
@@ -164,17 +167,7 @@ li {
 /* ≥768px (Desktop) */
 @media screen and (min-width: 768px) {
 
-    #Header {
-    
-        width: 100%;
-        height: 100vh;
-        background-image: url(./assets/Beat_bg.jpg);
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        color: #fff;
-    
-    }
+   
     
     
     .main-logo {
@@ -231,10 +224,6 @@ li {
     
     }
     
-    #Header .content {
-        margin-top: 450px;
-    }
-
     
     
     #like-button {
@@ -251,10 +240,19 @@ li {
         cursor: pointer;   
     }
     
+    
+    #Header .content {
+        position: relative;
+        bottom: 0;
+        margin-top: 500px;
+    }
 
+    #Header .container {
+        margin-left: 10%;
+    }
 }
 
-}
+
 
 /*Custom Grid System - Fix container width**/
 @media screen and (min-width: 1200px){
