@@ -1,4 +1,4 @@
-## Spring Container
+## Spring Container(IOC)
 >Spring Framework의 핵심 컴포넌트
 - Container는 DI를 사용하여 응용 프로그램을 구성하는 bean 객체를 관리한다.
 ### 역할
