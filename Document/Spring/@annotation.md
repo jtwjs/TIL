@@ -1,4 +1,4 @@
-## @annotation
+## @Annotation
 > @ 사인 하나로 많은 컨텍스트들을 제공 받을 수 있게 한다.
 
 ### @Controller
