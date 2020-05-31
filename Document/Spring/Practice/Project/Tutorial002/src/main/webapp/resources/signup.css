@@ -52,8 +52,9 @@ li {
     padding: 42px;
     color:  #000F08;
     background-color: #fff;
+    z-index: 99;
     transform: translateX(-50%);
-
+	
     
 }
 
@@ -105,7 +106,7 @@ li {
     padding-bottom: 10px;
     border: none;
     border-bottom: 1.5px solid #D8D8D8;
-    font-size: 12.6675‬;
+    font-size: 12.6675��;
     line-height: 1;
     color: #8C8C8C;;
 }

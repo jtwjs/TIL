@@ -15,7 +15,7 @@
     - 빈(Bean)객체 소멸
 #### InitializingBean, DsiposableBean 인터페이스
 > 빈이 생성 & 소멸 되는 시점에 특정한 작업을 할수 있는 인터페이스
-- **InitializingBean **
+- **InitializingBean**
     - afterPropertiesSet()
     - 빈(Bean)객체 생성시점에 호출
 - **DisposableBean**

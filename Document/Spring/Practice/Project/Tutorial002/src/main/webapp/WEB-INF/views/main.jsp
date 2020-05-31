@@ -1,12 +1,16 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="grid.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" type="text/css" href="./resources/grid.min.css" />
+    <link rel="stylesheet" type="text/css" href="./resources/style.css" />
+    <link rel="stylesheet" type="text/css" href="./resources/signup.css" />
     <title>Document</title>
 </head>
 <body>
@@ -27,7 +31,7 @@
                 </ul>
             </div>
             <div class="main-logo">
-                <img src="assets/logo.png" alt="nike logo" />
+                <img src="./resources/assets/logo.png" alt="nike logo" />
             </div>  
             <div class="nav-right">
                 <ul>
@@ -55,11 +59,11 @@
             </div>
             <div class="modal-content">
                 <div class="modal-input">
-                    <form class="modal-form" action="" method="post">
-                        <input class="modal-input-item"type="text" placeholder="First Name" required/>
-                        <input class="modal-input-item"type="text" placeholder="Last Name"  required />
-                        <input class="modal-input-item"type="email" placeholder="Email"  value="account" required/>
-                        <input class="modal-input-item"type="text" placeholder="Password" value="password" required/>
+                    <form class="modal-form" action="join" method="post">
+                        <input class="modal-input-item"type="text" placeholder="First Name" name="fn" required/>
+                        <input class="modal-input-item"type="text" placeholder="Last Name"  name="ln" required />
+                        <input class="modal-input-item"type="text" placeholder="Email"  name="account" value="account" required/>
+                        <input class="modal-input-item"type="text" placeholder="Password" name="passwod" value="password" required/>
                     </form>
                 </div>
                 <div class="modal-bottom">
@@ -75,7 +79,7 @@
                     </p>
                     <button class="signUp-btn" type="submit">SIGN UP</button>
                     <a href="#" class="sign-in-link">I HAVE AN ACCOUNT</a>
-    
+    				
                 
                 </div>
             </div>
@@ -102,9 +106,7 @@
             </div>
         </div>
     </header>
-    <script type="text/javascript" src="./script.js"></script>
-   
-
-</script>
+    <script type="text/javascript" src="./resources/script.js"></script>
+ 
 </body>
 </html>
