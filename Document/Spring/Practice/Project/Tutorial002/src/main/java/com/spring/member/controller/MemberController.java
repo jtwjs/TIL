@@ -28,12 +28,12 @@ public class MemberController {
 
 
 	
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String joinREg(Member member) {
 		
 		service.memberRegister(member);
 		
-		return "/index";
+		return "/main";
 	}
 	
 	/*// Login

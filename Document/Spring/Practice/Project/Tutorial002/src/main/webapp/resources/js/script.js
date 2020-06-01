@@ -2,11 +2,11 @@
 function like_toggle(){
     var target = document.getElementById('like-button');
     if(this.value === 'unlike') {
-        target.style.backgroundImage =  "url('./resources/assets/wishlist-icon_full.png')";
+        target.style.backgroundImage =  "url('../assets/wishlist-icon_full.png')";
         this.value = 'like';
     }
     else {
-        target.style.backgroundImage = "url('./resources/assets/wishlist-icon.png')";
+        target.style.backgroundImage = "url('../assets/wishlist-icon.png')";
         this.value = 'unlike';
     }
        
@@ -15,7 +15,7 @@ function like_toggle(){
 function check_toggle(){
     var target = document.getElementById('check-box');
     if(this.value === 'uncheck'){
-        target.style.backgroundImage = "url(./resources/assets/checkbox-icon.png)";
+        target.style.backgroundImage = "url(../assets/checkbox-icon.png)";
         this.value = 'check';
     }
     else {

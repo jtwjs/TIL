@@ -3,14 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./resources/grid.min.css" />
-    <link rel="stylesheet" type="text/css" href="./resources/style.css" />
-    <link rel="stylesheet" type="text/css" href="./resources/signup.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/grid.min.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/signup.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
     <title>Document</title>
 </head>
 <body>
@@ -45,8 +46,9 @@
                         <a href="#">BAG(0)</a>
                     </li>
                     <li>
-                        <button  type="button" id="like-button" value="unlike" onclick="like_toggle()" />
+                        <button  type="button" id="like-button" value="unlike" onclick="like_toggle()" >
                         </button>
+                     
                     </li>
                 </ul>
             </div>
@@ -68,7 +70,7 @@
                 </div>
                 <div class="modal-bottom">
                     <div class="promo-subscription">
-                        <button id="check-box"tpye="button" value="uncheck" onclick="check_toggle()"></button>
+                        <button id="check-box"type="button" value="uncheck" onclick="check_toggle()"></button>
                         <p class="promo-desc">
                             Let's get personal! We'll send you only the good stuff;<br>
                             Exclusive early access to Sale, new Arrivals and promotions. No nasties.
@@ -106,7 +108,7 @@
             </div>
         </div>
     </header>
-    <script type="text/javascript" src="./resources/script.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/script.js"></script>
  
 </body>
 </html>

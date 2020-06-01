@@ -118,3 +118,12 @@
          
     
    ```
+
+### @ModelAttribute
+1. 커맨드 객체의 이름 변경 가능
+    - 변경된 이름은 뷰에서 커맨드 객체를 참조할 때 사용됨
+    - Controller ``` public String memJoin(@ModelAttribute("mem") Member member) ```
+    - View ``` ID: ${mem.memId} ```
+2. @ModelAttribute가 적용되어있는 메소드는 다른어떤 메소드가 호출되면 같이 호출됨
+    - ``` @ModelAttribute("serverTime") ```
+    - 속성 이름을 View에서 그대로 사용 가능

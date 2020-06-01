@@ -1,46 +1,3 @@
-* {
-    box-sizing:border-box;
-    margin: 0;
-}
-
-body {
-    font-family: 'DM Sans', sans-serif;
-    color: #000F08;
-    font-weight: 400;
-    background-color: #333;
-}
-
-/* Reset CSS */
-a {
-    color: inherit;
-    text-decoration:none;
-}
-
-button,
-input,
-textarea {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-}
-
-button:focus,
-button:active,
-input:focus,
-input:active,
-textarea:focus,
-textarea:active {
-    outline: none;
-    box-shadow: none;
-}
-
-ul,
-ol,
-li {
-    list-style-type: none;
-    padding-left: 0;
-    margin-left: 0;
-
-}
 
 /* Sign-Up-Modal */
 .signUp-modal {
@@ -75,7 +32,7 @@ li {
     height: 16px;
     border: none;
     background-color: rgba(0,0,0,0);
-    background-image: url(./assets/close-icon\ \(1\).png);
+    background-image: url(../assets/close-icon\ \(1\).png);
     background-repeat: no-repeat;
     background-size: cover;
     cursor: pointer;
@@ -85,7 +42,7 @@ li {
 
 
 .close-icon:active {
-    background-image: url(./assets/close-icon.png);
+    background-image: url(../assets/close-icon.png);
 }
 
 
