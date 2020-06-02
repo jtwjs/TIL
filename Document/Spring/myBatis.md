@@ -116,3 +116,127 @@
     - 해당 컬럼의 자료형에 맞추어 파라매터의 자료형이 변경된다.
     - 쿼리 주입을 예방할수 없어 보안측면에서 불리, 사용자의 입력을 전달할때는 사용하지 않는편이 좋다.
     - 테이블이나 컬럼명을 파라메터로 전달하고싶을 때 사용<br> #{}은 자동으로 ""가 붙어서 이경우 사용불가
+
+
+---
+
+### Mapper 인터페이스 
+- Mapping 파일에 기재된 SQL을 호출하기 위한 인터페이스
+- Mapping 파일에 있는 SQL을 인터페이스로 호출한다.
+#### Mapper 인터페이스를 사용하지 않을 경우
+- session.selectOne("userNs.selectUserById",id)형식
+- 네임스페이스 +"."+SQL ID로 지정해야만 한다.
+- 문자열로 작성하기 때문에 버그 생길수 있음
+- IDE에서 제공하는 code assist를 사용할 수 없다.
+#### Mapper 사용했을 때
+- Mapper 인터페이스 개발자가 직접 작성
+- 패키지_명 + "." + 인터페이스_명 + "." + 메소드_명이 네임스페이스+"."+SQL_ID가 되도록 설정해야 함
+- 네임스페이스 속성에는 패키지를 포함한 Mapper 인터페이스 이름 
+- SQL ID 에는 매핑하는 메소드 이름을 지정하는 것
+
+#### Mapper 인터페이스 작성
+- 반드시 인터페이스로 선언
+- 네임스페이스_명 은 패키지+인터페이스_명 으로 작성
+- 메소드_명은 SQL_ID와 동일하게 작성
+
+### 사용법
+- **bean 추가**
+    - ```xml
+        <!-- Bean에 Mapper 인터페이스를 사용하기 위해 -->
+        <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+            <property name = "mapperInterface" value="myspring.user.dao.UserMapper" />
+            <property name = "sqlSessionTemplate" ref="sqlSession" />
+        </bean>
+      ```
+    - MapperFactoryBean은 UserMapper를 구현하는 프록시 클래스를 생성하고, 그것을 어플리케이션에 injection 한다.
+    - 프록시는 런타임 시에 생성되므로, 지정된 Mapper는 실제 구현클래스가 아닌 인터페이스여야만 한다.
+    - MapperFactoryBean은 sqlSessionFactory나 sqlSessionTemplate를 필요로 한다.
+- **xml네임스페이스 설정**
+    - ```xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="myspring.user.dao.UserMapper">
+        </mapper>
+      ```
+- **DAO에 autowired**
+    - ```java
+        @Autowired
+        private UserMapper userMapper;
+      ```
+
+#### Mapper인터페이스 메소드명은 네임스페이스 ID랑 맞출것
+- **인터페이스**
+    - ```java
+        public interface UserMapper {
+            UserVO selectUserById(String id);
+        }
+      ```
+- **XML**
+    - ```xml
+         <select id="selectUserById" parameterType="string" resultType="User" >
+            select * from users where userid=#{id}
+         </select>
+      ```
+- **여러개의 Mapper 설정방법**
+    - MapperScannerConfigurer 사용
+    - 위에 org.mybatis.spring.mapper.MapperFactoryBean 을 이용시 Mapper 등록시 갯수가 많아지면 일일이 정의해야 하는 단점이있다.
+    - DI 컨테이너에 등록된다.
+    - MapperScannerConfigurer 이용하면 지정한 패키지 아래 모든 인터페이스가  Mapper인터페이스로 간주 된다.
+    - dao 등 인터페이스도 등록되어 에러가 발생할수있음
+- **다른 인터페이스는 등록안되게 하는법**
+    - 빈에 등록하기
+        - ```xml
+            <!-- MapperScannerConfigurer 여러개 Mapper 인터페이스 사용시-->
+            <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+                <property name="basePackage" value="myspring.user.dao" />
+                <property name="annotationClass" value="myspring.user.dao.MyMapper" />
+                <!-- Mapper 지정 다른 인터페이스 등록안되게 -->
+            </bean>
+          ```
+    - annotation 파일 생성
+        - ```java
+            package myspring.user.dao;
+
+            public @interface MyMapper {
+
+            }
+          ```
+
+    - 기존 Mapper에 어노테이션 등록
+        - ```java
+            @MyMapper
+            public interface UserMapper {
+
+            }
+          ```
+### resultType, resultMap 차이점
+- **resultType**
+    - ibatis(resultClass) -> mybatis(resultType)
+    - 클래스_명 전체 또는 alias를 입력<br> 즉 매핑하려는 자바 클래스의 전체 경로를 입력함
+    - ex:) 
+         ```xml
+                <!-- com.test.Student 객체로 쿼리 실행 결과값을 받고자 할때-->
+                <select id="selectTest" resultType="com.test.Student">
+                ...
+                </select>
+
+                <!-- int형 객체로 쿼리 실행 결과값을 받을 때 -->
+                <select id ="selectTest" resultType="int">
+                ...
+                </select>
+            ```
+- **resultMap**
+    - resultMap 선언 당시 참조로 사용한 이름을 입력
+    - resultType을 이용하면 자동 매핑되기 때문에 편리하지만 제한이 있음<br>resultMap을 사용하면 개발자가 직접 원하는 POJO 클래스에 매핑가능
+    - ex:)
+        ```xml
+            <resultMap id="test" type="com.test.Student">
+                <result property="name" column="name">
+                ...
+            </resultMap>
+
+            <select id="selectTest" resultMap="test">
+                ...
+            </select>
+        ```
