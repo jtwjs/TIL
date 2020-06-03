@@ -1,0 +1,219 @@
+* {
+    box-sizing:border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: #000F08;
+    font-weight: 400;
+    background-color: #333;
+}
+
+/* Reset CSS */
+a {
+    color: inherit;
+    text-decoration:none;
+}
+
+button,
+input,
+textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+    outline: none;
+    box-shadow: none;
+}
+
+ul,
+ol,
+li {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+
+}
+
+.color_gray {
+    color: #8C8C8C;;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+/* Sign-Up-Modal */
+.signIn-modal {
+    position:fixed;
+    top: 8%;
+    left: 50%;
+    width: 526px;
+    padding: 42px;
+    border-radius: 5px;
+    color:  #000F08;
+    background-color: #fff;
+    transform: translateX(-50%);
+
+    
+}
+
+.modal-top {
+    position:relative;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.close-icon {
+    position:absolute;
+    right: 0;
+}
+
+
+.modal-top img{
+    width: 60px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.modal-title {
+    margin-bottom: 25px;
+    font-size: 20.89px;
+    line-height: 1.5;
+    letter-spacing: -0.04em;
+
+}
+
+.close-icon {
+    width: 16px;
+    height: 16px;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    background-image: url(./assets/close-icon\ \(1\).png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+}
+
+
+
+.close-icon:active {
+    background-image: url(./assets/close-icon.png);
+}
+
+
+/* modal-input */
+
+.modal-content {
+    display: flex;
+    align-items: center;
+    
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal-input {
+    width: auto;
+}
+
+
+.modal-input-item {
+    width: 421px;
+    margin: 0 auto;
+    margin-bottom: 32px;
+    padding-bottom: 10px;
+    border: none;
+    border-bottom: 1.5px solid #D8D8D8;
+    font-size: 12.6675‬;
+    line-height: 1;
+    color: #8C8C8C;
+}
+.modal-subcheck {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;  
+    font-size: 12px;  
+    color: #8c8c8c;
+}
+.keep-check {
+    display:flex;
+    align-items: center;    
+}
+
+#check-box {
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    padding: 0;
+    border: 1px solid #8c8c8c;
+    background-color: #fff;
+    background-position: 1px 2px;
+    background-repeat: no-repeat;
+    background-size: 13px 11px;
+    transform: translateY(5%);
+    cursor: pointer;
+}
+
+#check {
+    display: none;
+}
+
+/* modal-bottom */
+
+.modal-bottom {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.signIn-btn {
+    width: 421px;
+    height: 40px;
+    margin: 0 auto;
+    margin-bottom: 12px;
+    border:none;
+    font-size: 17px;
+    color: #fff;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.kakao {
+    background-color: #feec34;
+    color: #000;
+}
+
+.facebook {
+    background-color: #21538a;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    line-height: 1.2;
+
+}
+
+.modal-footer p {
+ 
+    margin-bottom: 15px;
+}
+.sign-in-link {
+    color: #000;
+}

@@ -98,6 +98,20 @@
 
 >mybatis에서 SqlSession을 생성하기 위해 sqlSessionFactory를 사용한다. <br>세션을 한번 생성하면 매핑구문을 실행하거나 커밋 또는 롤백을 하기 위해 세션을 사용할 수 있다.<br>더이상 필요하지 않은상태가 되면 세션을 닫는다. **mybatis 스프링 연동모듈을 사용하면 SqlSessionFactory를 직접 사용할 필요가 없다.** <br>스프링 트랜잭션 설정에따라 자동으로 커밋 혹은 롤백을 수행하고 닫혀지는, 쓰레드에 안전한 SqlSession 개체가 스프링 빈에 주입될수 있기때문
 
+- ```<property name="typeAliasesPackage" value="com.test.web" />```
+    - mybatis에서 resultType과 parameterType 사용시 bean 객체를 사용할려면 패키지 경로 및 bean 클래스명까지 입력해야 한다.<br>하지만 alias 처리를 해주면 bean 클래스명만 입력하면 되므로 조금 간소해진다.
+ex ) MemberBean 을 사용할 경우 com.test.web.member.bean.MemberBean --> memberBean
+- ```<property name="mapperLocations" value="classpath*:com/test/web/**/dao/mapper/*Mapper.xml" />```
+    - 기능명Mapper.xml 파일은 실제 쿼리 내용이 담겨 있다.
+    - 이 부분도 전체 경로를 명시하는 방법도 있지만, 기능이 추가되거나 삭제시에 설정 부분을 수정해야 하는 번거로움이 있다.
+    - 이 부분을 간소화하기 위해 com.test.web.기능명.dao.mapper 패키지내에 기능명Mapper.xml 패턴으로 정의해놓으면
+    - 서버 재 시작시 자동으로 추가되도록 처리한 부분이다.
+- ```<property name="basePackage" value="com.test.web.**.dao" />```
+    - dao 파일은 spring과 mybatis를 연결해주는 인터페이스 파일이다.
+    - 이 부분도 마찬가지도 규칙에 맞게 해당 패키지내 작성한다면 서버 재 시작시 자동으로 추가된다.
+
+
+
 ### SqlSessionTemplate
 - mybatis 스프링 연동모듈의 핵심
 - SqlSession을 구현하고 코드에서 SqlSession를 대체하는 역할
@@ -119,10 +133,14 @@
 
 
 ---
-
-### Mapper 인터페이스 
-- Mapping 파일에 기재된 SQL을 호출하기 위한 인터페이스
-- Mapping 파일에 있는 SQL을 인터페이스로 호출한다.
+## Mapper 인터페이스 
+- Mapping 파일의 SQL문 호출을 Type Safe 하게 호출하기 위한 인터페이스
+### Mapper 인터페이스 작성 및 설정
+- Mapper 인터페이스 작성
+- MapperFactoryBean을 이용한 Mapper 등록
+### 여러개의 Mapper 인터페이스 설정
+- 여러 개의 Mapper 인터페이스 작성
+- MapperScannerConfigurer을 이용한 Mapper 등록
 #### Mapper 인터페이스를 사용하지 않을 경우
 - session.selectOne("userNs.selectUserById",id)형식
 - 네임스페이스 +"."+SQL ID로 지정해야만 한다.
@@ -134,7 +152,7 @@
 - 네임스페이스 속성에는 패키지를 포함한 Mapper 인터페이스 이름 
 - SQL ID 에는 매핑하는 메소드 이름을 지정하는 것
 
-#### Mapper 인터페이스 작성
+#### Mapper 인터페이스 작성 규칙
 - 반드시 인터페이스로 선언
 - 네임스페이스_명 은 패키지+인터페이스_명 으로 작성
 - 메소드_명은 SQL_ID와 동일하게 작성
@@ -159,7 +177,7 @@
         <mapper namespace="myspring.user.dao.UserMapper">
         </mapper>
       ```
-- **DAO에 autowired**
+- **DAO에 @autowired**
     - ```java
         @Autowired
         private UserMapper userMapper;
@@ -178,38 +196,50 @@
             select * from users where userid=#{id}
          </select>
       ```
-- **여러개의 Mapper 설정방법**
-    - MapperScannerConfigurer 사용
-    - 위에 org.mybatis.spring.mapper.MapperFactoryBean 을 이용시 Mapper 등록시 갯수가 많아지면 일일이 정의해야 하는 단점이있다.
-    - DI 컨테이너에 등록된다.
-    - MapperScannerConfigurer 이용하면 지정한 패키지 아래 모든 인터페이스가  Mapper인터페이스로 간주 된다.
-    - dao 등 인터페이스도 등록되어 에러가 발생할수있음
-- **다른 인터페이스는 등록안되게 하는법**
-    - 빈에 등록하기
-        - ```xml
-            <!-- MapperScannerConfigurer 여러개 Mapper 인터페이스 사용시-->
-            <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
-                <property name="basePackage" value="myspring.user.dao" />
-                <property name="annotationClass" value="myspring.user.dao.MyMapper" />
-                <!-- Mapper 지정 다른 인터페이스 등록안되게 -->
-            </bean>
-          ```
-    - annotation 파일 생성
-        - ```java
-            package myspring.user.dao;
 
+    
+### 여러 개의 Mapper 인터페이스 설정
+#### MapperScannerConfigurer의 사용
+> 여러개의 Mapper 인터페이스가 있을때 설정하는 방법
+- MapperFactoryBean을 이용해 Mapper 인터페이스를 등록할 때 Mapper 인터페이스의 개수가 많아지게 되면 일일이 정의하는데 시간이 많이 걸림
+- Mapper 인터페이스의 수가 많아지면 MapperScannerConfigure를 이용하여 Mapper 인터페이스의 객체를 한번에 등록하는 것이 편리함
+- MapperScannerConfgiruer을 이용하면 지정한 패키지 아래 모든 인터페이스가 Mapper 인터페이스로 간주되어 Mapper 인터페이스의 객체가 DI 컨테이너에 등록되는것
+#### MapperScannerConfigurer의 설정
+- ```xml
+    <!-- MapperScannerConfigurer 설정 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="패키지경로" />
+    </bean>
+  ```
+- basePackage 속성에서 지정하는 것은 Mapper 인터페이스를 검색할 대상이 되는 Package
+- 기입한 Package 경로 아래의 인터페이스들은 모두 Mapper 인터페이스에 대응하는 Mapper 객체가 생성된다는점
+- 예상하지 않은 다른 객체가 등록되어 오류가 발생할 수 있음
+#### Maker 인터페이스와 Marker 어노테이션의 사용
+- 검색의 대상이 되는 Package 아래의 인터페이스들 중에서 Mapper로서 작성한 인터페이스로만 범위를 좁히려면 <br>Marker 인터페이스와 Marker 어노테이션을 작성하여 MapperScannerConfigurer에 설정하면됨
+- Marker 인터페이스
+    - ```java
             public @interface MyMapper {
 
             }
-          ```
+      ```
 
-    - 기존 Mapper에 어노테이션 등록
-        - ```java
-            @MyMapper
-            public interface UserMapper {
+- 기존 Mapper에 Marker 어노테이션 부여
+    - ```java
+        @MyMapper
+        public interface UserMapper {
 
-            }
-          ```
+        }
+        ```
+- MapperScannerConfigurer에 Marker 어노테이션 지정
+    - ```xml
+        <!-- MapperScannerConfigurer 여러개 Mapper 인터페이스 사용시-->
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+            <property name="basePackage" value="myspring.user.dao" />
+            <property name="annotationClass" value="myspring.user.dao.MyMapper" />
+            <!-- Mapper 지정 다른 인터페이스 등록안되게 -->
+        </bean>
+      ```
+
 ### resultType, resultMap 차이점
 - **resultType**
     - ibatis(resultClass) -> mybatis(resultType)

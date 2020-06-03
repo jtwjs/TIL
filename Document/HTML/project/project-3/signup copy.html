@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signin.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="signIn-modal">
+        <div class="modal-top">
+            <button class="close-icon" type="button"> </button>
+            <img src="./assets/logo.png" class="logo" alt="nike logo"/>
+            <h1 class="modal-title">나이키 로그인</h1>
+        </div>
+        <div class="modal-content">
+        <form class="modal-form" action="" method="post">
+            <div class="modal-input">
+                
+                    <input class="modal-input-item"type="email" placeholder="Account" required/>
+                    <input class="modal-input-item"type="text" placeholder="Password"  required />
+            </div>
+            <div class="modal-bottom">
+            <div class="modal-subcheck">
+                <div class="keep-check">
+                    <label for="check" id="check-box"></label>
+                    <input id="check" type="checkbox" value="uncheck" onclick="check_toggle()" required/>
+                    <p class="promo-desc">
+                        로그인 유지하기
+                    </p>
+                </div>
+                <a class="color_gray"href="#">아이디/비밀번호 찾기</a>
+            </div>
+                <button class="signIn-btn" type="submit">로그인</button>
+                <button class="signIn-btn kakao" type="submit">카카오계정 로그인</button>
+                <button class="signIn-btn facebook" type="submit">페이스북으로 로그인</button>
+            </div>
+            <div class="modal-footer">
+                <p class="color_gray">회원이 아니신가요? <a href="#" class="sign-in-link underline">회원가입</a></p>
+                <a href="#" class="sign-in-link underline">비회원 주문 조회</a>
+            </div>
+        </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
