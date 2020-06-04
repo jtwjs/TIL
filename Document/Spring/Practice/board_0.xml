@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis/org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.BoardMapper">
+
+    <resultMap type="BoardVO" id="boardResultMap">
+        <result property="num" column="num" />
+        <result property="id" column="id" />
+        <result property="subject" column="subject" />
+        <result property="content" column="content" />
+		<result property="org_file" column="org_file" />
+		<result property="up_file" column="up_file" />
+		<result property="re_ref" column="re_ref" />
+		<result property="re_lev" column="re_lev" />
+		<result property="re_seq" column="re_seq" />
+		<result property="readcount" column="readcount" />
+		<result property="boarddate" column="boarddate" />
+	</resultMap>
+
+    <!-- id는 Mapper.java(여기선 MemberMapper.java)에 동일하게 사용해야됨-->
+    <select id="getListCount" resultType="int" >
+        select count(*) from smemberboard2
+    </select>
+    <!-- CDATA는 태그안에서는 전부 문자열로 치환-->
+    <!-- <나 (와 같은 기호를 괄호인지 아니면 비교연산자인지 확인이 안되고 특문 사용하는데 제한됨-->
+    <select id="getBoardList" parameterType="HashMap" resultMap="boardResultMap">
+        <![CDATA[
+        select num,id,subject,content,org_file,up
+        ]]>]
+    </select>

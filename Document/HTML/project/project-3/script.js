@@ -38,3 +38,16 @@ function check_toggle(){
     openButton.addEventListener("click", openModal);
     closeButton.addEventListener("click", closeModal);
 
+    const openSigninBtn = document.getElementById("openSignin");
+    const signInmodal = document.querySelector(".signIn-modal");
+    
+    const signInopenModal = () => {
+        signInmodal.classList.remove("hidden");
+    }
+
+    const signIncloseModal = () => {
+        signInmodal.classList.add("hidden");
+    }
+
+    openSigninBtn.addEventListener("click",signInopenModal);
+    closeButton.addEventListener("click",signIncloseModal);
