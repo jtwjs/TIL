@@ -83,33 +83,3 @@ $.getJSON('JSON 주소',{데이터}, function(data){
 ```javascript
     $('#zero').load('다른 html 주소');
 ```
----
-### @RequestMapping의 produces 속성
-> @RequestMapping의 produces 속성을 이용해 Response의 Content-Type을 제어할 수 있다. 
-
-#### Produces, Headers 속성
-|Element|요청 조건|지원버전|
-|:--|:---|:--|
-|headrs|HTTP 헤더|3.0.3.1|
-|produces|Accept 헤더|3.1|
-- Accept 헤더는 headrs 대신 produces 엘리먼트를 이용해 조건을 지정할수 있다.
-    - headers와 같은 동작
-- **produces**
-    - ```java
-        @RequestMapping(value="/prod", produces ={"application/JSON"})
-        @ResponseBody
-        String getProduces(){
-            return "Produces attribute";
-        }
-      ```
-- headers
-    - ```java
-        @RequestMapping(value="/head", headrs= {"content-type=text/plain"})
-        String post(){
-            return "Mapping applied along with headers";
-        }
-      ```
-- 위와 같이 content-type을 적느냐 안적느냐 차이가 있다.
-    - 공통헤더와 요청헤더의 차이
-    - headrs는 공통헤더이기 때문에 그중에 content-type="text/plain"인걸 찾으려하는 것
-    - producs는 accept헤더를 찾기 때문에 content-type등을 안적어도 된다
