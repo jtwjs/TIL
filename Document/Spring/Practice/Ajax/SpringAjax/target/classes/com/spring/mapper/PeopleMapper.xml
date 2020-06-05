@@ -31,6 +31,6 @@
 	</delete>
 	
 	<update id="updatePeople" parameterType="PeopleVO" >
-		UPDATE people SET (name=#{name}, job=#{job},address=#{address},bloodtype=#{bloodtype} WHERE id=#{id})
+		update people set name=#{name},job=#{job},address=#{address},bloodtype=#{bloodtype} where id=#{id}
 	</update>
 </mapper>

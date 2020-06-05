@@ -41,7 +41,26 @@
 - jquerty ajax를 사용하면, HTTP GET 방식과 HTTP POST 방식 모두를 사용하여 원격 서버로부터 데이터 요청 가능
 
 ### jQuery 코드
+- jQuerty.ajax( [settings] )
+    - settins는 Ajax 통신을 위한 옵션을 담고 있는 객체가 들어간다.
+    - 주요한 옵션을 열거해보면 아래와 같다.
+    - data
+        - 서버로 데이터를 전송할 때 이 옵션을 사용
+        - ``` data:$("#폼명").serialize(),```
+        - serialize(): 입력된 모든 Element를 문자열의 데이터에 serialize 한다.
+            - ex:) freame=값&femail=값&sex=값&..
+            - 각각의 form태그를찾아서 value값을 조합해 문자열로 만들어줌
+    - dataType
+        - 서버측에서 전송한 데이터를 어떤 형식의 데이터로 해석할 것인가를 지정
+        - 값으로 올수 있는 것은 <br>xml,json,script,html이다. 형식을 지정하지 않으면 jQuery가 알아서 판단함
+    - success
+        - 성공했을 때 호출할 콜백을 지정
+        - Function(PlainObject data, String textStatus, jqXHR jqXHR)
+    - type
+        - 데이터를 전송하는 방법을 지정(get, post)
+
 ```javascript
+$('#execute').click(function(){
     $.ajax({
         url: '주소',
         type: 'get 또는 post',
@@ -49,16 +68,15 @@
             //보낼 데이터
         },
         dataType: 'json, xml, script, text 또는 thml',
-        done: function(response) {
-            //성공 시 동작
-        },
-        fail: function(error) {
-            //실패 시 동작
-        },
-        always: function(response) {
-            //성공하든 실패하든 항상 할 동작
+        success:function(data){
+            var str='';
+            for(var name in data){
+                str += '<li>'+data[name]+'</li>';
+            }
+            $('#timezones').html('<ul>'+str+'</ul>');
         }
     })
+})
 ```
 #### get 이나 post만을 전문적으로 하는 메소드
 - 데이터와 데이터타입은 입력하지 않아도 된다.
