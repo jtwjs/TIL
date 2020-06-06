@@ -12,5 +12,3 @@
 >하나의 자바 프로젝트에 빌드 툴로 maven을 설정했다면, 프로젝트 최상위 디렉토리에 "pom.xml"이라는 파일이 생성되었을 것
 - pom.xml은 POM(Project Object Model)을 설정하는 부분으로 **프로젝트 내 빌드 옵션을 설정하는 부분**이다.
 - pom.xml은 &#60;project&#62;..&#60;/project&#62;로 둘러싸여서 section별로 여러 정보를 나타내며 설정 가능
-
--

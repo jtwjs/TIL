@@ -160,8 +160,8 @@
     - HTTP GET 요청에서의 정적인 data에 바로 매핑 가능
 - View Resolver
     - ```xml
-    <bean class="org.springframework.web.servlet.viewInternalResourceViewResolver">
-    <property name="prefix" value="/WEB-INF/views/"/>
-    <property name="suffix" value=".jsp"/>
-    </bean>
+        <bean class="org.springframework.web.servlet.viewInternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+        </bean>
       ```
