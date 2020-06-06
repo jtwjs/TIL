@@ -38,10 +38,10 @@
 ### JQuery와의 시너지
 - 일반 Javscript만으로 Ajax를 하게되면 코딩량도 많아지고 브라우저별로 구현방법이 다른단점이 있다.
 - jQuery를 이용하면 더 적은 코딩량과 동일한 코딩방법으로 대부분의 브라우저에서 같은 동작을 할 수 있다.
-- jquerty ajax를 사용하면, HTTP GET 방식과 HTTP POST 방식 모두를 사용하여 원격 서버로부터 데이터 요청 가능
+- jQuery ajax를 사용하면, HTTP GET 방식과 HTTP POST 방식 모두를 사용하여 원격 서버로부터 데이터 요청 가능
 
 ### jQuery 코드
-- jQuerty.ajax( [settings] )
+- jQuery.ajax( [settings] )
     - settins는 Ajax 통신을 위한 옵션을 담고 있는 객체가 들어간다.
     - 주요한 옵션을 열거해보면 아래와 같다.
     - data

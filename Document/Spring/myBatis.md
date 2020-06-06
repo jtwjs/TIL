@@ -214,23 +214,23 @@ ex ) MemberBean 을 사용할 경우 com.test.web.member.bean.MemberBean --> mem
 - basePackage 속성에서 지정하는 것은 Mapper 인터페이스를 검색할 대상이 되는 Package
 - 기입한 Package 경로 아래의 인터페이스들은 모두 Mapper 인터페이스에 대응하는 Mapper 객체가 생성된다는점
 - 예상하지 않은 다른 객체가 등록되어 오류가 발생할 수 있음
-#### Maker 인터페이스와 Marker 어노테이션의 사용
-- 검색의 대상이 되는 Package 아래의 인터페이스들 중에서 Mapper로서 작성한 인터페이스로만 범위를 좁히려면 <br>Marker 인터페이스와 Marker 어노테이션을 작성하여 MapperScannerConfigurer에 설정하면됨
-- Marker 인터페이스
+#### Maker 인터페이스와 Maker 어노테이션의 사용
+- 검색의 대상이 되는 Package 아래의 인터페이스들 중에서 Mapper로서 작성한 인터페이스로만 범위를 좁히려면 <br>Maker 인터페이스와 Maker 어노테이션을 작성하여 MapperScannerConfigurer에 설정하면됨
+- Maker 인터페이스
     - ```java
             public @interface MyMapper {
-
+                //마커 인터페이스는 아무 메서드도 선언하지 않는 인터페이스를 말한다
             }
       ```
 
-- 기존 Mapper에 Marker 어노테이션 부여
+- 기존 Mapper에 Maker 어노테이션 부여
     - ```java
         @MyMapper
         public interface UserMapper {
 
         }
         ```
-- MapperScannerConfigurer에 Marker 어노테이션 지정
+- MapperScannerConfigurer에 Maker 어노테이션 지정
     - ```xml
         <!-- MapperScannerConfigurer 여러개 Mapper 인터페이스 사용시-->
         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
