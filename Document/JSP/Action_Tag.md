@@ -22,12 +22,12 @@
 |&#60;jsp:getProperty&#62;|자바 bean의 property값을 얻는다|
 
 ### 액션 태그 사용법
-- **&#60;jsp:include&#62;**
-    - ```&#60;jsp:include&#62; page="main.jsp"/> ```
+- **<;jsp:include&#62;**
+    - ```<jsp:include page="main.jsp"/> ```
     - jsp:include 태그속성인 page 속성에 모듈화 시킬 jsp.파일 명이나 jsp파일 경로를 입력
     - 해당 태그가 jsp파일에 있는 내용으로 대채된다.
 - **&#60;jsp:forward&#62;**
-    - ```&#60;jsp:forward&#62; page="/main.do" /> ```
+    - ```<jsp:forward page="/main.do" /> ```
     - page 속성에 이동할 주소를 입력
     - 해당 태그 내용이 처리되면 입력한 주소로 이동
 - **&#60;jsp:param&#62;**
