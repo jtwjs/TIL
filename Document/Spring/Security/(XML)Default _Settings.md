@@ -47,7 +47,7 @@
     - 각 모듈에서 제공하는 컴포넌트의 설정을 지원하기 위한 컴포넌트로 구성됨
 - **spring-security-taglibs**
     - 인증 정보나 인가 정보를 사용하기 위한 JSP 태그 라이브러리로 구성됨
-### 2. Spring Security Filter 추가
+### 2. Spring Security Filter 추가 (XML 기반설정)
 - spring security를 적용하기 위한 필터를 추가한다.
 - 필터이름을 임의로 변경 X
     - 스프링 시큐리티 내에서 클래스를 찾기위해 지정한 이름이여서 변경하거나 오타가 발생하면 안됨
@@ -90,7 +90,7 @@
 - 해당 필터가 적용될 URL 패턴을 모든 패턴을 의미하는 '/'를 반드시 써줘야 한다.
     - 주소 호출할 때 쓰던 *.do등으로 쓰면안된다.
 
-### 3. Security-context.xml
+### 3. Security-context.xml (XML 기반설정)
 - web.xml에서 시큐리티 주요 설정 파일의 경로를 /WEB-INF/spring/security/security-context.xml 로 했으므로<br>security 폴더를 만들어서 securiy-context.xml 파일을 만들어 아래 코드를 작성
 
 - **기능 설정**
