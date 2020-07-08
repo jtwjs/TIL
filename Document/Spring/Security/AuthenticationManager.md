@@ -1,4 +1,4 @@
-## AuthenticationManager 와 Authentication
+## AuthenticationManager(인증) 와 Authentication
 
 > 스프링 시큐리티에서 인증(Authentication)은 AuthenticationManager가 한다.
 
