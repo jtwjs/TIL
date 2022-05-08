@@ -19,6 +19,24 @@ export const map = curry((f, iter) => {
   return res;
 });
 
+// for of 숨겨진 코드
+const map = curry((f, iter) => {
+  let res = [];
+  // for (const a of iter) {
+  //   res.push(f(a));
+  // }
+  // 아래와 같이 동작
+
+  iter = iter[Symbol.iterator]();
+  let cur;
+  while (!(cur = iter.next()).done) {
+    const a = cur.value;
+    res.push(f(a));
+  }
+
+  return res;
+});
+
 // 보조함수를 통해 iterable 안의 조건에 충족하는 어떠한 값을 수집할때 사용
 export const filter = curry((f, iter) => {
   let res = [];
@@ -52,3 +70,43 @@ export const pipe =
   (f, ...fs) =>
   (...as) =>
     go(f(...as), ...fs);
+
+export const range = (l) => {
+  let i = -1;
+  const res = [];
+
+  while (++i < l) {
+    res.push(i);
+  }
+
+  return res;
+};
+
+export const L = {};
+L.range = function* (l) {
+  let i = -1;
+
+  while (++i < l) {
+    yield i;
+  }
+};
+
+L.map = curry(function* (f, iter) {
+  for (const a of iter) yield f(a);
+});
+
+L.filter = curry(function* (f, iter) {
+  for (const a of iter) {
+    if (f(a)) yield a;
+  }
+});
+
+export const take = curry((l, iter) => {
+  let res = [];
+  for (const a of iter) {
+    res.push(a);
+    if (res.length === l) return res;
+  }
+
+  return res;
+});
