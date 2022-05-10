@@ -20,7 +20,7 @@ export const map = curry((f, iter) => {
 });
 
 // for of 숨겨진 코드
-const map = curry((f, iter) => {
+const map2 = curry((f, iter) => {
   let res = [];
   // for (const a of iter) {
   //   res.push(f(a));

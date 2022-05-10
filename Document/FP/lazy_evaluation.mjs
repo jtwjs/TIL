@@ -63,3 +63,19 @@ go(
 - 이터레이터의 next를 처음 실행할 때까지 미뤄지는 컨셉 === 지연평가
 - 제너레이터는 그것을 구현하는 하나의 방법 
 */
+
+// ## L.map + take로 map 만들기
+
+// const map2 = curry((f, iter) => go(L.map(f, iter), take(Infinity)));
+
+const takeAll = take(Infinity);
+
+const map2 = curry(pipe(L.map, takeAll));
+
+console.log(map2((a) => a + 10, [0, 2, 5, 69, 11]));
+
+// ## L.filter + take -> filter
+
+const filter2 = curry(pipe(L.filter, takeAll));
+
+console.log(filter2((a) => a > 5, [6, 2, 3, 1, 2]));
